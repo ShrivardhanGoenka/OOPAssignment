@@ -56,4 +56,5 @@ public class CampConstraints {
         availableSlots++;
         withdrawn.add(userID);
     }
+
 }

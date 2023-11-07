@@ -1,32 +1,63 @@
 public class User implements UserActions{
-
+    private String userID;
+    private String password;
+    private String email;
+    private String faculty;
+    private boolean isLoggedIn;
+    private boolean isLocked;
+    private int loginAttempts;
+    public User(String userID, String password, String email, String faculty, boolean isLocked){
+        this.userID = userID;
+        this.password = password;
+        this.email = email;
+        this.faculty = faculty;
+        this.isLocked = isLocked;
+        isLoggedIn = false;
+        loginAttempts = 0;
+    }
     @Override
-    public void changePassword(String newPassword) {
-
+    public void changePassword(String newPassword) throws UserException{
+        if(isLoggedIn == false) throw new UserException("User not logged in");
+        this.password = newPassword;
     }
 
     @Override
-    public boolean login(String password) {
+    public boolean login(String password) throws UserException{
+        if (isLocked == true) throw new UserException("User is locked. Please contact admin");
+        if(isLoggedIn == true) throw new UserException("User already logged in");
+        if(this.password.equals(password)){
+            isLoggedIn = true;
+            return true;
+        }
+        else{
+            loginAttempts++;
+            if(loginAttempts == 3){
+                isLocked = true;
+                throw new UserException("User is locked. Please contact admin");
+            }
+        }
         return false;
     }
 
     @Override
-    public void logout() {
-
+    public void logout() throws UserException{
+        if(isLoggedIn == false) throw new UserException("User not logged in");
+        isLoggedIn = false;
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return email;
     }
 
     @Override
     public String getUserID() {
-        return null;
+        return userID;
     }
 
     @Override
     public String getFaculty() {
-        return null;
+        return faculty;
     }
+
 }
