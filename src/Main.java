@@ -5,6 +5,10 @@ public class Main {
     public static void main(String[] args){
         DBInterface dbInterface = new DBInterface();
         dbInterface.populateStudents();
-        StudentDriver.studentDriverPage1();
+        dbInterface.populateCamps();
+        //StudentDriver.studentDriverPage1();
+        for (Camp camp : Registry.campMap.values()){
+            System.out.println(camp.getCampName());
+        }
     }
 }

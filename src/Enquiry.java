@@ -10,8 +10,9 @@ public class Enquiry {
     private Date submittedOn;
     private Date updatedOn;
     private Date repliedOn;
+    private int campID;
 
-    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn){
+    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, int campID){
         this.enquiryID = enquiryID;
         this.enquiryString = enquiryString;
         this.submittedBy = submittedBy;
@@ -21,9 +22,10 @@ public class Enquiry {
         reply = "";
         repliedBy = "";
         repliedOn = null;
+        this.campID = campID;
     }
 
-    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, String reply, String repliedBy, Date repliedOn, Date updatedOn){
+    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, String reply, String repliedBy, Date repliedOn, Date updatedOn, int campID){
         this.enquiryID = enquiryID;
         this.enquiryString = enquiryString;
         this.submittedBy = submittedBy;
@@ -33,6 +35,7 @@ public class Enquiry {
         this.repliedBy = repliedBy;
         this.repliedOn = repliedOn;
         this.updatedOn = updatedOn;
+        this.campID = campID;
     }
 
     void editEnquiry(String newEnquiry){
