@@ -45,6 +45,7 @@ public class CampConstraints {
      * @param registrationDeadline 		Deadline for camp registration.
      * @param schoolOpenTo 			The school allowed to attend in the camp.
      * @param withdrawn 			List of ID of user withdrawn from the camp.
+     * @param campDates 			List of Dates the camp is scheduled.
      */
     public CampConstraints(int availableSlots, int availableCommitteeSlots, Date registrationDeadline, String schoolOpenTo, ArrayList<String> withdrawn, ArrayList<Date> campDates) {
         this.availableSlots = availableSlots;
