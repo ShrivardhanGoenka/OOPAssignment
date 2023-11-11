@@ -12,12 +12,12 @@ public class Enquiry {
     private Date repliedOn;
     private int campID;
 
-    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, int campID){
+    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, Date updatedOn, int campID){
         this.enquiryID = enquiryID;
         this.enquiryString = enquiryString;
         this.submittedBy = submittedBy;
         this.submittedOn = submittedOn;
-        this.updatedOn = submittedOn;
+        this.updatedOn = updatedOn;
         isProcessed = false;
         reply = "";
         repliedBy = "";
@@ -45,7 +45,7 @@ public class Enquiry {
     }
 
     boolean isProcessed(){
-        return isProcessed();
+        return isProcessed;
     }
 
     void replyToEnquiry(String reply, String repliedBy, Date repliedOn){
