@@ -1,5 +1,5 @@
 Learn how to code
-01/03/2024,02/03/2024
+01/04/2024,02/04/2024
 08/11/2024
 SCSE
 Room 5, SCSE
@@ -7,3 +7,4 @@ Room 5, SCSE
 5
 Learn how to code in a fast paced world
 staff1
+visible

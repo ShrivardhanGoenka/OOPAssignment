@@ -7,3 +7,5 @@ Room 5, SCSE
 5
 Learn how to code in a fast paced world
 staff1
+visible
+student1

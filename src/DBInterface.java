@@ -9,19 +9,19 @@ import java.util.Date;
 public class DBInterface {
     ArrayList<String> readDirectoryList(String dirname) throws IOException{
         String directoryPath = "LOGS/" + dirname + "/";
-        ArrayList<String> students = new ArrayList<String>();
+        ArrayList<String> dir = new ArrayList<String>();
         File directory = new File(directoryPath);
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             for (File file : files) {
                 if (file.isFile() && file.getName().endsWith(".txt")) {
-                    students.add(file.getName().substring(0, file.getName().length() - 4));
+                    dir.add(file.getName().substring(0, file.getName().length() - 4));
                 }
             }
         } else {
             throw new IOException("Directory not found");
         }
-        return students;
+        return dir;
     }
 
     Student addStudent(String userID){
@@ -86,6 +86,35 @@ public class DBInterface {
         return camp;
     }
 
+    Enquiry readEnquiry(int enquiryID){
+        Enquiry enquiry = null;
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("LOGS/ENQUIRIES/enquiry" + enquiryID + ".txt"));
+
+            String enquiryString = reader.readLine();
+            Date submittedOn = parseDate(reader.readLine());
+            Date updatedOn = parseDate(reader.readLine());
+            String submittedBy = reader.readLine();
+            int campId = Integer.parseInt(reader.readLine());
+            int isProcessed = Integer.parseInt(reader.readLine());
+            if(isProcessed == 0) {
+                reader.close();
+                enquiry = new Enquiry(enquiryID, enquiryString, submittedBy, submittedOn, updatedOn, campId);
+                return enquiry;
+            }
+            String reply = reader.readLine();
+            Date repliedOn = parseDate(reader.readLine());
+            String repliedBy = reader.readLine();
+            enquiry = new Enquiry(enquiryID, enquiryString, submittedBy, submittedOn, reply, repliedBy, repliedOn, updatedOn, campId);
+            reader.close();
+            return enquiry;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return enquiry;
+    }
+
     // Helper method to parse dates in the format: dd/MM/yyyy,dd/MM/yyyy
     private static ArrayList<Date> parseDates(String dates) {
         ArrayList<Date> dateList = new ArrayList<>();
@@ -128,6 +157,26 @@ public class DBInterface {
 
         for(String camp : camps){
             Registry.campMap.put(Integer.parseInt(camp.substring(4)), readCampDetails(Integer.parseInt(camp.substring(4))));
+            //Registry.campList.add(readCampDetails(Integer.parseInt(camp.substring(4))));
         }
+    }
+
+    void populateEnquiries(){
+        ArrayList<String> enquiries = new ArrayList<String>();
+        try{
+            enquiries = readDirectoryList("ENQUIRIES");
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
+        for(String enquiry : enquiries){
+            //System.out.println(enquiry );
+            Registry.enquiryMap.put(Integer.parseInt(enquiry.substring(7)), readEnquiry(Integer.parseInt(enquiry.substring(7))));
+        }
+    }
+
+    void loadNextValues() throws IOException{
+
     }
 }

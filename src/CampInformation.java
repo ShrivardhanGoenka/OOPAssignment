@@ -1,18 +1,19 @@
 import java.util.ArrayList;
 import java.util.Date;
-public class CampInformation implements Visibility {
-    int campID;
-    String campName;
-    ArrayList<Date> campDates;
-    Date registrationDeadline;
-    String schoolOpenTo;
-    String location;
-    int totalSlots;
-    int campCommitteeSlots;
-    String description;
-    String staffID;
-    boolean visibility;
-    public CampInformation(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID) {
+public abstract class CampInformation implements Visibility {
+    protected int campID;
+    protected String campName;
+    protected ArrayList<Date> campDates;
+    protected Date registrationDeadline;
+    protected String schoolOpenTo;
+    protected String location;
+    protected int totalSlots;
+    protected int campCommitteeSlots;
+    protected String description;
+    protected String staffID;
+    protected boolean visibility;
+    protected boolean isCampActive;
+    public CampInformation(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, boolean isCampActive, boolean isVisible) {
         this.campID = campID;
         this.campName = campName;
         this.campDates = campDates;
@@ -23,6 +24,8 @@ public class CampInformation implements Visibility {
         this.campCommitteeSlots = campCommitteeSlots;
         this.description = description;
         this.staffID = staffID;
+        this.isCampActive = isCampActive;
+        this.visibility = isVisible;
     }
 
     public int getCampID() {
@@ -76,5 +79,38 @@ public class CampInformation implements Visibility {
     public boolean isVisible(String faculty){
         if(schoolOpenTo.equals("*")) return true;
         return schoolOpenTo.equalsIgnoreCase(faculty);
+    }
+
+    public void setCampName(String name){
+        campName = name;
+    }
+
+    public void setCampDates(ArrayList<Date> dates){
+        campDates = new ArrayList<>(dates);
+    }
+
+    public void setRegistrationDeadline(Date date){
+        registrationDeadline = date;
+    }
+
+    public void setSchoolOpenTo(String schoolOpenTo){
+        this.schoolOpenTo = schoolOpenTo;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
+    //the below 2 functions are abstract as I need to call the camp constraints object to check if changing the slot is allowed or not.
+    public abstract void setTotalSlots(int newSlots) throws CampException;
+
+    public abstract void setCampCommitteeSlots(int newSlots) throws CampException;
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public boolean isCampActive(){
+        return isCampActive;
     }
 }

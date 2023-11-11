@@ -8,12 +8,13 @@ public class CampConstraints {
     ArrayList<String> withdrawn;
     ArrayList<Date> campDates;
 
-    public CampConstraints(int availableSlots, int availableCommitteeSlots, Date registrationDeadline, String schoolOpenTo, ArrayList<String> withdrawn) {
+    public CampConstraints(int availableSlots, int availableCommitteeSlots, Date registrationDeadline, String schoolOpenTo, ArrayList<String> withdrawn, ArrayList<Date> campDates){
         this.availableSlots = availableSlots;
         this.availableCommitteeSlots = availableCommitteeSlots;
         this.registrationDeadline = registrationDeadline;
         this.schoolOpenTo = schoolOpenTo;
         this.withdrawn = withdrawn;
+        this.campDates = campDates;
     }
 
     void checkAttendeeRegistration(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
@@ -55,6 +56,18 @@ public class CampConstraints {
     void withdrawAttendee(String userID){
         availableSlots++;
         withdrawn.add(userID);
+    }
+    //difference = currentslots - newslots
+    boolean changeAttendeeSlots(int difference){
+        if (difference > availableSlots) return false;
+        availableSlots -= difference;
+        return true;
+    }
+
+    boolean changeCampCommitteeSlots(int difference){
+        if (difference > availableCommitteeSlots) return false;
+        availableCommitteeSlots -= difference;
+        return true;
     }
 
 }

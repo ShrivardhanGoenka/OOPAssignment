@@ -60,4 +60,9 @@ public class User implements UserActions{
         return faculty;
     }
 
+    public void printProfile(){
+        System.out.println("UserID: " + userID);
+        System.out.println("Email Address: " + email);
+        System.out.println("Faculty: " + faculty);
+    }
 }
