@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
 public class Camp extends CampInformation {
     CampConstraints campConstraints;
     private ArrayList<String> attendees;
     private ArrayList<String> committeeMembers;
+    private HashMap<Integer, Enquiry> campEnquiries;
 
     // Constructor for new camp by staff
     public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID){
@@ -55,4 +58,9 @@ public class Camp extends CampInformation {
             throw new CampException("The registrations exceed the number of slots.");
         }
     }
+
+    public void addCampEnquiry(Enquiry enquiry){
+        campEnquiries.put(enquiry.getID(), enquiry);
+    }
+
 }

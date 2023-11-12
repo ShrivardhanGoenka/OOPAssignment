@@ -177,6 +177,9 @@ public class DBInterface {
     }
 
     void loadNextValues() throws IOException{
-
+        BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
+        Registry.nextCampID = Integer.parseInt(reader.readLine());
+        Registry.nextEnquiryID = Integer.parseInt(reader.readLine());
+        reader.close();
     }
 }

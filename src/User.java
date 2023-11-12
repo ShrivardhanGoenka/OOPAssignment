@@ -27,6 +27,7 @@ public class User implements UserActions{
         if(isLoggedIn == true) throw new UserException("User already logged in");
         if(this.password.equals(password)){
             isLoggedIn = true;
+            loginAttempts = 0;
             return true;
         }
         else{

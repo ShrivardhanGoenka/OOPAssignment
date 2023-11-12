@@ -14,6 +14,13 @@ public class Student extends User{
         blockedDates = new ArrayList<>();
     }
 
+    public Student(String userId, String password, String email, String faculty, boolean isLocked, HashMap<Integer, Enquiry> enquiryMap, HashMap<Integer, Camp> registeredCamps, ArrayList<Date> blockedDates) {
+        super(userId, password, email, faculty, isLocked);
+        this.enquiryMap = enquiryMap;
+        this.registeredCamps = registeredCamps;
+        this.blockedDates = blockedDates;
+    }
+
     public void printProfile() {
         super.printProfile();
         System.out.println("Domain: Student");
@@ -38,6 +45,15 @@ public class Student extends User{
         }
         return camps;
     }
+
+    public void raiseEnquiry(String enquiry, int campID){
+        Enquiry newEnquiry = new Enquiry(Registry.nextEnquiryID, enquiry, this.getUserID(), new Date(), new Date(), campID);
+        enquiryMap.put(newEnquiry.getID(), newEnquiry);
+        Registry.nextEnquiryID++;
+        Registry.enquiryMap.put(newEnquiry.getID(), newEnquiry);
+        Registry.campMap.get(campID).addCampEnquiry(newEnquiry);
+    }
+
 
 //    public void withdrawCamp(int campID){
 //        Camp camp = registeredCamps.get(campID);

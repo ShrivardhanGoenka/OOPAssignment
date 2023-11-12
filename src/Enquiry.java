@@ -1,8 +1,8 @@
 import java.util.Date;
 
 public class Enquiry {
-    private int enquiryID;
-    private String enquiryString;
+    private int ID;
+    private String stringValue;
     private boolean isProcessed;
     private String reply;
     private String submittedBy;
@@ -12,9 +12,9 @@ public class Enquiry {
     private Date repliedOn;
     private int campID;
 
-    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, Date updatedOn, int campID){
-        this.enquiryID = enquiryID;
-        this.enquiryString = enquiryString;
+    public Enquiry(int ID,String stringValue, String submittedBy, Date submittedOn, Date updatedOn, int campID){
+        this.ID = ID;
+        this.stringValue = stringValue;
         this.submittedBy = submittedBy;
         this.submittedOn = submittedOn;
         this.updatedOn = updatedOn;
@@ -25,9 +25,9 @@ public class Enquiry {
         this.campID = campID;
     }
 
-    public Enquiry(int enquiryID,String enquiryString, String submittedBy, Date submittedOn, String reply, String repliedBy, Date repliedOn, Date updatedOn, int campID){
-        this.enquiryID = enquiryID;
-        this.enquiryString = enquiryString;
+    public Enquiry(int ID,String stringValue, String submittedBy, Date submittedOn, String reply, String repliedBy, Date repliedOn, Date updatedOn, int campID){
+        this.ID = ID;
+        this.stringValue = stringValue;
         this.submittedBy = submittedBy;
         this.submittedOn = submittedOn;
         isProcessed = true;
@@ -38,9 +38,9 @@ public class Enquiry {
         this.campID = campID;
     }
 
-    void editEnquiry(String newEnquiry){
+    void edit(String newString){
         if(isProcessed) return;
-        this.enquiryString = newEnquiry;
+        this.stringValue = newString;
         updatedOn = new Date();
     }
 
@@ -48,15 +48,15 @@ public class Enquiry {
         return isProcessed;
     }
 
-    void replyToEnquiry(String reply, String repliedBy, Date repliedOn){
+    void reply(String reply, String repliedBy, Date repliedOn){
         isProcessed = true;
         this.reply = reply;
         this.repliedBy = repliedBy;
         this.repliedOn = repliedOn;
     }
 
-    public String getEnquiryString() {
-        return enquiryString;
+    public String getStringValue() {
+        return stringValue;
     }
 
     public String getReply() {
@@ -81,5 +81,13 @@ public class Enquiry {
 
     public Date getRepliedOn() {
         return repliedOn;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public int getCampID() {
+        return campID;
     }
 }
