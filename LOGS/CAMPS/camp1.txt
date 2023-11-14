@@ -8,3 +8,8 @@ Room 5, SCSE
 Learn how to code in a fast paced world
 staff1
 visible
+student1,student2
+student4
+1,2
+1,2
+student3

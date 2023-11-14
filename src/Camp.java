@@ -7,20 +7,24 @@ public class Camp extends CampInformation {
     private ArrayList<String> attendees;
     private ArrayList<String> committeeMembers;
     private HashMap<Integer, Enquiry> campEnquiries;
+    private HashMap<Integer, Suggestion> campSuggestions;
 
     // Constructor for new camp by staff
     public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID){
-        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, true, true);
+        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, true);
         campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, new ArrayList<String>(), campDates);
         attendees = new ArrayList<>();
         committeeMembers = new ArrayList<>();
+        campEnquiries = new HashMap<>();
     }
     // Constructor for existing camp from db
-    public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, ArrayList<String> withdrawn, ArrayList<String> attendees, ArrayList<String> committeeMembers, boolean isCampActive, boolean isCampVisible){
-        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isCampActive, isCampVisible);
+    public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, ArrayList<String> withdrawn, ArrayList<String> attendees, ArrayList<String> committeeMembers, boolean isCampVisible, HashMap<Integer,Enquiry> campEnquiries, HashMap<Integer,Suggestion> campSuggestions){
+        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isCampVisible);
         campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, withdrawn, campDates);
         this.attendees = new ArrayList<>(attendees);
         this.committeeMembers = new ArrayList<>(committeeMembers);
+        this.campEnquiries = campEnquiries;
+        this.campSuggestions = campSuggestions;
     }
 
     public void checkUserAlreadyRegistered(String userID) throws CampException{
@@ -63,4 +67,29 @@ public class Camp extends CampInformation {
         campEnquiries.put(enquiry.getID(), enquiry);
     }
 
+    public void deleteCampEnquiry(int enquiryID){campEnquiries.remove(enquiryID);}
+    public void withdrawAttendee(String userid){
+        int i = 0;
+        for(String u: attendees){
+            if(userid.equalsIgnoreCase(u)) break;
+            i++;
+        }
+        attendees.remove(i);
+        campConstraints.withdrawAttendee(userid);
+    }
+
+    public ArrayList<String> getAttendees(){
+        return attendees;
+    }
+
+    public ArrayList<String> getCommitteeMembers(){
+        return committeeMembers;
+    }
+    public HashMap<Integer, Enquiry> getCampEnquiries(){
+        return campEnquiries;
+    }
+
+    public HashMap<Integer, Suggestion> getCampSuggestions(){
+        return campSuggestions;
+    }
 }

@@ -7,7 +7,7 @@ public class Filters {
         ArrayList<Camp> list = new ArrayList<>();
         for (Map.Entry<Integer, Camp> map : Registry.campMap.entrySet()){
             Camp i = map.getValue();
-            if(i.isVisible() && i.isVisible(faculty) && i.isCampActive){
+            if(i.isVisible() && i.isVisible(faculty) ){
                 list.add(i);
             }
         }

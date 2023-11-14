@@ -1,3 +1,4 @@
+import javax.swing.plaf.BorderUIResource;
 import java.io.File;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
@@ -5,14 +6,55 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class DBInterface {
+
+    Suggestion readSuggestion(int suggestionID){
+        //Suggestion suggestion = null;
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("LOGS/SUGGESTIONS/suggestion" + suggestionID + ".txt"));
+            String suggestionString = reader.readLine();
+            Date submittedOn = parseDate(reader.readLine());
+            Date updatedOn = parseDate(reader.readLine());
+            String submittedBy = reader.readLine();
+            int campID = Integer.parseInt(reader.readLine());
+            int isProcessed = Integer.parseInt(reader.readLine());
+            if(isProcessed == 0) {
+                reader.close();
+                return new Suggestion(suggestionID, suggestionString, submittedBy, submittedOn, updatedOn, campID);
+            }
+            String reply = reader.readLine();
+            Date repliedOn = parseDate(reader.readLine());
+            String repliedBy = reader.readLine();
+            int isApproved = Integer.parseInt(reader.readLine());
+            return new Suggestion(suggestionID, suggestionString, submittedBy, submittedOn, reply, repliedBy, repliedOn, updatedOn, campID, isApproved);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    ArrayList<Integer> parseIntegerList(String l){
+        if(l == null || l.equals("")){
+            return new ArrayList<Integer>();
+        }
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        String[] arr = l.split(",");
+        for(String s : arr){
+            if(s == null || s.isEmpty()) continue;
+            list.add(Integer.parseInt(s.trim()));
+        }
+        return list;
+    }
     ArrayList<String> readDirectoryList(String dirname) throws IOException{
         String directoryPath = "LOGS/" + dirname + "/";
         ArrayList<String> dir = new ArrayList<String>();
         File directory = new File(directoryPath);
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
+            if(files == null) return new ArrayList<String>();
             for (File file : files) {
                 if (file.isFile() && file.getName().endsWith(".txt")) {
                     dir.add(file.getName().substring(0, file.getName().length() - 4));
@@ -31,10 +73,21 @@ public class DBInterface {
             String email = reader.readLine();
             String faculty = reader.readLine();
             String temp = reader.readLine();
-            boolean isLocked = false;
-            if(temp.equals("locked")) isLocked = true;
+            boolean isLocked = temp.equals("locked");
+            String blockedDates = reader.readLine();
+            ArrayList<Date> blockedDatesList = parseDates(blockedDates);
+            ArrayList<Integer> registeredCamps = parseIntegerList(reader.readLine());
+            ArrayList<Integer> submittedEnquiries = parseIntegerList(reader.readLine());
+            HashMap<Integer,Camp> registeredCampsMap = new HashMap<Integer,Camp>();
+            for(int i: registeredCamps){
+                registeredCampsMap.put(i, Registry.campMap.get(i));
+            }
+            HashMap<Integer,Enquiry> submittedEnquiriesMap = new HashMap<Integer,Enquiry>();
+            for(int i: submittedEnquiries){
+                submittedEnquiriesMap.put(i, Registry.enquiryMap.get(i));
+            }
             reader.close();
-            return new Student(userID, password, email, faculty, isLocked);
+            return new Student(userID, password, email, faculty, isLocked, submittedEnquiriesMap, registeredCampsMap, blockedDatesList);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -70,13 +123,25 @@ public class DBInterface {
             int campCommitteeSlots = Integer.parseInt(reader.readLine());
             String description = reader.readLine();
             String staffInCharge = reader.readLine();
-
+            boolean visibility = (reader.readLine().equals("visible"));
             // Parse the dates and registration deadline
             ArrayList<Date> campDates = parseDates(dates);
             Date regDeadline = parseDate(registrationClosingDate);
-
+            ArrayList<String> attendees = new ArrayList<String>(List.of(reader.readLine().split(",")));
+            ArrayList<String> committee = new ArrayList<String>(List.of(reader.readLine().split(",")));
+            ArrayList<Integer> enquiries = parseIntegerList(reader.readLine());
+            HashMap<Integer, Enquiry> campenquiries = new HashMap<>();
+            for(int i: enquiries){
+                if(Registry.enquiryMap.get(i) != null ) campenquiries.put(i, Registry.enquiryMap.get(i));
+            }
+            ArrayList<Integer> suggestions = parseIntegerList(reader.readLine());
+            HashMap<Integer,Suggestion> campSuggestions = new HashMap<>();
+            for(int i: suggestions){
+                if(Registry.suggestionMap.get(i) != null ) campSuggestions.put(i, Registry.suggestionMap.get(i));
+            }
+            ArrayList<String> withdrawn = new ArrayList<String>(List.of(reader.readLine().split(",")));
             // Create the CampInformation object
-            camp = new Camp(campID, campName, campDates, regDeadline, userGroup, location, totalSlots, campCommitteeSlots, description, staffInCharge);
+            camp = new Camp(campID, campName, campDates, regDeadline, userGroup, location, totalSlots, campCommitteeSlots, description, staffInCharge, withdrawn, attendees, committee, visibility, campenquiries, campSuggestions );
 
             reader.close();
         } catch (IOException e) {
@@ -161,6 +226,21 @@ public class DBInterface {
         }
     }
 
+    void populateSuggestions(){
+        ArrayList<String> suggestions = new ArrayList<String>();
+        try{
+            suggestions = readDirectoryList("SUGGESTIONS");
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
+        for(String suggestion : suggestions){
+            //System.out.println(suggestion );
+            Registry.suggestionMap.put(Integer.parseInt(suggestion.substring(10)), readSuggestion(Integer.parseInt(suggestion.substring(10))));
+        }
+    }
+
     void populateEnquiries(){
         ArrayList<String> enquiries = new ArrayList<String>();
         try{
@@ -176,10 +256,17 @@ public class DBInterface {
         }
     }
 
-    void loadNextValues() throws IOException{
-        BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
-        Registry.nextCampID = Integer.parseInt(reader.readLine());
-        Registry.nextEnquiryID = Integer.parseInt(reader.readLine());
-        reader.close();
+    void loadNextValues() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
+            Registry.nextCampID = Integer.parseInt(reader.readLine());
+            Registry.nextEnquiryID = Integer.parseInt(reader.readLine());
+            Registry.nextSuggestionID = Integer.parseInt(reader.readLine());
+            reader.close();
+        }
+        catch(Exception e){
+            System.out.println("Error in loading next values");
+            System.exit(1);
+        }
     }
 }

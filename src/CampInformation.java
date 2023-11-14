@@ -12,8 +12,7 @@ public abstract class CampInformation implements Visibility {
     protected String description;
     protected String staffID;
     protected boolean visibility;
-    protected boolean isCampActive;
-    public CampInformation(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, boolean isCampActive, boolean isVisible) {
+    public CampInformation(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID,  boolean isVisible) {
         this.campID = campID;
         this.campName = campName;
         this.campDates = campDates;
@@ -24,7 +23,6 @@ public abstract class CampInformation implements Visibility {
         this.campCommitteeSlots = campCommitteeSlots;
         this.description = description;
         this.staffID = staffID;
-        this.isCampActive = isCampActive;
         this.visibility = isVisible;
     }
 
@@ -110,7 +108,4 @@ public abstract class CampInformation implements Visibility {
         this.description = description;
     }
 
-    public boolean isCampActive(){
-        return isCampActive;
-    }
 }

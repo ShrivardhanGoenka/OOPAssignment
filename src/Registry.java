@@ -6,7 +6,7 @@ public class Registry {
     static HashMap<String, Staff> staffMap = new HashMap<String, Staff>();
     static HashMap<Integer, Camp> campMap = new HashMap<>();
     static HashMap<Integer, Enquiry> enquiryMap = new HashMap<>();
-    static HashMap<Integer, Suggestion> suggestionList = new HashMap<>();
+    static HashMap<Integer, Suggestion> suggestionMap = new HashMap<>();
     static int nextCampID;
     static int nextEnquiryID;
     static int nextSuggestionID;

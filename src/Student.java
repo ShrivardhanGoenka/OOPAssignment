@@ -54,6 +54,42 @@ public class Student extends User{
         Registry.campMap.get(campID).addCampEnquiry(newEnquiry);
     }
 
+    public ArrayList<Enquiry> submittedEnquiries(){
+        ArrayList<Enquiry> enquiries = new ArrayList<>();
+        for(Map.Entry<Integer, Enquiry> i: enquiryMap.entrySet() ) {
+            enquiries.add(i.getValue());
+        }
+        return enquiries;
+    }
+
+    public ArrayList<Enquiry> getUnprocessedEnquiries(){
+        ArrayList<Enquiry> enquiries = new ArrayList<>();
+        for(Map.Entry<Integer, Enquiry> i: enquiryMap.entrySet() ) {
+            if(i.getValue().isProcessed()) continue;
+            enquiries.add(i.getValue());
+        }
+        return enquiries;
+    }
+    public void deleteEnquiry(int enquiryId){
+        int camp = enquiryMap.get(enquiryId).getCampID();
+        Registry.campMap.get(camp).deleteCampEnquiry(enquiryId);
+        //Enquiry e = enquiryMap.get(enquiryId);
+        enquiryMap.remove(enquiryId);
+    }
+
+    public void withdrawFromCamp(Camp camp){
+        camp.withdrawAttendee(this.getUserID());
+        ArrayList<Date> campdates = camp.getCampDates();
+        for (Date campdate : campdates) {
+            int j;
+            for (j = 0; j < this.blockedDates.size(); j++) {
+                Date temp = this.blockedDates.get(j);
+                if(campdate.getDate() == temp.getDate() && campdate.getYear() == temp.getYear() && campdate.getMonth() == temp.getMonth())break;
+            }
+            this.blockedDates.remove(j);
+        }
+    }
+
 
 //    public void withdrawCamp(int campID){
 //        Camp camp = registeredCamps.get(campID);

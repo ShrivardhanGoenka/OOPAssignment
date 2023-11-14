@@ -5,8 +5,8 @@ public class Suggestion extends Enquiry {
         super(ID, stringValue, submittedBy, submittedOn, updatedOn, campID);
         approvalStatus = 0;
     }
-    public Suggestion(int ID, String stringValue, String submittedBy, Date submittedOn, Date updatedOn, int campID, int approvalStatus) {
-        super(ID, stringValue, submittedBy, submittedOn, updatedOn, campID);
+    public Suggestion(int ID,String stringValue, String submittedBy, Date submittedOn, String reply, String repliedBy, Date repliedOn, Date updatedOn, int campID, int approvalStatus) {
+        super(ID,stringValue, submittedBy, submittedOn, reply, repliedBy, repliedOn, updatedOn, campID);
         this.approvalStatus = approvalStatus;
     }
 
