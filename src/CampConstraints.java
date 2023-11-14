@@ -128,13 +128,24 @@ public class CampConstraints {
         withdrawn.add(userID);
     }
 
-    //difference = currentslots - newslots
+    /**
+     * Updates the total attendee slots.
+     *
+     * @param difference 		The difference in number of total slots requested to change.
+     * @return true 			if the change is successful, otherwise false.
+     */
     boolean changeAttendeeSlots(int difference){
         if (difference > availableSlots) return false;
         availableSlots -= difference;
         return true;
     }
 
+    /**
+     * Updates the number of committee slots.
+     *
+     * @param difference 		The difference in number of committee slots requested to change.
+     * @return true 			if the change is successful, otherwise false.
+     */
     boolean changeCampCommitteeSlots(int difference){
         if (difference > availableCommitteeSlots) return false;
         availableCommitteeSlots -= difference;

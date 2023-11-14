@@ -141,7 +141,12 @@ public class DBInterface {
             }
             ArrayList<String> withdrawn = new ArrayList<String>(List.of(reader.readLine().split(",")));
             // Create the CampInformation object
+<<<<<<< HEAD
             camp = new Camp(campID, campName, campDates, regDeadline, userGroup, location, totalSlots, campCommitteeSlots, description, staffInCharge, withdrawn, attendees, committee, visibility, campenquiries, campSuggestions );
+=======
+	    campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, new ArrayList<String>(), campDates);
+            camp = new Camp(campID, campName, campDates, regDeadline, userGroup, location, totalSlots, campCommitteeSlots, description, staffInCharge, campConstraints);
+>>>>>>> 1964996 (feat: add javadoc)
 
             reader.close();
         } catch (IOException e) {
