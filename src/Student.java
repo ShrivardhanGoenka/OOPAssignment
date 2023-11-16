@@ -88,7 +88,7 @@ public class Student extends User{
             }
             this.blockedDates.remove(j);
         }
-	// registeredCamps.remove(camp.getCampID());
+	    registeredCamps.remove(camp.getCampID());
     }
 
 
