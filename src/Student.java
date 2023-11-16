@@ -84,10 +84,11 @@ public class Student extends User{
             int j;
             for (j = 0; j < this.blockedDates.size(); j++) {
                 Date temp = this.blockedDates.get(j);
-                if(campdate.getDate() == temp.getDate() && campdate.getYear() == temp.getYear() && campdate.getMonth() == temp.getMonth())break;
+                if(campdate.getDate() == temp.getDate() && campdate.getYear() == temp.getYear() && campdate.getMonth() == temp.getMonth()) break;
             }
             this.blockedDates.remove(j);
         }
+	// registeredCamps.remove(camp.getCampID());
     }
 
 

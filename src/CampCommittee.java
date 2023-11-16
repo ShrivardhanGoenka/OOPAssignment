@@ -65,7 +65,7 @@ public class CampCommittee extends Student {
     }
 
     /**
-     * Returns ArrayList of suggestions submitted by the committee member.
+     * Returns ArrayList of suggestions submitted.
      *
      * @returns An ArrayList of suggestions.
      */
