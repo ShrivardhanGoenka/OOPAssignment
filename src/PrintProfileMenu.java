@@ -1,11 +1,6 @@
-public class PrintProfileMenu implements IMenu {
-	private Student studentObject;
+public class PrintProfileMenu extends IMenu<User> {
 
-	public PrintProfileMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(User studentObject) {
 		System.out.println();
 		studentObject.printProfile();
 	}

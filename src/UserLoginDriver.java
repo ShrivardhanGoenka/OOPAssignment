@@ -3,19 +3,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.io.IOException;
 
-public class StudentLoginDriver {
+public class UserLoginDriver {
 
-    static void printMenuPage1(){
+    static void printLoginMenu(){
         System.out.println("1. Login");
         System.out.println("2. Return to main menu");
         System.out.println("3. Exit");
     }
 
-    public static void studentDriverPage1() throws IOException {
+    public static String authenticateUser() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int choice = 0;
         while (choice != 2 ){
-            printMenuPage1();
+            printLoginMenu();
             System.out.print("Enter your choice: ");
             choice = Integer.parseInt(br.readLine());
             switch(choice){
@@ -24,11 +24,13 @@ public class StudentLoginDriver {
                     String userID = br.readLine();
                     System.out.print("Enter your password: ");
                     String password = br.readLine();
+
+		    //need refractored
 		    if (Registry.studentMap.containsKey(userID)){
 			try{
 			    if(Registry.studentMap.get(userID).login(password)){
 				System.out.println("Login successful");
-				StudentDriver.printMenuPage2(userID);
+				return userID;
 			    }
 			    else{
 				System.out.println("Invalid Credentials");
@@ -37,20 +39,32 @@ public class StudentLoginDriver {
 			catch (Exception e){
 			    System.out.println(e.getMessage());
 			}
-		    }else{
+		    } else if (Registry.committeeMap.containsKey(userID)){
+
+			try{
+			    if(Registry.committeeMap.get(userID).login(password)){
+				System.out.println("Login successful");
+				return userID;
+			    }
+			    else{
+				System.out.println("Invalid Credentials");
+			    }
+			}
+			catch (Exception e){
+			    System.out.println(e.getMessage());
+			}
+		    } else{
 			System.out.println("Invalid Credentials");
 		    }
-
-                    break;
                 case 2:
-                    break;
+                    return null; 
                 case 3:
                     System.exit(0);
-                    break;
+                    return null;
                 default:
                     System.out.println("Invalid choice");
-                    break;
             }
         }
+	return null;
     }
 }

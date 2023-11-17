@@ -3,16 +3,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class WithdrawCampMenu implements IMenu {
-	private Student studentObject;
-
+public class WithdrawCampMenu extends IMenu<Student> {
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public WithdrawCampMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
                     System.out.println("Choose the camp you want to withdraw from: ");
                     ArrayList<Camp> camps = studentObject.registeredCamps();
                     for(int i=0;i<camps.size();i++){

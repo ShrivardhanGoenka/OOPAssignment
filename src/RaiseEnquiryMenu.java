@@ -3,16 +3,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class RaiseEnquiryMenu implements IMenu {
-	private Student studentObject;
+public class RaiseEnquiryMenu extends IMenu<Student> {
 
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public RaiseEnquiryMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
 	    	System.out.println("Choose the camp you want to raise an enquiry for: ");
 		ArrayList<Camp> camps = Filters.filterStudentCamps(studentObject.getFaculty());
 		for(int i=0;i<camps.size();i++){

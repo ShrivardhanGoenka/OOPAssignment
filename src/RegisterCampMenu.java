@@ -3,16 +3,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class RegisterCampMenu implements IMenu {
-	private Student studentObject; 
+public class RegisterCampMenu extends IMenu<Student> {
 
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public RegisterCampMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
                 ArrayList<Camp> availablaCamps = Filters.filterStudentCamps(studentObject.getFaculty());
                 System.out.println("Choose the camp you want to register for: ");
                 for(int i=0;i<availablaCamps.size();i++){

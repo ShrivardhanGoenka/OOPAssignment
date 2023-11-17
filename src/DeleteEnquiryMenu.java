@@ -3,16 +3,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class DeleteEnquiryMenu implements IMenu {
-	private Student studentObject; 
+public class DeleteEnquiryMenu extends IMenu<Student> {
 
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public DeleteEnquiryMenu (Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
                     System.out.println("Choose the enquiry you want to delete: ");
                     ArrayList<Enquiry> enquiries = studentObject.getUnprocessedEnquiries();
                     if(enquiries.isEmpty()) {

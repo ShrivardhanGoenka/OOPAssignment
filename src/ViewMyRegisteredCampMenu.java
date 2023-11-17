@@ -1,14 +1,8 @@
 import java.util.Date;
 
-public class ViewMyRegisteredCampMenu implements IMenu {
+public class ViewMyRegisteredCampMenu extends IMenu<Student> {
 
-	private Student studentObject;
-
-	public ViewMyRegisteredCampMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
                     for (Camp registered : studentObject.registeredCamps()){
                         System.out.println(registered.getCampName());
                     }

@@ -32,6 +32,10 @@ public class User implements UserActions{
         this.password = newPassword;
     }
 
+    public boolean isLoggedIn() {
+	return isLoggedIn;
+    }
+
     /**
      * Authenticates the user by verifying the provided password.
      *

@@ -92,8 +92,8 @@ public class DBInterface {
             e.printStackTrace();
             return null;
         }
-
     }
+
     void populateStudents(){
         ArrayList<String> students = new ArrayList<String>();
         try{
@@ -106,6 +106,56 @@ public class DBInterface {
         for(String student : students){
             Registry.studentMap.put(student, addStudent(student));
         }
+    }
+
+    CampCommittee addCommittee(String userID){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("LOGS/COMMITTEE/" + userID + ".txt"));
+            String password = reader.readLine();
+            String email = reader.readLine();
+            String faculty = reader.readLine();
+            String temp = reader.readLine();
+            boolean isLocked = temp.equals("locked");
+            String blockedDates = reader.readLine();
+            ArrayList<Date> blockedDatesList = parseDates(blockedDates);
+            ArrayList<Integer> registeredCamps = parseIntegerList(reader.readLine());
+            ArrayList<Integer> submittedEnquiries = parseIntegerList(reader.readLine());
+            HashMap<Integer,Camp> registeredCampsMap = new HashMap<Integer,Camp>();
+            for(int i: registeredCamps){
+                registeredCampsMap.put(i, Registry.campMap.get(i));
+            }
+            HashMap<Integer,Enquiry> submittedEnquiriesMap = new HashMap<Integer,Enquiry>();
+            for(int i: submittedEnquiries){
+                submittedEnquiriesMap.put(i, Registry.enquiryMap.get(i));
+            }
+	    Integer campIDCommittee = Integer.parseInt(reader.readLine());
+	    Camp camp = Registry.campMap.get(campIDCommittee);
+            HashMap<Integer,Suggestion> submittedSuggestionsMap = new HashMap<Integer,Suggestion>();
+	    ArrayList<Integer> submittedSuggestions = parseIntegerList(reader.readLine());
+	    for(int i: submittedSuggestions) {
+		submittedSuggestionsMap.put(i, Registry.suggestionMap.get(i));
+	    }
+	    Integer point = Integer.parseInt(reader.readLine());
+            reader.close();
+            return new CampCommittee(userID, password, email, faculty, isLocked, submittedEnquiriesMap, registeredCampsMap, blockedDatesList, camp, submittedSuggestionsMap, point);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    void populateCampCommittees(){
+	ArrayList<String> campCommittees = new ArrayList<String>();
+	try{
+		campCommittees = readDirectoryList("COMMITTEE");
+	} catch(IOException e) {
+		System.out.println(e.getMessage());
+		System.exit(1);
+	}
+
+	for(String campCommittee : campCommittees) {
+		Registry.committeeMap.put(campCommittee, addCommittee(campCommittee));
+	}
     }
 
     Camp readCampDetails(int campID){

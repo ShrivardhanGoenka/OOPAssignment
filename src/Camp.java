@@ -214,4 +214,11 @@ public class Camp extends CampInformation {
     public HashMap<Integer, Suggestion> getCampSuggestions(){
         return campSuggestions;
     }
+
+    /** 
+    * Removes the enquiry to campEnquiries 
+    *
+    * @param enquiryID 			The ID of enquiry to remove.
+    */
+    public void deleteCampSuggestion(int enquiryID){campSuggestions.remove(enquiryID);}
 }

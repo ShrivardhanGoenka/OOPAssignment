@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CampCommittee extends Student {
 
@@ -19,6 +20,8 @@ public class CampCommittee extends Student {
      */
     HashMap<Integer, Suggestion> submittedSuggestions;
 
+    Integer point;
+
     /**
      * Constructs a new {@code CampCommittee} with an empty submittedSuggestions.
      *
@@ -32,6 +35,7 @@ public class CampCommittee extends Student {
     public CampCommittee(String userID, String password, String email, String faculty, boolean isLocked, Camp camp) {
         super(userID, password, email, faculty, isLocked);
         this.camp = camp;
+	this.point = 0;
         submittedSuggestions = new HashMap<>();
     }
 
@@ -49,9 +53,10 @@ public class CampCommittee extends Student {
      * @param camp 			The camp associated with the committee member.
      * @param submittedSuggestions 	A map of submitted suggestions from the committee member.
      */
-    public CampCommittee(String userId, String password, String email, String faculty, boolean isLocked, HashMap<Integer, Enquiry> enquiryMap, HashMap<Integer, Camp> registeredCamps, ArrayList<Date> blockedDates, Camp camp, HashMap<Integer, Suggestion> submittedSuggestions) {
+    public CampCommittee(String userId, String password, String email, String faculty, boolean isLocked, HashMap<Integer, Enquiry> enquiryMap, HashMap<Integer, Camp> registeredCamps, ArrayList<Date> blockedDates, Camp camp, HashMap<Integer, Suggestion> submittedSuggestions, Integer point) {
         super(userId, password, email, faculty, isLocked, enquiryMap, registeredCamps, blockedDates);
         this.camp = camp;
+	this.point = point;
         this.submittedSuggestions = submittedSuggestions;
     }
 
@@ -71,6 +76,58 @@ public class CampCommittee extends Student {
      */
     public ArrayList<Suggestion> viewSuggestions(){
         return new ArrayList<>(submittedSuggestions.values());
+    }
+
+    public Camp getCamp() {
+	return camp;
+    }
+
+    public HashMap<Integer, Enquiry> getAttendeeEnquiryMap() {
+	    return camp.getCampEnquiries();
+    }
+
+    public ArrayList<Enquiry> getUnprocessedAttendeeEnquiry() {
+	ArrayList<Enquiry> enquiryList = new ArrayList<>(camp.getCampEnquiries().values());
+	int i = 0;
+	while (i<enquiryList.size()) {
+		if (enquiryList.get(i).isProcessed()) {
+			enquiryList.remove(i--);
+		}
+		i++;
+	}
+	return enquiryList;
+    }
+
+    public void replyToAttendeeEnquiry(Enquiry enquiry, String Message, String userID) {
+	enquiry.reply(Message, userID, new Date());
+    }
+
+    public void submitSuggestion(String suggestion, Integer campID) {
+        Suggestion newSuggestion = new Suggestion(Registry.nextSuggestionID, suggestion, this.getUserID(), new Date(), new Date(), campID);
+        submittedSuggestions.put(newSuggestion.getID(), newSuggestion);
+        Registry.nextSuggestionID++;
+        Registry.suggestionMap.put(newSuggestion.getID(), newSuggestion);
+    }
+
+    // can have some interface to link Enquiry and suggestion
+    public ArrayList<Suggestion> getUnprocessedSuggestions(){
+        ArrayList<Suggestion> suggestions = new ArrayList<>();
+        for(Map.Entry<Integer, Suggestion> i: submittedSuggestions.entrySet() ) {
+            if(i.getValue().getApprovalStatus()!=0) continue;
+            suggestions.add(i.getValue());
+        }
+        return suggestions;
+    }
+
+    public void deleteSuggestion(int suggestionID) {
+        int campID = submittedSuggestions.get(suggestionID).getCampID();
+        Registry.campMap.get(campID).deleteCampSuggestion(suggestionID);
+        //Enquiry e = enquiryMap.get(enquiryId);
+        submittedSuggestions.remove(suggestionID);
+    }
+
+    public void generateReport() {
+	System.out.println("To Generate report (not yet implemented)");
     }
 
 }

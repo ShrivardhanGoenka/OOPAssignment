@@ -3,15 +3,10 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class EditEnquiryMenu implements IMenu {
-	private Student studentObject;
+public class EditEnquiryMenu extends IMenu<Student> {
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public EditEnquiryMenu (Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
                     System.out.println("Choose the enquiry you want to edit: ");
                     ArrayList<Enquiry> enquiries = studentObject.getUnprocessedEnquiries();
                     if(enquiries.isEmpty()) {

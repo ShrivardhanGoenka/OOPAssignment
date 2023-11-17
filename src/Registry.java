@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class Registry {
     static HashMap<String, Student> studentMap = new HashMap<String, Student>();
+    static HashMap<String, CampCommittee> committeeMap = new HashMap<String, CampCommittee>();
     static HashMap<String, Staff> staffMap = new HashMap<String, Staff>();
     static HashMap<Integer, Camp> campMap = new HashMap<>();
     static HashMap<Integer, Enquiry> enquiryMap = new HashMap<>();

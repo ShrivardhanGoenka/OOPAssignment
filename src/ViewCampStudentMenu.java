@@ -1,14 +1,8 @@
 import java.util.Date;
 
-public class ViewCampStudentMenu implements IMenu {
+public class ViewCampStudentMenu extends IMenu<Student> {
 
-	private Student studentObject;
-
-	public ViewCampStudentMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+	public void runMenu(Student studentObject) {
 	    System.out.println("-------------<List of Avaiable Camp>-------------");
 	    for(Camp campIterator:Filters.filterStudentCamps(studentObject.getFaculty())){
 		System.out.println("Name:" + campIterator.getCampName());

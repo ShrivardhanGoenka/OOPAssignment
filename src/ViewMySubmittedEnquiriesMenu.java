@@ -1,10 +1,5 @@
-public class ViewMySubmittedEnquiriesMenu implements IMenu {
-	private Student studentObject;
-	public ViewMySubmittedEnquiriesMenu(Student studentObject) {
-		this.studentObject = studentObject;
-	}
-
-	public void runMenu() {
+public class ViewMySubmittedEnquiriesMenu extends IMenu<Student> {
+	public void runMenu(Student studentObject) {
 	    int counter = 0;
 	    for (Enquiry enquiry : studentObject.submittedEnquiries()){
 		System.out.println(counter++);
