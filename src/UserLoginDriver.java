@@ -7,8 +7,7 @@ public class UserLoginDriver {
 
     static void printLoginMenu(){
         System.out.println("1. Login");
-        System.out.println("2. Return to main menu");
-        System.out.println("3. Exit");
+        System.out.println("2. Exit");
     }
 
     public static String authenticateUser() throws IOException {
@@ -26,42 +25,57 @@ public class UserLoginDriver {
                     String password = br.readLine();
 
 		    //need refractored
-		    if (Registry.studentMap.containsKey(userID)){
-			try{
-			    if(Registry.studentMap.get(userID).login(password)){
-				System.out.println("Login successful");
-				return userID;
-			    }
-			    else{
-				System.out.println("Invalid Credentials");
-			    }
-			}
-			catch (Exception e){
-			    System.out.println(e.getMessage());
-			}
-		    } else if (Registry.committeeMap.containsKey(userID)){
+				if (Registry.studentMap.containsKey(userID)){
+				try{
+					if(Registry.studentMap.get(userID).login(password)){
+					System.out.println("Login successful");
+					return userID;
+					}
+					else{
+					System.out.println("Invalid Credentials");
+					}
+				}
+				catch (Exception e){
+					System.out.println(e.getMessage());
+				}
+				} else if (Registry.committeeMap.containsKey(userID)){
 
-			try{
-			    if(Registry.committeeMap.get(userID).login(password)){
-				System.out.println("Login successful");
-				return userID;
-			    }
-			    else{
+				try{
+					if(Registry.committeeMap.get(userID).login(password)){
+					System.out.println("Login successful");
+					return userID;
+					}
+					else{
+					System.out.println("Invalid Credentials");
+					}
+				}
+				catch (Exception e){
+					System.out.println(e.getMessage());
+				}
+				}
+				else if(Registry.staffMap.containsKey(userID)){
+					try{
+						if(Registry.staffMap.get(userID).login(password)){
+							System.out.println("Login successful");
+							return userID;
+						}
+						else{
+							System.out.println("Invalid Credentials");
+						}
+					}
+					catch (Exception e){
+						System.out.println(e.getMessage());
+					}
+				}
+				else{
 				System.out.println("Invalid Credentials");
-			    }
-			}
-			catch (Exception e){
-			    System.out.println(e.getMessage());
-			}
-		    } else{
-			System.out.println("Invalid Credentials");
-		    }
+				}
+				break;
                 case 2:
-                    return null; 
-                case 3:
-
-                    System.exit(0);
-                    return null;
+					DBInterface dbInterface = new DBInterface();
+					dbInterface.writeToDB();
+					System.exit(0);
+					return null;
                 default:
                     System.out.println("Invalid choice");
             }

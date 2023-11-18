@@ -3,13 +3,13 @@ Learn how to code
 08/11/2024
 SCSE
 Room 5, SCSE
-20
+1
 5
 Learn how to code in a fast paced world
 staff1
 visible
-student1,student2
+
 student4
-1,2
-1,2
-student3
+
+
+student3,student1

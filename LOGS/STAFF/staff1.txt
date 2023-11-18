@@ -2,3 +2,4 @@ staffpassword1
 staff1@ntu.edu.sg
 SCSE
 unlock
+1,2

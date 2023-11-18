@@ -5,19 +5,19 @@ public abstract class CampInformation implements Visibility {
     protected String campName;
     protected ArrayList<Date> campDates;
     protected Date registrationDeadline;
-    protected String schoolOpenTo;
+    protected String facultyOpenTo;
     protected String location;
     protected int totalSlots;
     protected int campCommitteeSlots;
     protected String description;
     protected String staffID;
     protected boolean visibility;
-    public CampInformation(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID,  boolean isVisible) {
+    public CampInformation(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String facultyOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, boolean isVisible) {
         this.campID = campID;
         this.campName = campName;
         this.campDates = campDates;
         this.registrationDeadline = registrationDeadline;
-        this.schoolOpenTo = schoolOpenTo;
+        this.facultyOpenTo = facultyOpenTo;
         this.location = location;
         this.totalSlots = totalSlots;
         this.campCommitteeSlots = campCommitteeSlots;
@@ -42,8 +42,8 @@ public abstract class CampInformation implements Visibility {
         return registrationDeadline;
     }
 
-    public String getSchoolOpenTo() {
-        return schoolOpenTo;
+    public String getFacultyOpenTo() {
+        return facultyOpenTo;
     }
 
     public String getLocation() {
@@ -75,8 +75,8 @@ public abstract class CampInformation implements Visibility {
         return visibility;
     }
     public boolean isVisible(String faculty){
-        if(schoolOpenTo.equals("*")) return true;
-        return schoolOpenTo.equalsIgnoreCase(faculty);
+        if(facultyOpenTo.equals("*")) return true;
+        return facultyOpenTo.equalsIgnoreCase(faculty);
     }
 
     public void setCampName(String name){
@@ -91,8 +91,8 @@ public abstract class CampInformation implements Visibility {
         registrationDeadline = date;
     }
 
-    public void setSchoolOpenTo(String schoolOpenTo){
-        this.schoolOpenTo = schoolOpenTo;
+    public void setFacultyOpenTo(String facultyOpenTo){
+        this.facultyOpenTo = facultyOpenTo;
     }
 
     public void setLocation(String location){
@@ -119,7 +119,7 @@ public abstract class CampInformation implements Visibility {
         campdates = campdates.substring(0, campdates.length()-1);
         output += campdates + "\n";
         output += DBInterface.returnDateVal(registrationDeadline) + "\n";
-        output += schoolOpenTo + "\n";
+        output += facultyOpenTo + "\n";
         output += location + "\n";
         output += totalSlots + "\n";
         output += campCommitteeSlots + "\n";

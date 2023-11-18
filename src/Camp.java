@@ -42,9 +42,9 @@ public class Camp extends CampInformation implements DatabaseWritable {
      * @param description 		The description of the camp.
      * @param staffID 			The staff ID of the committee organizing the camp.
      */
-    public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID){
-        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, true);
-        campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, new ArrayList<String>(), campDates);
+    public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, boolean isVisible){
+        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isVisible);
+        campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, new ArrayList<>(), campDates);
         attendees = new ArrayList<>();
         committeeMembers = new ArrayList<>();
         campEnquiries = new HashMap<>();
@@ -68,7 +68,7 @@ public class Camp extends CampInformation implements DatabaseWritable {
      */
     public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, ArrayList<String> withdrawn, ArrayList<String> attendees, ArrayList<String> committeeMembers, boolean isCampVisible, HashMap<Integer,Enquiry> campEnquiries, HashMap<Integer,Suggestion> campSuggestions){
         super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isCampVisible);
-        campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, withdrawn, campDates);
+        campConstraints = new CampConstraints(totalSlots-attendees.size(), campCommitteeSlots-committeeMembers.size(), registrationDeadline, schoolOpenTo, withdrawn, campDates);
         this.attendees = new ArrayList<>(attendees);
         this.committeeMembers = new ArrayList<>(committeeMembers);
         this.campEnquiries = campEnquiries;
@@ -97,6 +97,9 @@ public class Camp extends CampInformation implements DatabaseWritable {
      * @throws CampException 		if the registration fails.
      */
     public void registerAttendee(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
+        if(attendees.contains(userID) || committeeMembers.contains(userID)){
+            throw new CampException("User already registered!");
+        }
         campConstraints.checkAttendeeRegistration(userID, blockedDates, faculty);
         campConstraints.addRegistration();
         attendees.add(userID);
@@ -111,6 +114,9 @@ public class Camp extends CampInformation implements DatabaseWritable {
      * @throws CampException 		if the registration fails.
      */
     public void registerCommitteeMember(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
+        if(attendees.contains(userID) || committeeMembers.contains(userID)){
+            throw new CampException("User already registered!");
+        }
         campConstraints.checkCommitteeRegistration(userID, blockedDates, faculty);
         campConstraints.addCommitteeMember();
         committeeMembers.add(userID);

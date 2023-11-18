@@ -7,7 +7,7 @@ public class MenuFactory {
 		ArrayList<IMenu> studentSpecificMenus = new ArrayList<IMenu>(
 			Arrays.asList(
 				new ViewCampStudentMenu(),
-				new RegisterCampMenu(),
+				new RegisterCampStudentMenu(),
 				new ViewMyRegisteredCampMenu(),
 				new ViewMySubmittedEnquiriesMenu(),
 				new RaiseEnquiryMenu(),
@@ -20,9 +20,16 @@ public class MenuFactory {
 	};
 
 	public static ArrayList<IMenu> getCommitteeMenu() {
-		ArrayList<IMenu> userMenus = getStudentMenu();
+		ArrayList<IMenu> userMenus = getUserMenu();
 		ArrayList<IMenu> committeeSpecificMenus = new ArrayList<IMenu>(
 			Arrays.asList(
+				new ViewCampStudentMenu(),
+				new RegisterCampCommitteeMenu(),
+				new ViewMyRegisteredCampMenu(),
+				new ViewMySubmittedEnquiriesMenu(),
+				new RaiseEnquiryMenu(),
+				new DeleteEnquiryMenu(),
+				new WithdrawCampMenu(),
 				new SubmitSuggestionMenu(), // checked
 				new EditSuggestionMenu(), // checked
 				new DeleteSuggestionMenu(), //checked
@@ -35,6 +42,17 @@ public class MenuFactory {
 		userMenus.addAll(committeeSpecificMenus);
 		return userMenus;
 	};
+	public static ArrayList<IMenu> getStaffMenu(){
+		ArrayList<IMenu> userMenus = getUserMenu();
+		ArrayList<IMenu> staffSpecificMenus = new ArrayList<IMenu>(
+			Arrays.asList(
+					new ViewCampStaffMenu(),
+					new ViewCreatedCampsStaffMenu()
+			)
+		);
+		userMenus.addAll(staffSpecificMenus);
+		return userMenus;
+	}
 
 	public static ArrayList<IMenu> getUserMenu() {
 		ArrayList<IMenu> userProfileMenus = new ArrayList<IMenu>(
@@ -46,6 +64,4 @@ public class MenuFactory {
 		);
 		return userProfileMenus;
 	};
-
-	public static void getStaffMenu() {};
 }

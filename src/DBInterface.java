@@ -10,7 +10,7 @@ public class DBInterface {
         return dateFormat.format(date);
     }
 
-    <T extends DatabaseWritable, K> void writeObjects(String folder, Map<K, T> objectMap) {
+    private <T extends DatabaseWritable, K> void writeObjects(String folder, Map<K, T> objectMap) {
         removeAllFiles(folder);
         for(Map.Entry<K, T> entry: objectMap.entrySet()){
             try(PrintWriter writer = new PrintWriter("LOGS/" + folder + "/" + entry.getValue().getFileName())){
@@ -20,12 +20,23 @@ public class DBInterface {
             }
         }
     }
+    void writeNextValues(){
+        try(PrintWriter writer = new PrintWriter("LOGS/nextValues.txt")){
+            writer.write(Registry.nextCampID + "\n");
+            writer.write(Registry.nextEnquiryID + "\n");
+            writer.write(Registry.nextSuggestionID + "\n");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     void writeToDB(){
         writeObjects("CAMPS", Registry.campMap);
         writeObjects("ENQUIRIES", Registry.enquiryMap);
         writeObjects("SUGGESTIONS", Registry.suggestionMap);
         writeObjects("STUDENT", Registry.studentMap);
         writeObjects("COMMITTEE", Registry.committeeMap);
+        writeObjects("STAFF", Registry.staffMap);
+        writeNextValues();
     }
 
     void removeAllFiles(String folder){
@@ -208,8 +219,15 @@ public class DBInterface {
             // Parse the dates and registration deadline
             ArrayList<Date> campDates = parseDates(dates);
             Date regDeadline = parseDate(registrationClosingDate);
-            ArrayList<String> attendees = new ArrayList<String>(List.of(reader.readLine().split(",")));
-            ArrayList<String> committee = new ArrayList<String>(List.of(reader.readLine().split(",")));
+            // Parse the attendees and committee members
+            String list = reader.readLine();
+            ArrayList<String> attendees;
+            if (list == null || list.isEmpty()) attendees = new ArrayList<>();
+            else attendees = new ArrayList<>(List.of(list.split(",")));
+            list = reader.readLine();
+            ArrayList<String> committee;
+            if (list == null || list.isEmpty()) committee = new ArrayList<>();
+            else committee = new ArrayList<>(List.of(list.split(",")));
             ArrayList<Integer> enquiries = parseIntegerList(reader.readLine());
             HashMap<Integer, Enquiry> campenquiries = new HashMap<>();
             for(int i: enquiries){
@@ -263,6 +281,7 @@ public class DBInterface {
 
     // Helper method to parse dates in the format: dd/MM/yyyy,dd/MM/yyyy
     private static ArrayList<Date> parseDates(String dates) {
+        if(dates == null || dates.equals("")) return new ArrayList<Date>();
         ArrayList<Date> dateList = new ArrayList<>();
         try {
             String[] dateArr = dates.split(",");
@@ -348,6 +367,40 @@ public class DBInterface {
         catch(Exception e){
             System.out.println("Error in loading next values");
             System.exit(1);
+        }
+    }
+    Staff readStaff(String userID){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("LOGS/STAFF/" + userID + ".txt"));
+            String password = reader.readLine();
+            String email = reader.readLine();
+            String faculty = reader.readLine();
+            String temp = reader.readLine();
+            boolean isLocked = temp.equals("locked");
+            ArrayList<Integer> createdCamps = parseIntegerList(reader.readLine());
+            HashMap<Integer,Camp> createdCampsMap = new HashMap<Integer,Camp>();
+            for(int i: createdCamps){
+                createdCampsMap.put(i, Registry.campMap.get(i));
+            }
+            reader.close();
+            return new Staff(userID, password, email, faculty, isLocked, createdCampsMap);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    void populateStaff(){
+        ArrayList<String> staff = new ArrayList<String>();
+        try{
+            staff = readDirectoryList("STAFF");
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
+        for(String s : staff){
+            Registry.staffMap.put(s, readStaff(s));
         }
     }
 }

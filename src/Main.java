@@ -10,33 +10,23 @@ public class Main {
         dbInterface.populateCamps();
         dbInterface.populateStudents();
 		dbInterface.populateCampCommittees();
+		dbInterface.populateStaff();
 
-		Student test = new Student("test", "test", "test", "test", false);
-		Registry.studentMap.put("test", test);
-
-		dbInterface.writeToDB();
-
-//		System.out.println(Registry.studentMap.get("student1").DBWriter() + "\n\n\n");
-//		System.out.println(Registry.studentMap.get("student2").DBWriter() + "\n\n\n");
-//		System.out.println(Registry.studentMap.get("student3").DBWriter() + "\n\n\n");
-//		System.out.println(Registry.committeeMap.get("student4").DBWriter() + "\n\n\n");
-//		System.out.println(Registry.campMap.get(1).DBWriter() + "\n\n\n");
-//		System.out.println(Registry.campMap.get(2).DBWriter() + "\n\n\n");
-
-		//dbInterface.writeToDB();
-		System.exit(0);
-		while (true) {
+		while (true)
 			try {
 				String userID = UserLoginDriver.authenticateUser();
 				if (Registry.committeeMap.containsKey(userID)) { // not really a good way to check
-				CommitteeMenuDriver.accountMenu(userID, MenuFactory.getCommitteeMenu());
+					Driver.accountMenu(Registry.committeeMap.get(userID), MenuFactory.getCommitteeMenu());
 				} else if (Registry.studentMap.containsKey(userID)){
-				StudentMenuDriver.accountMenu(userID, MenuFactory.getStudentMenu());
-				} else {continue;}
+					Driver.accountMenu(Registry.studentMap.get(userID), MenuFactory.getStudentMenu());
+				}
+				else if(Registry.staffMap.containsKey(userID)){
+					Driver.accountMenu(Registry.staffMap.get(userID), MenuFactory.getStaffMenu());
+				}
 			}catch (Exception e){
 				e.printStackTrace();
 			}
 		}
     }
-}
+
 

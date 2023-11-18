@@ -134,7 +134,8 @@ public class CampCommittee extends Student implements DatabaseWritable {
         for (Map.Entry<Integer, Suggestion> i : submittedSuggestions.entrySet()) {
             suggestionString += i.getKey() + ",";
         }
-        suggestionString = suggestionString.substring(0, suggestionString.length() - 1);
+        if(!suggestionString.isEmpty())
+            suggestionString = suggestionString.substring(0, suggestionString.length() - 1);
         output += suggestionString + "\n";
         output += point + "\n";
         return output;
