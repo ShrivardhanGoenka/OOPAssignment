@@ -129,7 +129,7 @@ public class User implements UserActions{
         output += password + "\n";
         output += email + "\n";
         output += faculty + "\n";
-        output += isLocked + "\n";
+        output += isLocked? "lock":"unlock" + "\n";
         return output;
     }
 }

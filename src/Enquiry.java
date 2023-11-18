@@ -101,8 +101,8 @@ public class Enquiry implements DatabaseWritable{
         if(isProcessed){
             output += "1\n";
             output += reply + "\n";
-            output += repliedBy + "\n";
             output += DBInterface.returnDateVal(repliedOn) + "\n";
+            output += repliedBy + "\n";
         }
         else{
             output += "0\n";
