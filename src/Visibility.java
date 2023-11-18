@@ -1,3 +1,4 @@
+//javadoc
 /**
  * The {@code Visibility} interface represents objects that can be toggled between hidden or shown.
  * This serves to manage the visibility states.

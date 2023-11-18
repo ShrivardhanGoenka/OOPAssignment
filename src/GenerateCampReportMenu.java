@@ -4,6 +4,9 @@ public class GenerateCampReportMenu extends IMenu<CampCommittee> {
 
 	}
 
+	/**
+	 * @return the menu description
+	 */
 	public String getMenuDescription () {
 		return "Generate Camp Report";
 	}

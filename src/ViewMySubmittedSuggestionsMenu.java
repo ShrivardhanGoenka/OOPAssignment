@@ -1,3 +1,4 @@
+// javadoc
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -6,10 +7,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * The ViewMySubmittedSuggestionsMenu class provides the execution logics of the menu for viewing the submitted suggestion to the staff.
+ */
 public class ViewMySubmittedSuggestionsMenu extends IMenu<CampCommittee> {
 	
+	/** 
+	 * A buffer reader to handle the user input.
+	 */
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+	/**
+	 * Executes the menu logics for viewing the submitted suggestion.
+	 */
 	public void runMenu(CampCommittee committeeObject) {
 		HashMap<Integer, Suggestion> suggestionMap = committeeObject.submittedSuggestions;
 		System.out.printf("----------<View All Suggestions Submitted for Camp %s>-----------\n", committeeObject.getCamp().getCampName());
@@ -34,11 +44,18 @@ public class ViewMySubmittedSuggestionsMenu extends IMenu<CampCommittee> {
 			System.out.println("---------------------");
 		}
 	}
-
+	
+	/**
+	 * Returns the print format for the Date
+	 * @param d 		The Date.
+	 * @return String
 	static String printDate(Date d){
 		return d.getDate() + "/" + d.getMonth() + "/" + (d.getYear() + 1900);
 	}
 
+	/**
+	 * @return String of the menu description.
+	 */
 	public String getMenuDescription() {
 		return "View my submitted suggestions";
 	}

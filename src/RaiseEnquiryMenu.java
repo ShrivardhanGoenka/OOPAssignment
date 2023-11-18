@@ -1,12 +1,26 @@
+// javadoc
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * The RaiseEnquiryMenu class provides the execution logics of the menu for submitting an enquiry to a camp committee.
+ */
 public class RaiseEnquiryMenu extends IMenu<Student> {
 
+	/** 
+	 * A buffer reader to handle the user input.
+	 */
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+	/**
+	 * Executes the menu logics for making an enquiry to the camp committee.
+	 * The logics is as follows:
+	 * 1. The program shows camp this student has registered.
+	 * 2. The program will prompt the student to choose the camp to raise an enquiry to the camp committee.
+	 * 3. The program will prompt the student to enter enquiry message.
+	 */
 	public void runMenu(Student studentObject) {
 	    	System.out.println("Choose the camp you want to raise an enquiry for: ");
 		ArrayList<Camp> camps = Filters.filterStudentCamps(studentObject.getFaculty());
@@ -30,6 +44,9 @@ public class RaiseEnquiryMenu extends IMenu<Student> {
 		}
 	}
 
+	/** 
+	 * @return the menu description
+	 */
 	public String getMenuDescription() {
 		return "Raise an enquiry";
 	}

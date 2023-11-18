@@ -1,15 +1,53 @@
+// javadoc
 /**
  * The {@code User} class represents a user in the system and implements the {@code UserActions} interface.
  * It provides methods to manage user actions such as changing passwords, logging in, controling user login, retreiving user information, and logging out.
  */
 public class User implements UserActions{
+    /**
+     * The unique userID of this student.
+     */
     private String userID;
+
+    /** 
+     * The password of this user account.
+     */
     private String password;
+
+    /**
+     * The email address of the user.
+     */
     private String email;
+
+    /**
+     * The faculty this user is from.
+     */
     private String faculty;
+
+    /**
+     * A boolean flag indicating if the user is currently logged in.
+     */
     private boolean isLoggedIn;
+
+    /**
+     * A boolean flag indicating if the account is locked.
+     */
     private boolean isLocked;
+
+    /**
+     * The number of unsuccessful login attempt made by this user since last successful login.
+     */
     private int loginAttempts;
+
+    /**
+     * The Constructors for a new user.
+     *
+     * @param userID 				The unique userID.
+     * @param password 				The password of this account.
+     * @param email 				The email address of this user.
+     * @param faculty 				The faculty this user is from.
+     * @param isLocked 				A boolean indicating whether the account is locked.
+     */
     public User(String userID, String password, String email, String faculty, boolean isLocked){
         this.userID = userID;
         this.password = password;
@@ -23,7 +61,7 @@ public class User implements UserActions{
     /**
      * Changes the user's password to the specified new password.
      *
-     * @param newPassword 			The new password to set.
+     * @param newPassword 			The new password to set to.
      * @throws UserException 			If the user is not logged in.
      */
     @Override
@@ -34,7 +72,7 @@ public class User implements UserActions{
     /**
      * Checks if the user is logged in
      *
-     * @return 					boolean value indicating if the user is logged in.
+     * @return 					A boolean value indicating if the user is logged in.
      */
     public boolean isLoggedIn() {
 	return isLoggedIn;
@@ -108,7 +146,7 @@ public class User implements UserActions{
     }
 
     /**
-     * Prints the user's profile information.
+     * Prints the user's profile information to System.out.
      */
     public void printProfile(){
         System.out.println("UserID: " + userID);

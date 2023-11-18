@@ -1,11 +1,23 @@
+//javadoc
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
+/**
+ * The WithdrawCampMenu class provides the execution logics of the menu for withdrawing from a camp.
+ */
 public class WithdrawCampMenu extends IMenu<Student> {
+	/** 
+	 * A buffer reader to handle the user input.
+	 */
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+	/**
+	 * Executes the menu logics for withdrawing from a camp.
+	 * The logics is as follows:
+	 * 1. The program will prompt the student to choose the camp to withdraw from.
+	 */
 	public void runMenu(Student studentObject) {
                     System.out.println("Choose the camp you want to withdraw from: ");
                     ArrayList<Camp> camps = studentObject.registeredCamps();
@@ -29,6 +41,9 @@ public class WithdrawCampMenu extends IMenu<Student> {
 		    }
 	}
 
+	/**
+	 * @return the menu description.
+	 */
 	public String getMenuDescription () {
 		return "Withdraw from a camp";
 	}
