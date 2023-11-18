@@ -115,4 +115,21 @@ public class User implements UserActions{
         System.out.println("Email Address: " + email);
         System.out.println("Faculty: " + faculty);
     }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String DBWriter(){
+        String output = "";
+        output += password + "\n";
+        output += email + "\n";
+        output += faculty + "\n";
+        output += isLocked + "\n";
+        return output;
+    }
 }

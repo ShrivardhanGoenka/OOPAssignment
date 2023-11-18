@@ -1,11 +1,13 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-public class Student extends User{
+public class Student extends User implements DatabaseWritable{
     private HashMap<Integer, Enquiry> enquiryMap;
     private HashMap<Integer, Camp> registeredCamps;
+
+
+
     private ArrayList<Date> blockedDates;
     public Student(String userID, String password, String email, String faculty, boolean isLocked){
         super(userID, password, email, faculty, isLocked);
@@ -92,13 +94,38 @@ public class Student extends User{
 	    registeredCamps.remove(camp.getCampID());
     }
 
+    public ArrayList<Date> getBlockedDates() {
+        return blockedDates;
+    }
 
-//    public void withdrawCamp(int campID){
-//        Camp camp = registeredCamps.get(campID);
-//        camp.withdrawAttendee(this.getUserID());
-//        registeredCamps.remove(campID);
-//        ArrayList<Date> datelist = camp.getCampDates();
-//        blockedDates.removeAll(datelist);
-//    }
+    @Override
+    public String DBWriter(){
+        String output = super.DBWriter();
+        String datesblocked = "";
+        for (Date blockedDate : blockedDates) {
+            datesblocked += DBInterface.returnDateVal(blockedDate) + ",";
+        }
+        if(!datesblocked.isEmpty())
+            datesblocked = datesblocked.substring(0, datesblocked.length()-1);
+        output += datesblocked + "\n";
+        String campsregistered = "";
+        for (Map.Entry<Integer, Camp> i: registeredCamps.entrySet() ) {
+            campsregistered += i.getKey() + ",";
+        }
+        if(!campsregistered.isEmpty())
+            campsregistered = campsregistered.substring(0, campsregistered.length()-1);
+        output += campsregistered + "\n";
+        String enquiries = "";
+        for (Map.Entry<Integer, Enquiry> i: enquiryMap.entrySet() ) {
+            enquiries += i.getKey() + ",";
+        }
+        if(!enquiries.isEmpty())
+            enquiries = enquiries.substring(0, enquiries.length()-1);
+        output += enquiries + "\n";
+        return output;
+    }
 
+    public String getFileName(){
+        return this.getUserID() + ".txt";
+    }
 }

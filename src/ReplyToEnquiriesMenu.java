@@ -14,6 +14,10 @@ public class ReplyToEnquiriesMenu extends IMenu<CampCommittee> {
 		System.out.printf("----------<List of Unprocessed Enquiries for Camp %s>-----------\n", committeeObject.getCamp().getCampName());
 		int indexIterator=0;
 		ArrayList<Enquiry> enquiries = committeeObject.getUnprocessedAttendeeEnquiry();
+		if(enquiries.isEmpty()) {
+			System.out.println("You have no open enquiries");
+			return;
+		}
 		for (Enquiry enquiry : enquiries) {
 			System.out.printf("%d. Enquiry: %s\n", ++indexIterator, enquiry.getStringValue());
 		}

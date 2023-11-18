@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Enquiry {
+public class Enquiry implements DatabaseWritable{
     private int ID;
     private String stringValue;
     private boolean isProcessed;
@@ -89,5 +89,28 @@ public class Enquiry {
 
     public int getCampID() {
         return campID;
+    }
+
+    public String DBWriter(){
+        String output = "";
+        output += stringValue + "\n";
+        output += DBInterface.returnDateVal(submittedOn) + "\n";
+        output += DBInterface.returnDateVal(updatedOn) + "\n";
+        output += submittedBy + "\n";
+        output += campID + "\n";
+        if(isProcessed){
+            output += "1\n";
+            output += reply + "\n";
+            output += repliedBy + "\n";
+            output += DBInterface.returnDateVal(repliedOn) + "\n";
+        }
+        else{
+            output += "0\n";
+        }
+        return output;
+    }
+
+    public String getFileName(){
+        return "enquiry" + ID + ".txt";
     }
 }

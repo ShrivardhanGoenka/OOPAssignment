@@ -22,7 +22,6 @@ public class ViewAllEnquiriesMenu extends IMenu<CampCommittee> {
 			}
 			System.out.printf("Last Updated on: %s\n", printDate(enquiry.getUpdatedOn()));
 			System.out.println("---------------------");
-
 		}
 	}
 

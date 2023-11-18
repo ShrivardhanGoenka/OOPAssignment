@@ -152,6 +152,14 @@ public class CampConstraints {
         return true;
     }
 
+    String returnWithdrawnString(){
+        String output = "";
+        for(String userID : withdrawn){
+            output += userID + ",";
+        }
+        if(!output.isEmpty()) output = output.substring(0, output.length()-1);
+        return output;
+    }
 
 
 }

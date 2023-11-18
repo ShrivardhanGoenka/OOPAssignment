@@ -1,7 +1,7 @@
 testpasssword5
 student3@e.ntu.edu.sg
 SPMS
-unlock
+false
 24/11/2023,25/11/2023,26/11/2023,29/11/2023
 
 2

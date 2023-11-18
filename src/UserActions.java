@@ -48,4 +48,13 @@ public interface UserActions{
      */
     String getFaculty();
 
+    /**
+     * Retrieves if the account is locked.
+     *
+     * @return 					{@code true} if the account is locked, {@code false} otherwise.
+     */
+    boolean isLocked();
+
+
+    String getPassword();
 }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
 * The Camp class represents a camp with a specific constraints and information
@@ -9,7 +10,7 @@ import java.util.HashMap;
 * @see  	{@link CampInformation}
 * @see        	{@link CampConstrants} 
 */
-public class Camp extends CampInformation {
+public class Camp extends CampInformation implements DatabaseWritable {
 
     // Fields
     /** The constraints for this camp*/
@@ -221,4 +222,43 @@ public class Camp extends CampInformation {
     * @param enquiryID 			The ID of enquiry to remove.
     */
     public void deleteCampSuggestion(int enquiryID){campSuggestions.remove(enquiryID);}
+
+    @Override
+    public String DBWriter(){
+        String output = super.DBWriter();
+        String attendeesString = "";
+        for(String attendee: attendees){
+            attendeesString += attendee + ",";
+        }
+        if(!attendeesString.isEmpty())
+            attendeesString = attendeesString.substring(0, attendeesString.length()-1);
+        output += attendeesString + "\n";
+        String committeeMembersString = "";
+        for(String committeeMember: committeeMembers){
+            committeeMembersString += committeeMember + ",";
+        }
+        if(!committeeMembersString.isEmpty())
+            committeeMembersString = committeeMembersString.substring(0, committeeMembersString.length()-1);
+        output += committeeMembersString + "\n";
+        String campEnquiriesString = "";
+        for (Map.Entry<Integer, Enquiry> i: campEnquiries.entrySet() ) {
+            campEnquiriesString += i.getKey() + ",";
+        }
+        if(!campEnquiriesString.isEmpty())
+            campEnquiriesString = campEnquiriesString.substring(0, campEnquiriesString.length()-1);
+        output += campEnquiriesString + "\n";
+        String campSuggestionsString = "";
+        for (Map.Entry<Integer, Suggestion> i: campSuggestions.entrySet() ) {
+            campSuggestionsString += i.getKey() + ",";
+        }
+        if(!campSuggestionsString.isEmpty())
+            campSuggestionsString = campSuggestionsString.substring(0, campSuggestionsString.length()-1);
+        output += campSuggestionsString + "\n";
+        output += campConstraints.returnWithdrawnString() + "\n";
+        return output;
+    }
+
+    public String getFileName(){
+        return "camp" + getCampID() + ".txt";
+    }
 }

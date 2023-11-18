@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CampCommittee extends Student {
+public class CampCommittee extends Student implements DatabaseWritable {
 
     /**
      * The {@CampCommittee} represents a student who is a committee member of the camp.
@@ -124,6 +124,20 @@ public class CampCommittee extends Student {
         Registry.campMap.get(campID).deleteCampSuggestion(suggestionID);
         //Enquiry e = enquiryMap.get(enquiryId);
         submittedSuggestions.remove(suggestionID);
+    }
+
+    @Override
+    public String DBWriter(){
+        String output = super.DBWriter();
+        output += camp.getCampID() + "\n";
+        String suggestionString = "";
+        for (Map.Entry<Integer, Suggestion> i : submittedSuggestions.entrySet()) {
+            suggestionString += i.getKey() + ",";
+        }
+        suggestionString = suggestionString.substring(0, suggestionString.length() - 1);
+        output += suggestionString + "\n";
+        output += point + "\n";
+        return output;
     }
 
     public void generateReport() {
