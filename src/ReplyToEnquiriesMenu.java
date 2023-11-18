@@ -13,7 +13,7 @@ public class ReplyToEnquiriesMenu extends IMenu<CampCommittee> {
 	public void runMenu(CampCommittee committeeObject) {
 		System.out.printf("----------<List of Unprocessed Enquiries for Camp %s>-----------\n", committeeObject.getCamp().getCampName());
 		int indexIterator=0;
-		ArrayList<Enquiry> enquiries = committeeObject.getUnprocessedEnquiries();
+		ArrayList<Enquiry> enquiries = committeeObject.getUnprocessedAttendeeEnquiry();
 		for (Enquiry enquiry : enquiries) {
 			System.out.printf("%d. Enquiry: %s\n", ++indexIterator, enquiry.getStringValue());
 		}

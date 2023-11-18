@@ -70,6 +70,7 @@ public class Student extends User{
         }
         return enquiries;
     }
+
     public void deleteEnquiry(int enquiryId){
         int camp = enquiryMap.get(enquiryId).getCampID();
         Registry.campMap.get(camp).deleteCampEnquiry(enquiryId);

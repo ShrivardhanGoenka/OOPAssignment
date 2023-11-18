@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 
 public class ViewAllEnquiriesMenu extends IMenu<CampCommittee> {
 	
-        private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 	public void runMenu(CampCommittee committeeObject) {
 		HashMap<Integer, Enquiry> enquiryMap = committeeObject.getAttendeeEnquiryMap();
 		System.out.printf("----------<View All Enquiries for Camp %s>-----------\n", committeeObject.getCamp().getCampName());
