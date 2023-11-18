@@ -99,7 +99,7 @@ public class CampCommittee extends Student {
     }
 
     public void replyToAttendeeEnquiry(Enquiry enquiry, String Message, String userID) {
-	enquiry.reply(Message, userID, new Date());
+	    enquiry.reply(Message, userID, new Date());
     }
 
     public void submitSuggestion(String suggestion, Integer campID) {

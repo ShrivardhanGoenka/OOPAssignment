@@ -31,7 +31,11 @@ public class User implements UserActions{
         if(isLoggedIn == false) throw new UserException("User not logged in");
         this.password = newPassword;
     }
-
+    /**
+     * Checks if the user is logged in
+     *
+     * @return 					boolean value indicating if the user is logged in.
+     */
     public boolean isLoggedIn() {
 	return isLoggedIn;
     }

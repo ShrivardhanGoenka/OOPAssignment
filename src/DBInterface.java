@@ -1,6 +1,7 @@
 import javax.swing.plaf.BorderUIResource;
 import java.io.File;
 import java.io.FileReader;
+import java.nio.Buffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -8,8 +9,52 @@ import java.io.BufferedReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class DBInterface {
+    String returnDateVal(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
+    }
+
+    void writeSuggestion(Suggestion suggestion){
+        BufferedWriter writer = null;
+        try{
+            writer = new BufferedWriter(new FileWriter("LOGS/SUGGESTIONS/suggestion" + suggestion.getID() + ".txt"));
+            writer.write(suggestion.getStringValue());
+            writer.newLine();
+            writer.write(returnDateVal(suggestion.getSubmittedOn()));
+            writer.newLine();
+            writer.write(returnDateVal(suggestion.getUpdatedOn()));
+            writer.newLine();
+            writer.write(suggestion.getSubmittedBy());
+            writer.newLine();
+            writer.write(Integer.toString(suggestion.getCampID()));
+            writer.newLine();
+            if(suggestion.isProcessed()){
+                writer.write("1");
+                writer.newLine();
+                writer.write(suggestion.getReply());
+                writer.newLine();
+                writer.write(returnDateVal(suggestion.getRepliedOn()));
+                writer.newLine();
+                writer.write(suggestion.getRepliedBy());
+                writer.newLine();
+                writer.write(Integer.toString(suggestion.getApprovalStatus()));
+                writer.newLine();
+            }
+            else{
+                writer.write("0");
+                writer.newLine();
+            }
+            writer.close();
+        }
+        catch(Exception e){
+            System.out.println("Error in writing suggestion");
+            System.exit(1);
+        }
+    }
 
     Suggestion readSuggestion(int suggestionID){
         //Suggestion suggestion = null;

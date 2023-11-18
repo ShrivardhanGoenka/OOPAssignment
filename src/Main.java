@@ -10,6 +10,11 @@ public class Main {
 
     public static void main(String[] args){
         DBInterface dbInterface = new DBInterface();
+
+		Suggestion suggestiontest = new Suggestion(10,"hello?", "student4",   new Date(), new Date(), 1);
+		dbInterface.writeSuggestion(suggestiontest);
+		System.exit(0);
+
         dbInterface.loadNextValues();
         dbInterface.populateSuggestions();
         dbInterface.populateEnquiries();
