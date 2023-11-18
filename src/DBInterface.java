@@ -56,6 +56,26 @@ public class DBInterface {
         }
     }
 
+    void writeAllSuggestions(){
+        for(Suggestion suggestion : Registry.suggestionMap.values()){
+            writeSuggestion(suggestion);
+        }
+    }
+
+    void removeAllFiles(String folder){
+        folder = "LOGS/" + folder + "/";
+        File directory = new File(folder);
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if(files == null) return;
+            for (File file : files) {
+                if (file.isFile() && file.getName().endsWith(".txt")) {
+                    file.delete();
+                }
+            }
+        }
+    }
+
     Suggestion readSuggestion(int suggestionID){
         //Suggestion suggestion = null;
         try{
