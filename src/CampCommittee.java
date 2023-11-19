@@ -1,19 +1,14 @@
-// javadoc
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
 public class CampCommittee extends Student implements DatabaseWritable {
-=======
-/**
-* The {@CampCommittee} represents a student who is a committee member of the camp.
-* It extends the {@code Student} class and includes extra functionalities specific to camp committee.
-* This includes making, deleting, viewing and editing the suggestions to staff, and managing the attendees' enquiries.
-*/
-public class CampCommittee extends Student {
->>>>>>> f5288b8 (feat: add javadoc)
+
+    /**
+     * The {@CampCommittee} represents a student who is a committee member of the camp.
+     * It extends the {@link Student} class and includes extra functionality specific to camp committee.
+     */
 
     /**
      * Represents Camp that this committee is associated.
@@ -83,29 +78,14 @@ public class CampCommittee extends Student {
         return new ArrayList<>(submittedSuggestions.values());
     }
 
-    /**
-     * Returns the camp this committee oversee.
-     *
-     * @return The {@code Camp} this {@code CampCommittee} oversee.
-     */
     public Camp getCamp() {
 	return camp;
     }
 
-    /**
-     * Returns the enquiries to the camp this committee oversees. 
-     *
-     * @return {@code HashMap<Integer, Enquiry>} of the enquiryID and Enquiry.
-     */
     public HashMap<Integer, Enquiry> getAttendeeEnquiryMap() {
 	    return camp.getCampEnquiries();
     }
 
-    /**
-     * Returns the unreplied enquiries to the camp this committee oversees.
-     *
-     * @return {@code ArrayList<Enquiry>} of the unreplied enquiry.
-     */
     public ArrayList<Enquiry> getUnprocessedAttendeeEnquiry() {
 	ArrayList<Enquiry> enquiryList = new ArrayList<>(camp.getCampEnquiries().values());
 	int i = 0;
@@ -118,35 +98,19 @@ public class CampCommittee extends Student {
 	return enquiryList;
     }
 
-    /**
-     * Makes a reply to an Enquiry.
-     *
-     * @param enquiry 			The Enquiry to reply to.
-     * @param message 			The String of the reply message.
-     * @param userID 			The String of the committee's userID that make a reply.
-     */
-    public void replyToAttendeeEnquiry(Enquiry enquiry, String message, String userID) {
-	    enquiry.reply(message, userID, new Date());
+    public void replyToAttendeeEnquiry(Enquiry enquiry, String Message, String userID) {
+	    enquiry.reply(Message, userID, new Date());
     }
 
-    /**
-     * Submits a suggestion to staff.
-     *
-     * @param suggestion 		The String of suggestion message.
-     * @param campID 			The ID of the camp to submit to.
-     */
     public void submitSuggestion(String suggestion, Integer campID) {
         Suggestion newSuggestion = new Suggestion(Registry.nextSuggestionID, suggestion, this.getUserID(), new Date(), new Date(), campID);
         submittedSuggestions.put(newSuggestion.getID(), newSuggestion);
         Registry.nextSuggestionID++;
         Registry.suggestionMap.put(newSuggestion.getID(), newSuggestion);
+        camp.addCampSuggestion(newSuggestion);
     }
 
-    /**
-     * Retrieves unprocessed suggestions.
-     *
-     * @return {@code ArrayList<Suggestion>} of suggestions.
-     */
+    // can have some interface to link Enquiry and suggestion
     public ArrayList<Suggestion> getUnprocessedSuggestions(){
         ArrayList<Suggestion> suggestions = new ArrayList<>();
         for(Map.Entry<Integer, Suggestion> i: submittedSuggestions.entrySet() ) {
@@ -156,19 +120,14 @@ public class CampCommittee extends Student {
         return suggestions;
     }
 
-    /**
-     * Deletes the unprocessed suggestion this committee submited.
-     *
-     * @param suggestionID 		The ID of the suggestion to delete.
-     */
     public void deleteSuggestion(int suggestionID) {
         int campID = submittedSuggestions.get(suggestionID).getCampID();
         Registry.campMap.get(campID).deleteCampSuggestion(suggestionID);
         //Enquiry e = enquiryMap.get(enquiryId);
         submittedSuggestions.remove(suggestionID);
+        Registry.suggestionMap.remove(suggestionID);
     }
 
-<<<<<<< HEAD
     @Override
     public String DBWriter(){
         String output = super.DBWriter();
@@ -184,12 +143,6 @@ public class CampCommittee extends Student {
         return output;
     }
 
-=======
-    /**
-     * Generates a report of the camp this committee oversee.
-     *
-     */
->>>>>>> f5288b8 (feat: add javadoc)
     public void generateReport() {
 	System.out.println("To Generate report (not yet implemented)");
     }

@@ -33,7 +33,7 @@ public class ViewMySubmittedSuggestionsMenu extends IMenu<CampCommittee> {
 				System.out.printf("Reply: %s\n", suggestion.getReply());
 				System.out.printf("Replied by: %s on: %s\n", suggestion.getRepliedBy(), suggestion.getRepliedOn());
 			}
-			System.out.printf("Last Updated on: %s\n", printDate(suggestion.getUpdatedOn()));
+			System.out.printf("Last Updated on: %s\n", DBInterface.returnDateVal(suggestion.getUpdatedOn()));
 			String status = "Pending";
 			if (suggestion.getApprovalStatus() == 1) { 
 				status = "Approved"; 

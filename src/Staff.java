@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Date;
+import java.util.Map;
 
 public class Staff extends User implements DatabaseWritable{
     private HashMap<Integer, Camp> createdCamps;
@@ -44,5 +45,30 @@ public class Staff extends User implements DatabaseWritable{
         createdCamps.put(newCamp.getCampID(), newCamp);
     }
 
+    public ArrayList<Suggestion> getSuggestions(){
+        ArrayList<Suggestion> suggestions = new ArrayList<>();
+        for(Map.Entry<Integer,Camp> camp : createdCamps.entrySet()){
+            suggestions.addAll(camp.getValue().getCampSuggestions().values());
+        }
+        return suggestions;
+    }
 
+    public ArrayList<Suggestion> getUnprocessedSuggestions(){
+        ArrayList<Suggestion> suggestions = getSuggestions();
+        ArrayList<Suggestion> unprocessedSuggestions = new ArrayList<>();
+        for(Suggestion suggestion: suggestions){
+            if(suggestion.getApprovalStatus() == 0){
+                unprocessedSuggestions.add(suggestion);
+            }
+        }
+        return unprocessedSuggestions;
+    }
+
+    public void processSuggestion(int suggestionID, boolean approvalStatus, String reply){
+        Suggestion suggestion = Registry.suggestionMap.get(suggestionID);
+        suggestion.approve();
+        suggestion.reply(reply, this.getUserID(), new Date());
+        if(approvalStatus) suggestion.approve();
+        else suggestion.reject();
+    }
 }

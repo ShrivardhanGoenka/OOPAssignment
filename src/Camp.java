@@ -49,6 +49,7 @@ public class Camp extends CampInformation implements DatabaseWritable {
         attendees = new ArrayList<>();
         committeeMembers = new ArrayList<>();
         campEnquiries = new HashMap<>();
+        campSuggestions = new HashMap<>();
     }
 
     // Constructors for an existing camp from database.
@@ -167,6 +168,24 @@ public class Camp extends CampInformation implements DatabaseWritable {
         campEnquiries.put(enquiry.getID(), enquiry);
     }
 
+    /**
+     * Adds the suggestion to the camp.
+     *
+     * @param suggestion 			The suggestion.
+     */
+    public void addCampSuggestion(Suggestion suggestion){
+        campSuggestions.put(suggestion.getID(), suggestion);
+    }
+
+    /**
+     * Deletes the suggestion from the camp.
+     *
+     * @param suggestionID 			The ID of suggestion to delete.
+     *
+     */
+    public void deleteCampSuggestion(Integer suggestionID){
+        campSuggestions.remove(suggestionID);
+    }
 
     /** 
     * Removes the enquiry to campEnquiries 
@@ -277,5 +296,13 @@ public class Camp extends CampInformation implements DatabaseWritable {
      */
     public String getFileName(){
         return "camp" + getCampID() + ".txt";
+    }
+
+    public void deleteCamp(){
+        for(String attendee: attendees){
+            Registry.studentMap.get(attendee).withdrawFromCamp(this);
+        }
+
+        Registry.campMap.remove(this.getCampID());
     }
 }

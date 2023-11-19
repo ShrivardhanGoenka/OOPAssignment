@@ -22,6 +22,10 @@ public class Suggestion extends Enquiry implements DatabaseWritable {
         approvalStatus = 2;
     }
 
+    public void replyToSuggestions(String reply, String repliedBy, Date repliedOn){
+        super.reply(reply, repliedBy, repliedOn);
+    }
+
     @Override
     public String DBWriter(){
         String output = super.DBWriter();

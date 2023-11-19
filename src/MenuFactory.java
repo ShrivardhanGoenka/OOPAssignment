@@ -47,7 +47,11 @@ public class MenuFactory {
 		ArrayList<IMenu> staffSpecificMenus = new ArrayList<IMenu>(
 			Arrays.asList(
 					new ViewCampStaffMenu(),
-					new ViewCreatedCampsStaffMenu()
+					new CreateCampMenu(),
+					new ViewCreatedCampsStaffMenu(),
+					new EditCampMenu(),
+					new ViewSuggestionMenu(),
+					new ProcessSuggestionMenu()
 			)
 		);
 		userMenus.addAll(staffSpecificMenus);
