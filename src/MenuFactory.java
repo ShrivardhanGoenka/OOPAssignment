@@ -10,6 +10,7 @@ public class MenuFactory {
 				new RegisterCampStudentMenu(),
 				new ViewMyRegisteredCampMenu(),
 				new ViewMySubmittedEnquiriesMenu(),
+				new EditEnquiryMenu(),
 				new RaiseEnquiryMenu(),
 				new DeleteEnquiryMenu(),
 				new WithdrawCampMenu()

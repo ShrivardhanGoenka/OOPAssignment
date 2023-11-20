@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Enquiry implements DatabaseWritable{
+public class Enquiry extends Sortable implements DatabaseWritable {
     private int ID;
     private String stringValue;
     private boolean isProcessed;
