@@ -15,6 +15,6 @@ public class SortableEnquiry implements Sortable<Enquiry>{
         return sortableAttributes;
     }
     public void sortArrayList(ArrayList<Enquiry> arrayList, ComparableAttribute<Enquiry> attribute){
-
+        arrayList.sort(attribute.getComparator());
     }
 }
