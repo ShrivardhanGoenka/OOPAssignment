@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class SortableEnquiry implements Sortable<Enquiry>{
+public class SortableEnquiry extends Sortable<Enquiry>{
     public ArrayList<ComparableAttribute<Enquiry>> getSortableAttributes(){
         ArrayList<ComparableAttribute<Enquiry>> sortableAttributes = new ArrayList<ComparableAttribute<Enquiry>>();
         sortableAttributes.add(new ComparableAttribute<Enquiry>("Enquiry Content", Comparator.comparing(Enquiry::getStringValue)));

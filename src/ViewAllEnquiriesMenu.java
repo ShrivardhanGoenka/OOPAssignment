@@ -19,25 +19,7 @@ public class ViewAllEnquiriesMenu extends IMenu<CampCommittee> {
 		);
 		
 		SortableEnquiry sortableEnquiry = new SortableEnquiry();
-		System.out.println("Please select the attribute to sort");
-		ArrayList<ComparableAttribute<Enquiry>> sortableAttributes = sortableEnquiry.getSortableAttributes();
-		for (int i=0;i<sortableAttributes.size();i++) {
-			System.out.printf("%d. %s\n", i+1, sortableAttributes.get(i).getAttributeName());
-		}
-		int choice = 0;
-		try {
-			choice = Integer.parseInt(br.readLine());
-		} catch(IOException e) {
-			e.printStackTrace();
-			System.out.println("Invalid option, using default sorting option");
-		}
-		if (choice < 1 || choice > sortableAttributes.size()) {
-			System.out.println("Invalid option, using default sorting option");
-			return;
-		}
-
-		ComparableAttribute<Enquiry> attribute = sortableAttributes.get(choice-1);
-		sortableEnquiry.sortArrayList(enquiries, attribute);
+		enquiries = sortableEnquiry.runMenu(enquiries);
 
 		System.out.printf("----------<View All Enquiries for Camp %s>-----------\n", committeeObject.getCamp().getCampName());
 		for (int i=0;i<enquiries.size();i++) {
