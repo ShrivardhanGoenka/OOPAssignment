@@ -18,30 +18,26 @@ public class ViewAllEnquiriesMenu extends IMenu<CampCommittee> {
 			committeeObject.getAttendeeEnquiryMap().values()
 		);
 		
+		SortableEnquiry sortableEnquiry = new SortableEnquiry();
 		System.out.println("Please select the attribute to sort");
-		System.out.println("1. enquiryID");
-		System.out.println("2. Date last update");
-		System.out.println("3. Date submitted");
-
-		int choice = 2;
+		ArrayList<ComparableAttribute<Enquiry>> sortableAttributes = sortableEnquiry.getSortableAttributes();
+		for (int i=0;i<sortableAttributes.size();i++) {
+			System.out.printf("%d. %s\n", i+1, sortableAttributes.get(i).getAttributeName());
+		}
+		int choice = 0;
 		try {
 			choice = Integer.parseInt(br.readLine());
 		} catch(IOException e) {
 			e.printStackTrace();
 			System.out.println("Invalid option, using default sorting option");
 		}
-
-		switch (choice) {
-		    case 1:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> Integer.compare(((Enquiry) e1).getID(), ((Enquiry) e2).getID()));
-			break;
-		    case 2:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> e1.getUpdatedOn().compareTo(e2.getUpdatedOn()));
-			break;
-		    case 3:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> e1.getSubmittedOn().compareTo(e2.getSubmittedOn()));
-			break;
+		if (choice < 1 || choice > sortableAttributes.size()) {
+			System.out.println("Invalid option, using default sorting option");
+			return;
 		}
+
+		ComparableAttribute<Enquiry> attribute = sortableAttributes.get(choice-1);
+		sortableEnquiry.sortArrayList(enquiries, attribute);
 
 		System.out.printf("----------<View All Enquiries for Camp %s>-----------\n", committeeObject.getCamp().getCampName());
 		for (int i=0;i<enquiries.size();i++) {

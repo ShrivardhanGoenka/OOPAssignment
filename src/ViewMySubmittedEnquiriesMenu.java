@@ -29,21 +29,6 @@ public class ViewMySubmittedEnquiriesMenu extends IMenu<Student> {
 		System.out.println("Invalid option, using default sorting option");
 	    }
 
-		switch (choice) {
-		    case 1:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> Integer.compare(((Enquiry) e1).getCampID(), ((Enquiry) e2).getCampID()));
-			break;
-		    case 2:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> Integer.compare(((Enquiry) e1).getID(), ((Enquiry) e2).getID()));
-			break;
-		    case 3:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> e1.getUpdatedOn().compareTo(e2.getUpdatedOn()));
-			break;
-		    case 4:
-			Enquiry.sortObjects(enquiries, (e1, e2) -> e1.getSubmittedOn().compareTo(e2.getSubmittedOn()));
-			break;
-		}
-
 	    for (Enquiry enquiry : studentObject.submittedEnquiries()){
 		System.out.println(counter++);
 		System.out.println("Enquiry: " + enquiry.getStringValue());

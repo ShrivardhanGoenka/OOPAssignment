@@ -1,12 +1,5 @@
 import java.util.ArrayList;
-public class Sortable{
-
-	@FunctionalInterface
-	public interface ObjectComparator<T> {
-		int compare(T object1, T object2);
-	}
-
-	public static <T> void sortObjects(ArrayList<T> objects, ObjectComparator<T> comparator) {
-		objects.sort(comparator::compare);
-	}
+public interface Sortable<T> {
+	public ArrayList<ComparableAttribute<T>> getSortableAttributes();
+	void sortArrayList(ArrayList<T> arrayList, ComparableAttribute<T> attribute);
 }
