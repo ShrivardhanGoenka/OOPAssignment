@@ -1,13 +1,6 @@
 public class Main {
 
     public static void main(String[] args){
-
-		A obj = new AB();
-		obj.print(1);
-		AB obj2 = new AB();
-		obj2.print(1);
-		System.exit(1);
-
         DBInterface dbInterface = new DBInterface();
 
         dbInterface.loadNextValues();
