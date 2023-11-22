@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Date;
 import java.text.ParseException;
-public class EditCampMenu extends IMenu<Staff>{
+public class EditCampMenu extends IMenu<Staff> {
 
     @Override
     public String getMenuDescription() {
@@ -33,19 +33,8 @@ public class EditCampMenu extends IMenu<Staff>{
         }
         Camp chosen = camps.get(choice-1);
         System.out.println("<------------------Details of the camp------------------>");
-        System.out.println("Camp Name: " + chosen.getCampName());
-        System.out.println("Camp Description: " + chosen.getDescription());
-        System.out.print("Camp Dates: ");
-        for(int i=0;i<chosen.getCampDates().size();i++){
-            System.out.print(DBInterface.returnDateVal(chosen.getCampDates().get(i)) + ",");
-        }
-        System.out.println();
-        System.out.println("Camp Location: " + chosen.getLocation());
-        System.out.println("Camp Registration Deadline: " + DBInterface.returnDateVal(chosen.getRegistrationDeadline()));
-        System.out.println("Camp Total Slots: " + chosen.getTotalSlots());
-        System.out.println("Camp Committee Slots: " + chosen.getCampCommitteeSlots());
-        System.out.println("Camp Visibility: " + (chosen.isVisible()?"Visible":"Invisible"));
-        System.out.println("Camp Open to: " + chosen.getFacultyOpenTo());
+        CustomPrinterCamp printer = new CustomPrinterCamp();
+        printer.print(chosen);
         System.out.println("<------------------Choose the field you want to edit------------------>");
         System.out.println("1. Camp Name");
         System.out.println("2. Camp Description");

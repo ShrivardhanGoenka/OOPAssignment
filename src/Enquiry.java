@@ -38,7 +38,7 @@ public class Enquiry implements DatabaseWritable {
         this.campID = campID;
     }
 
-    void edit(String newString){
+    public void edit(String newString){
         if(isProcessed) return;
         this.stringValue = newString;
         updatedOn = new Date();

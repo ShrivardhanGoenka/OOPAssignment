@@ -18,7 +18,7 @@ public class CampCommittee extends Student implements DatabaseWritable {
     /**
      * Represents suggestions submitted and their entry IDs.
      */
-    HashMap<Integer, Suggestion> submittedSuggestions;
+    private HashMap<Integer, Suggestion> submittedSuggestions;
 
     Integer point;
 

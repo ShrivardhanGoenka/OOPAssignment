@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.text.ParseException;
-public class CreateCampMenu extends IMenu<Staff>{
+public class CreateCampMenu extends IMenu<Staff> {
 
     @Override
     public String getMenuDescription() {

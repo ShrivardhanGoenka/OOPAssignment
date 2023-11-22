@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditEnquiryMenu extends IMenu<Student> {
-        private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public void runMenu(Student studentObject) {
                     System.out.println("Choose the enquiry you want to edit: ");
@@ -16,7 +16,7 @@ public class EditEnquiryMenu extends IMenu<Student> {
                     for(int i=0;i<enquiries.size();i++){
                         System.out.println((i+1) + ": " + enquiries.get(i).getStringValue());
                     }
-                    System.out.print("Your choice: ");
+					System.out.print("Your choice: ");
 		    try {
 			    int tchoice = Integer.parseInt(br.readLine());
 			    if(tchoice < 1 || tchoice > enquiries.size()){

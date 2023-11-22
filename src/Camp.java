@@ -297,12 +297,7 @@ public class Camp extends CampInformation implements DatabaseWritable {
     public String getFileName(){
         return "camp" + getCampID() + ".txt";
     }
-
-    public void deleteCamp(){
-        for(String attendee: attendees){
-            Registry.studentMap.get(attendee).withdrawFromCamp(this);
-        }
-
-        Registry.campMap.remove(this.getCampID());
+    public String getWithdrawnString(){
+        return campConstraints.returnWithdrawnString();
     }
 }

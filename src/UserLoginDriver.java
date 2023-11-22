@@ -10,76 +10,40 @@ public class UserLoginDriver {
         System.out.println("2. Exit");
     }
 
-    public static String authenticateUser() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int choice = 0;
-        while (choice != 2 ){
-            printLoginMenu();
-            System.out.print("Enter your choice: ");
-            choice = Integer.parseInt(br.readLine());
-            switch(choice){
-                case 1:
-                    System.out.print("Enter your userID: ");
-                    String userID = br.readLine();
-                    System.out.print("Enter your password: ");
-                    String password = br.readLine();
-
-		    //need refractored
-				if (Registry.studentMap.containsKey(userID)){
-				try{
-					if(Registry.studentMap.get(userID).login(password)){
-					System.out.println("Login successful");
-					return userID;
-					}
-					else{
-					System.out.println("Invalid Credentials");
-					}
-				}
-				catch (Exception e){
-					System.out.println(e.getMessage());
-				}
-				} else if (Registry.committeeMap.containsKey(userID)){
-
-				try{
-					if(Registry.committeeMap.get(userID).login(password)){
-					System.out.println("Login successful");
-					return userID;
-					}
-					else{
-					System.out.println("Invalid Credentials");
-					}
-				}
-				catch (Exception e){
-					System.out.println(e.getMessage());
-				}
-				}
-				else if(Registry.staffMap.containsKey(userID)){
-					try{
-						if(Registry.staffMap.get(userID).login(password)){
-							System.out.println("Login successful");
-							return userID;
-						}
-						else{
-							System.out.println("Invalid Credentials");
-						}
-					}
-					catch (Exception e){
-						System.out.println(e.getMessage());
-					}
+    public static String authenticateUser() {
+        ConsoleReaderString cr1 = new ConsoleReaderString();
+		ConsoleReaderInteger cr2 = new ConsoleReaderInteger();
+		while(true) {
+			printLoginMenu();
+			int choice;
+			System.out.print("Your choice: ");
+			try {
+				choice = cr2.readFromConsole(1, 2);
+			}catch(InputException e){
+				System.out.println(e.getMessage());
+				continue;
+			}
+			if(choice == 2){
+				DBInterface db = new DBInterface();
+				db.writeToDB();
+				System.exit(0);
+				return null;
+			}
+			String username, password;
+			try{
+				System.out.print("Username: ");
+				username = cr1.readFromConsole();
+				System.out.print("Password: ");
+				password = cr1.readFromConsole();
+				if(Registry.authenticateUser(username, password)){
+					return username;
 				}
 				else{
-				System.out.println("Invalid Credentials");
+					System.out.println("Invalid username or password");
 				}
-				break;
-                case 2:
-					DBInterface dbInterface = new DBInterface();
-					dbInterface.writeToDB();
-					System.exit(0);
-					return null;
-                default:
-                    System.out.println("Invalid choice");
-            }
+			} catch(InputException | UserException e){
+				System.out.println(e.getMessage());
+			}
         }
-	return null;
     }
 }

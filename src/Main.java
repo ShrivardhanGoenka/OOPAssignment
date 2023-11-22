@@ -1,7 +1,13 @@
-import java.io.*;
 public class Main {
 
     public static void main(String[] args){
+
+		A obj = new AB();
+		obj.print(1);
+		AB obj2 = new AB();
+		obj2.print(1);
+		System.exit(1);
+
         DBInterface dbInterface = new DBInterface();
 
         dbInterface.loadNextValues();
@@ -15,7 +21,7 @@ public class Main {
 		while (true)
 			try {
 				String userID = UserLoginDriver.authenticateUser();
-				if (Registry.committeeMap.containsKey(userID)) { // not really a good way to check
+				if (Registry.committeeMap.containsKey(userID)) {
 					Driver.accountMenu(Registry.committeeMap.get(userID), MenuFactory.getCommitteeMenu());
 				} else if (Registry.studentMap.containsKey(userID)){
 					Driver.accountMenu(Registry.studentMap.get(userID), MenuFactory.getStudentMenu());
@@ -24,7 +30,7 @@ public class Main {
 					Driver.accountMenu(Registry.staffMap.get(userID), MenuFactory.getStaffMenu());
 				}
 			}catch (Exception e){
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
     }

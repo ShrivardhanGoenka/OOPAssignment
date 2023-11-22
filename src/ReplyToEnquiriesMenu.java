@@ -12,12 +12,6 @@ import java.io.InputStreamReader;
  * Only camp committee are allowed to execute this menu.
  */
 public class ReplyToEnquiriesMenu extends IMenu<CampCommittee> {
-
-	/** 
-	 * A buffer reader to handle the user input.
-	 */
-        private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 	/**
 	 * Executes the menu logics for replying to enquiries.
 	 * The logics is as follows:
@@ -36,21 +30,19 @@ public class ReplyToEnquiriesMenu extends IMenu<CampCommittee> {
 		for (Enquiry enquiry : enquiries) {
 			System.out.printf("%d. Enquiry: %s\n", ++indexIterator, enquiry.getStringValue());
 		}
-		System.out.printf("Which Enquiry to Reply?\nYour choice: ");
-		
-	    	try {
-		    int tchoice = Integer.parseInt(br.readLine());
-		    if(tchoice < 1 || tchoice > enquiries.size()){
-			System.out.println("Invalid choice");
-			return;
-		    }
+		System.out.print("Which Enquiry to Reply?\nYour choice: ");
+		ConsoleReaderInteger cr = new ConsoleReaderInteger();
+		ConsoleReaderString crs = new ConsoleReaderString();
+		try {
+			int choice = cr.readFromConsole(1, enquiries.size());
 		    System.out.print("Enter reply message: ");
-		    String treply = br.readLine();
-		    committeeObject.replyToAttendeeEnquiry(Registry.enquiryMap.get(enquiries.get(tchoice-1).getID()), treply, committeeObject.getUserID());
+		    String reply = crs.readFromConsole();
+		    committeeObject.replyToAttendeeEnquiry(enquiries.get(choice-1), reply, committeeObject.getUserID());
 		    System.out.println("Reply successfully!");
-	    	} catch (IOException e) {
-			e.printStackTrace();
-	    	}
+		}
+		catch (InputException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	/** 
