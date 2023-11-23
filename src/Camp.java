@@ -329,4 +329,20 @@ public class Camp extends CampInformation implements DatabaseWritable {
         }
         super.setFacultyOpenTo(facultyOpenTo);
     }
+    void deleteCamp() throws CampException{
+        if (!attendees.isEmpty() || !committeeMembers.isEmpty()){
+            throw new CampException("There are students registered for this camp");
+        }
+        for(Enquiry enquiry: campEnquiries.values()){
+            Student student;
+            if(Registry.studentMap.containsKey(enquiry.getSubmittedBy())){
+                student = Registry.studentMap.get(enquiry.getSubmittedBy());
+            }
+            else{
+                student = Registry.studentMap.get(enquiry.getRepliedBy());
+            }
+            student.deleteEnquiry(enquiry.getID());
+        }
+        Registry.campMap.remove(getCampID());
+    }
 }

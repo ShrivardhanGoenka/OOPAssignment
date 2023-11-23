@@ -141,6 +141,7 @@ public class Student extends User implements DatabaseWritable {
         Registry.campMap.get(camp).deleteCampEnquiry(enquiryID);
         //Enquiry e = enquiryMap.get(enquiryId);
         enquiryMap.remove(enquiryID);
+        Registry.enquiryMap.remove(enquiryID);
     }
 
     /**

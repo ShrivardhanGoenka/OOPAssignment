@@ -26,7 +26,7 @@ public class GenerateCampReportCommitteeMenu extends IMenu<CampCommittee> {
 					return;
 				}
 			} catch(InputException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 		databaseWriter.writeToDatabase(camp, filter, committeeObject.getUserID());

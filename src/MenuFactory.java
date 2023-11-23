@@ -59,7 +59,8 @@ public class MenuFactory {
 				new ReplyToEnquiryStaffMenu(),
 				new ViewSuggestionMenu(),
 				new ProcessSuggestionMenu(),
-				new GenerateCampReportStaffMenu()
+				new GenerateCampReportStaffMenu(),
+				new DeleteCampMenu()
 			)
 		);
 		userMenus.addAll(staffSpecificMenus);

@@ -11,11 +11,6 @@ public class Main {
         dbInterface.populateStudents();
 		dbInterface.populateCampCommittees();
 		dbInterface.populateStaff();
-//		try{
-//		DBReader.Initialise();
-//		}catch (IOException | DBException e){
-//			System.out.println(e.getMessage());
-//		}
 		dbInterface.populateAdmin();
 
         while (true)

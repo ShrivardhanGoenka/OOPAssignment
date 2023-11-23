@@ -160,4 +160,8 @@ public class Staff extends User implements DatabaseWritable{
         Enquiry enquiry = Registry.enquiryMap.get(enquiryID);
         enquiry.reply(reply, this.getUserID(), new Date());
     }
+    public void deleteCamp(Camp camp) throws CampException{
+        if(!createdCamps.containsKey(camp.getCampID())) throw new CampException("Camp does not exist");
+        camp.deleteCamp();
+    }
 }

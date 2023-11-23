@@ -40,7 +40,7 @@ public class GenerateCampReportStaffMenu extends IMenu<Staff> {
 					return;
 				}
 			} catch(InputException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 		databaseWriter.writeToDatabase(camp, filter, userID);
