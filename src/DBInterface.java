@@ -185,8 +185,6 @@ public class DBInterface {
                 submittedEnquiriesMap.put(i, Registry.enquiryMap.get(i));
             }
             reader.close();
-	    System.out.println("++++");
-	    System.out.println(registeredCamps);
             return new Student(userID, password, email, faculty, isLocked, submittedEnquiriesMap, registeredCampsMap, blockedDatesList);
         } catch (Exception e) {
             e.printStackTrace();
