@@ -23,6 +23,7 @@ public class Staff extends User implements DatabaseWritable{
      */
     public Staff(String userID, String password, String email, String faculty, boolean isLocked){
         super(userID, password, email, faculty, isLocked);
+        createdCamps = new HashMap<>();
     }
     /**
      * Constructs a Staff with exisiting created camp from the database.

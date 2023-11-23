@@ -8,12 +8,12 @@ public interface Visibility {
     /**
      * Hides the object
      */
-    void hide();
+    void hide() throws CampException;
 
     /**
      * Shows the object
      */
-    void show();
+    void show() throws CampException;
 
     /**
      * Checks if the object is currently visible.

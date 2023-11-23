@@ -13,7 +13,8 @@ public class MenuFactory {
 				new EditEnquiryMenu(),
 				new RaiseEnquiryMenu(),
 				new DeleteEnquiryMenu(),
-				new WithdrawCampMenu()
+				new WithdrawCampMenu(),
+				new ViewBlockedDatesMenu()
 			)	
 		);
 		userMenus.addAll(studentSpecificMenus);
@@ -27,11 +28,13 @@ public class MenuFactory {
 				new ViewCampStudentMenu(),
 				new RegisterCampCommitteeMenu(),
 				new ViewMyRegisteredCampMenu(),
-				new ViewMyRegisteredCampMenu(),
+				new ViewMyCommitteeCampMenu(),
 				new ViewMySubmittedEnquiriesMenu(),
+				new EditEnquiryMenu(),
 				new RaiseEnquiryMenu(),
 				new DeleteEnquiryMenu(),
 				new WithdrawCampMenu(),
+				new ViewBlockedDatesMenu(),
 				new SubmitSuggestionMenu(), // checked
 				new EditSuggestionMenu(), // checked
 				new DeleteSuggestionMenu(), //checked

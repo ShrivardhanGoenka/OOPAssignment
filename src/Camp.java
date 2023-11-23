@@ -1,4 +1,3 @@
-// javadoc
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,7 +8,7 @@ import java.util.Map;
 * It extends the {@link CampInformation} class.
 *
 * @see  	{@link CampInformation}
-* @see        	{@link CampConstrants} 
+* @see        	{@link CampConstrants}
 */
 public class Camp extends CampInformation implements DatabaseWritable {
 
@@ -51,8 +50,6 @@ public class Camp extends CampInformation implements DatabaseWritable {
         campEnquiries = new HashMap<>();
         campSuggestions = new HashMap<>();
     }
-
-    // Constructors for an existing camp from database.
     /** Constructs a new camp with existing data from the database.
      * @param campID 			The ID of the camp.
      * @param campName 			The name of the camp.
@@ -73,7 +70,7 @@ public class Camp extends CampInformation implements DatabaseWritable {
      */
     public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, ArrayList<String> withdrawn, ArrayList<String> attendees, ArrayList<String> committeeMembers, boolean isCampVisible, HashMap<Integer,Enquiry> campEnquiries, HashMap<Integer,Suggestion> campSuggestions){
         super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isCampVisible);
-        campConstraints = new CampConstraints(totalSlots-attendees.size(), campCommitteeSlots-committeeMembers.size(), registrationDeadline, schoolOpenTo, withdrawn, campDates);
+        campConstraints = new CampConstraints(totalSlots-attendees.size()-committeeMembers.size(), campCommitteeSlots-committeeMembers.size(), registrationDeadline, schoolOpenTo, withdrawn, campDates);
         this.attendees = new ArrayList<>(attendees);
         this.committeeMembers = new ArrayList<>(committeeMembers);
         this.campEnquiries = campEnquiries;
@@ -305,5 +302,31 @@ public class Camp extends CampInformation implements DatabaseWritable {
      */
     public String getWithdrawnString(){
         return campConstraints.returnWithdrawnString();
+    }
+    @Override
+    public void hide() throws CampException{
+        if(!attendees.isEmpty() || !committeeMembers.isEmpty()){
+            throw new CampException("Students are already registered");
+        }
+        else{
+            super.show();
+        }
+    }
+    @Override
+    public void setFacultyOpenTo(String facultyOpenTo) throws CampException{
+        if(facultyOpenTo.equals("*")) super.setFacultyOpenTo(facultyOpenTo);
+        for(String attendee: attendees){
+            User user = Registry.studentMap.get(attendee);
+            if(!user.getFaculty().equals(facultyOpenTo)){
+                throw new CampException("There are students registered that are not from " + facultyOpenTo);
+            }
+        }
+        for (String committeeMember: committeeMembers){
+            User user = Registry.committeeMap.get(committeeMember);
+            if(!user.getFaculty().equals(facultyOpenTo)){
+                throw new CampException("There are committee members that are not from " + facultyOpenTo);
+            }
+        }
+        super.setFacultyOpenTo(facultyOpenTo);
     }
 }

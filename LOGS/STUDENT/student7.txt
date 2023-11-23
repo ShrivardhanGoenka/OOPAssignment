@@ -1,6 +1,6 @@
-testpasssword2
-student2@e.ntu.edu.sg
-EEE
+password
+student7@e.ntu.edu.sg
+SCSE
 unlock
 01/02/2024,02/02/2024,03/02/2024
 3

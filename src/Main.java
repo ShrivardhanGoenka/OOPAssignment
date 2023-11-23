@@ -5,19 +5,19 @@ public class Main {
     public static void main(String[] args){
 
         DBInterface dbInterface = new DBInterface();
-//
-//        dbInterface.loadNextValues();
-//        dbInterface.populateSuggestions();
-//        dbInterface.populateEnquiries();
-//        dbInterface.populateCamps();
-//        dbInterface.populateStudents();
-//		dbInterface.populateCampCommittees();
-//		dbInterface.populateStaff();
-		try{
-		DBReader.Initialise();
-		}catch (IOException | DBException e){
-			System.out.println(e.getMessage());
-		}
+
+        dbInterface.loadNextValues();
+        dbInterface.populateSuggestions();
+        dbInterface.populateEnquiries();
+        dbInterface.populateCamps();
+        dbInterface.populateStudents();
+		dbInterface.populateCampCommittees();
+		dbInterface.populateStaff();
+//		try{
+//		DBReader.Initialise();
+//		}catch (IOException | DBException e){
+//			System.out.println(e.getMessage());
+//		}
 		dbInterface.populateAdmin();
 
         while (true)

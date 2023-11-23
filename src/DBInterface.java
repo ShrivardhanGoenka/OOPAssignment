@@ -171,7 +171,7 @@ public class DBInterface {
             String email = reader.readLine();
             String faculty = reader.readLine();
             String temp = reader.readLine();
-            boolean isLocked = temp.equals("locked");
+            boolean isLocked = temp.equals("lock");
             String blockedDates = reader.readLine();
             ArrayList<Date> blockedDatesList = parseDates(blockedDates);
             ArrayList<Integer> registeredCamps = parseIntegerList(reader.readLine());
@@ -224,7 +224,7 @@ public class DBInterface {
             String email = reader.readLine();
             String faculty = reader.readLine();
             String temp = reader.readLine();
-            boolean isLocked = temp.equals("locked");
+            boolean isLocked = temp.equals("lock");
             String blockedDates = reader.readLine();
             ArrayList<Date> blockedDatesList = parseDates(blockedDates);
             ArrayList<Integer> registeredCamps = parseIntegerList(reader.readLine());
@@ -503,7 +503,7 @@ public class DBInterface {
             String email = reader.readLine();
             String faculty = reader.readLine();
             String temp = reader.readLine();
-            boolean isLocked = temp.equals("locked");
+            boolean isLocked = temp.equals("lock");
             ArrayList<Integer> createdCamps = parseIntegerList(reader.readLine());
             HashMap<Integer,Camp> createdCampsMap = new HashMap<Integer,Camp>();
             for(int i: createdCamps){
@@ -544,7 +544,7 @@ public class DBInterface {
             String email = reader.readLine();
             String faculty = reader.readLine();
 	    String temp = reader.readLine();
-            boolean isLocked = temp.equals("locked");
+            boolean isLocked = temp.equals("lock");
             reader.close();
             return new Admin(userID, password, email, faculty, isLocked);
         }

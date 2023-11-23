@@ -1,5 +1,5 @@
-testpasssword2
-student2@e.ntu.edu.sg
+password6
+student6@e.ntu.edu.sg
 EEE
 unlock
 01/02/2024,02/02/2024,03/02/2024

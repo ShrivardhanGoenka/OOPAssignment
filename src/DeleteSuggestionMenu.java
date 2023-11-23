@@ -7,11 +7,6 @@ import java.util.ArrayList;
  * The {@code DeleteSuggestionMenu} class provides the execution logics of the menu for deleting user's submitted suggestion.
  */
 public class DeleteSuggestionMenu extends IMenu<CampCommittee> {
-	/** 
-	 * A buffer reader to handle the user input.
-	 */
-        private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 	/**
 	 * Executes the menu logics for deleing suggestions.
 	 * The logics are as follows:
@@ -23,24 +18,21 @@ public class DeleteSuggestionMenu extends IMenu<CampCommittee> {
 	    System.out.println("Choose the suggestion you want to delete: ");
 	    ArrayList<Suggestion> suggestion = committeeObject.getUnprocessedSuggestions();
 	    if(suggestion.isEmpty()) {
-		System.out.println("You have no open suggestion");
-		return;
+			System.out.println("You have no open suggestion");
+			return;
 	    }
 	    for(int i=0;i<suggestion.size();i++){
-		System.out.println((i+1) + ": " + suggestion.get(i).getStringValue());
+			System.out.println((i+1) + ": " + suggestion.get(i).getStringValue());
 	    }
-	    System.out.print("Your choice: ");
+		ConsoleReaderInteger consoleReaderInteger = new ConsoleReaderInteger();
 	    try {
-		    int tchoice = Integer.parseInt(br.readLine());
-		    if(tchoice < 1 || tchoice > suggestion.size()){
-			System.out.println("Invalid choice");
-			return;
-		    }
+			System.out.print("Your choice: ");
+		    int tchoice = consoleReaderInteger.readFromConsole(1, suggestion.size());
 		    committeeObject.deleteSuggestion(suggestion.get(tchoice-1).getID());
 		    System.out.println("Suggestion deleted successfully!");
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
+	    } catch (InputException e) {
+	    	System.out.println(e.getMessage());
+		}
 	}
 
 	/** 

@@ -146,13 +146,15 @@ public abstract class CampInformation implements Visibility {
     /**
      * Hides the camp from student.
      */
-    public void hide() {
+    public void hide() throws CampException {
+        if(!visibility) throw new CampException("Camp is already hidden");
         visibility = false;
     }
     /**
      * Unhides the camp to student.
      */
-    public void show() {
+    public void show() throws CampException {
+        if(visibility) throw new CampException("Camp is already visible");
         visibility = true;
     }
 
@@ -211,7 +213,8 @@ public abstract class CampInformation implements Visibility {
      *
      * @param facultyOpenTo 	The new allowed faculty from which student can register and attend the camp.
      */
-    public void setFacultyOpenTo(String facultyOpenTo){
+    public void setFacultyOpenTo(String facultyOpenTo) throws CampException{
+        if(this.facultyOpenTo.equals(facultyOpenTo)) throw new CampException("Camp is already open to " + facultyOpenTo);
         this.facultyOpenTo = facultyOpenTo;
     }
 

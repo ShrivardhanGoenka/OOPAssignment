@@ -8,11 +8,6 @@ import java.io.IOException;
  */
 public class RegisterCampStudentMenu extends IMenu<Student> {
 
-	/** 
-	 * A buffer reader to handle the user input.
-	 */
-        private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 	/**
 	 * Executes the menu logics for registering to a camp as attendee.
 	 *
@@ -20,6 +15,7 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 	 */
 	public void runMenu(Student studentObject) throws CampException{
 		ArrayList<Camp> availablaCamps = Filters.filterStudentCamps(studentObject.getFaculty());
+		ConsoleReaderInteger consoleReaderInteger = new ConsoleReaderInteger();
 		System.out.println("Choose the camp you want to register for: ");
 		for(int i=0;i<availablaCamps.size();i++){
 				System.out.println((i+1) + ". " + availablaCamps.get(i).getCampName());
@@ -27,19 +23,10 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 		System.out.print("Your choice: ");
 		int throwexception = 0;
 		try {
-			int tempchoice = Integer.parseInt(br.readLine());
-			if(tempchoice <1 || tempchoice > availablaCamps.size()){
-				System.out.println("Invalid choice");
-				return;
-			}
-			System.out.print("Enter 1 if you want to register as an attendee, 2 if you want to register as a committee member: ");
-			int choice = Integer.parseInt(br.readLine());
+			int tempchoice = consoleReaderInteger.readFromConsole(1, availablaCamps.size());
 			Camp chosen = availablaCamps.get(tempchoice-1);
-			//studentObject.registerCamp(chosen);
-			if(choice != 1 && choice != 2){
-				System.out.println("Invalid choice");
-				return;
-			}
+			System.out.print("Enter 1 if you want to register as an attendee, 2 if you want to register as a committee member: ");
+			int choice = consoleReaderInteger.readFromConsole(1, 2);
 			if(choice == 1){
 				studentObject.registerCamp(chosen);
 			}
@@ -56,8 +43,8 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 					return;
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (InputException e) {
+			System.out.println(e.getMessage());
 			return;
 		}
 		if(throwexception == 1){

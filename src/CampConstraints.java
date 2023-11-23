@@ -25,7 +25,7 @@ public class CampConstraints {
      * The allowed school to attend the camp.
      * Use "*" for allowing all schools.
      */
-    String schoolOpenTo;
+    String facultyOpenTo;
 
     /**
      * List of ID of user withdrawn from the camp.
@@ -51,7 +51,7 @@ public class CampConstraints {
         this.availableSlots = availableSlots;
         this.availableCommitteeSlots = availableCommitteeSlots;
         this.registrationDeadline = registrationDeadline;
-        this.schoolOpenTo = schoolOpenTo;
+        this.facultyOpenTo = schoolOpenTo;
         this.withdrawn = withdrawn;
         this.campDates = campDates;
     }
@@ -80,7 +80,7 @@ public class CampConstraints {
                 }
             }
         }
-        if(!schoolOpenTo.equals("*") && !schoolOpenTo.equalsIgnoreCase(faculty)){
+        if(!facultyOpenTo.equals("*") && !facultyOpenTo.equalsIgnoreCase(faculty)){
             throw new CampException("Camp is not open to your school!");
         }
         if(withdrawn.contains(userID)) {

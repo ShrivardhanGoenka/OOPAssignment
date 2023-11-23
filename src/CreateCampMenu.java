@@ -45,6 +45,7 @@ public class CreateCampMenu extends IMenu<Staff> {
             String location = stringReader.readFromConsole();
             System.out.print("Camp Registration Deadline (dd/mm/yyyy): ");
             Date registrationDate = dateReader.readFromConsole();
+            if(registrationDate.before(new Date())) throw new CampException("Registration date has passed");
             System.out.print("Camp Total Slots: ");
             int totalSlots = intReader.readFromConsole(0, Integer.MAX_VALUE);
             System.out.print("Camp Committee Slots: ");

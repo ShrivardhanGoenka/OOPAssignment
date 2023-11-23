@@ -67,23 +67,4 @@ public class Registry {
     public static void addCommittee(CampCommittee committee){
         committeeMap.put(committee.getUserID(),committee);
     }
-    public static void removeCamp(Camp camp){
-        campMap.remove(camp.getCampID());
-    }
-    public static void removeStudent(Student student){
-        studentMap.remove(student.getUserID());
-    }
-    public static void removeStaff(Staff staff){
-        staffMap.remove(staff.getUserID());
-    }
-    public static void removeCommittee(CampCommittee committee){
-        committeeMap.remove(committee.getUserID());
-    }
-    public static void removeEnquiry(Enquiry enquiry){
-        enquiryMap.remove(enquiry.getID());
-    }
-    public static void removeSuggestion(Suggestion suggestion){
-        suggestionMap.remove(suggestion.getID());
-    }
-
 }
