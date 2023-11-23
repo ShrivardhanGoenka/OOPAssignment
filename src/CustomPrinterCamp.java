@@ -17,6 +17,7 @@ public class CustomPrinterCamp extends CustomPrinter<Camp> {
         System.out.println("Camp Committee Slots: " + camp.getCampCommitteeSlots());
         System.out.println("Camp Staff ID: " + camp.getStaffID());
         System.out.println("Camp Visibility: " + camp.isVisible());
+	System.out.println("Camp Faculty Open to: " + ( camp.getFacultyOpenTo().equals("*") ? "All" : camp.getFacultyOpenTo()));
         System.out.println("-----------------------------------------------");
     }
 

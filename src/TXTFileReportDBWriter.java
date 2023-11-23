@@ -36,6 +36,7 @@ public class TXTFileReportDBWriter {
 		text += "\nCamp Committee Slots: " + camp.getCampCommitteeSlots();
 		text += "\nCamp Staff ID: " + camp.getStaffID();
 		text += "\nCamp Visibility: " + camp.isVisible();
+		text += "\nCamp Faculty Opens to: " + (camp.getFacultyOpenTo().equals("*") ? "All" : camp.getFacultyOpenTo());
 		text += "\n===================================================\n";
 		return text;
 	}

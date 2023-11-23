@@ -314,7 +314,10 @@ public class Camp extends CampInformation implements DatabaseWritable {
     }
     @Override
     public void setFacultyOpenTo(String facultyOpenTo) throws CampException{
-        if(facultyOpenTo.equals("*")) super.setFacultyOpenTo(facultyOpenTo);
+        if(facultyOpenTo.equals("*")) {
+		super.setFacultyOpenTo(facultyOpenTo);
+		return;
+	}
         for(String attendee: attendees){
             User user = Registry.studentMap.get(attendee);
             if(!user.getFaculty().equals(facultyOpenTo)){
