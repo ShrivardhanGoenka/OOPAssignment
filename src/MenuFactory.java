@@ -41,7 +41,7 @@ public class MenuFactory {
 				new ViewMySubmittedSuggestionsMenu(),
 				new ViewAllEnquiriesMenu(),
 				new ReplyToEnquiriesMenu(),
-				new GenerateCampReportMenu()
+				new GenerateCampReportCommitteeMenu()
 			)
 		);
 		userMenus.addAll(committeeSpecificMenus);
@@ -58,7 +58,8 @@ public class MenuFactory {
 				new ViewAllEnquiriesStaffMenu(),
 				new ReplyToEnquiryStaffMenu(),
 				new ViewSuggestionMenu(),
-				new ProcessSuggestionMenu()
+				new ProcessSuggestionMenu(),
+				new GenerateCampReportStaffMenu()
 			)
 		);
 		userMenus.addAll(staffSpecificMenus);
