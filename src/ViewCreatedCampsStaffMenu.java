@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 //Complete
 /**
  * The {@code ViewCreatedCampsStaffMenu} class provides the execution logics of the menu for viewing all camps created by a specific staff account.

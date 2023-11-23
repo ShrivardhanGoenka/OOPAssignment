@@ -1,10 +1,7 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java.io.FileInputStream;
 
 public class DBHandler {
     static <T> void readIn(String folderName) throws IOException {

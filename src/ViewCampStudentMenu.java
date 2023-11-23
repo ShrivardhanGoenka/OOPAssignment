@@ -1,4 +1,3 @@
-import java.util.Date;
 import java.util.ArrayList;
 /**
  * The {@code ViewCampStudentMenu} class provides the execution logics of the menu for viewing all the camps visible to the specific student.

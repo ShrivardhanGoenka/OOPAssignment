@@ -1,7 +1,7 @@
-import java.util.Date;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  * The {@code ConsoleReaderDate} provides the method for reading and parsing the date from the input in the console.
  * The {@code ConsoleReaderDate} realizes {@code IConsoleReader} interface with type Date

@@ -1,8 +1,5 @@
 // javadoc
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * The RaiseEnquiryMenu class provides the execution logics of the menu for submitting an enquiry to a camp committee.

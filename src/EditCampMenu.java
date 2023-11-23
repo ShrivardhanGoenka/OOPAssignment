@@ -1,9 +1,5 @@
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
 import java.util.Date;
-import java.text.ParseException;
 /**
  * The {@code EditCampMenu} class provides the execution logics of the menu for editing the camp details.
  */
@@ -35,7 +31,6 @@ public class EditCampMenu extends IMenu<Staff> {
         ConsoleReaderDateList dateListReader = new ConsoleReaderDateList();
         ConsoleReaderDate dateReader = new ConsoleReaderDate();
         try{
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("<------------------Choose the camp you want to edit------------------>");
             ArrayList<Camp> camps = userObject.createdCamps();
             for(int i=0;i<camps.size();i++){

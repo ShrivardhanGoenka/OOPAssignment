@@ -1,7 +1,7 @@
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.io.IOException;
 public class ConsoleReaderDateList implements IConsoleReader<ArrayList<Date>>{
 
     @Override

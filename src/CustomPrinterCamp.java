@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  * This class provides a method to print all camp details (name, camp ID, description, location, etc.) to the user.
  */

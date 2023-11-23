@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
 
 /**
  * The {@code DeleteEnquiryMenu} class provides the execution logics of the menu for deleting the user's submitted enquiries.

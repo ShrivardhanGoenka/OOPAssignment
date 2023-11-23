@@ -1,8 +1,3 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.io.IOException;
-
 /**
  * The {@code UserLoginDriver} class provides the method for authenticating users and control the user input and UI during user login.
  */

@@ -1,10 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Date;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 //Complete
 /**
  * The ViewMySubmittedSuggestionsMenu class provides the execution logics of the menu for viewing the submitted suggestion to the staff.

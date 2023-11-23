@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.util.Date;
 import java.util.ArrayList;
-import java.text.ParseException;
+import java.util.Date;
 
 /**
  * The {@link CreateCampMenuclass} provides the execution logics of the menu for the staff to create a new camp.
@@ -28,7 +24,6 @@ public class CreateCampMenu extends IMenu<Staff> {
 	*/
     @Override
     public void runMenu(Staff userObject) throws CampException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ConsoleReaderDateList dateListReader = new ConsoleReaderDateList();
         ConsoleReaderString stringReader = new ConsoleReaderString();
         ConsoleReaderInteger intReader = new ConsoleReaderInteger();

@@ -1,5 +1,5 @@
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Filters {
     //function to filter camps based on what student can see
