@@ -92,9 +92,9 @@ public class TXTFileReportDBWriter {
 			text += "\nNo suggestion found";
 		}
 		for (Suggestion suggestion: suggestionList) {
-			text += "Suggestion: " + suggestion.getStringValue();
-			text += "Submitted by: " + suggestion.getSubmittedBy();
-			text += "Submitted on: " + suggestion.getSubmittedOn();
+			text += "Suggestion: " + suggestion.getStringValue() + "\n";
+			text += "Submitted by: " + suggestion.getSubmittedBy() + "\n";
+			text += "Submitted on: " + suggestion.getSubmittedOn() + "\n";
 			if (suggestion.isProcessed()){
 			    text += "Reply: "  + suggestion.getReply() + "\n";
 			    text += "Replied by: " + suggestion.getRepliedBy() + " on: " + suggestion.getRepliedOn() + "\n";
