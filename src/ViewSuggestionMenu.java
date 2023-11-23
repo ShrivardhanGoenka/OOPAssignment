@@ -20,7 +20,7 @@ public class ViewSuggestionMenu extends IMenu<Staff> {
 	 * @param userObject 		The staff that runs the menu.
 	 */
     @Override
-    public void runMenu(Staff userObject) throws CampException {
+    public void runMenu(Staff userObject)  {
 
         ArrayList<Suggestion> suggestions = userObject.getSuggestions();
         if(suggestions.isEmpty()){

@@ -1,7 +1,7 @@
 /**
  * This class provides a method to print suggestion details (suggestion message, submission information, reply information, status, date last updated) to the user.
  */
-public class CustomPrinterSuggestion extends ICustomPrinter<Suggestion>{
+public class CustomPrinterSuggestion extends CustomPrinter<Suggestion> {
     /**
      * Prints details of a suggestion to the console.
      */
@@ -19,7 +19,7 @@ public class CustomPrinterSuggestion extends ICustomPrinter<Suggestion>{
         else{
             System.out.println("Status: Pending");
         }
-        System.out.printf("Last Updated on: %s\n", DBInterface.returnDateVal(suggestion.getUpdatedOn()));
+        System.out.printf("Last Updated on: %s\n", Parsers.dateToString(suggestion.getUpdatedOn()));
         System.out.println("---------------------");
     }
 

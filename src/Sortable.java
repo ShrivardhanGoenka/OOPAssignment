@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 public abstract class Sortable<T> {
 	public abstract ArrayList<ComparableAttribute<T>> getSortableAttributes();
-	void sortArrayList(ArrayList<T> arrayList, ComparableAttribute<T> attribute){
+	public void sortArrayList(ArrayList<T> arrayList, ComparableAttribute<T> attribute){
 		arrayList.sort(attribute.getComparator());
 	}
 
-	void runMenu(ArrayList<T> list){
+	public void runMenu(ArrayList<T> list){
 		ArrayList<ComparableAttribute<T>> sortableAttributes = getSortableAttributes();
 		System.out.println("Please select the attribute to sort");
 		for (int i=0;i<sortableAttributes.size();i++) {

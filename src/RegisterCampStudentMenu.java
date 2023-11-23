@@ -18,7 +18,7 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 	 *
 	 * @param studentObject 			The student object that runs the menu.
 	 */
-	public void runMenu(Student studentObject) throws CampException {
+	public void runMenu(Student studentObject) throws CampException{
 		ArrayList<Camp> availablaCamps = Filters.filterStudentCamps(studentObject.getFaculty());
 		System.out.println("Choose the camp you want to register for: ");
 		for(int i=0;i<availablaCamps.size();i++){

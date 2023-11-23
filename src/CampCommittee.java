@@ -20,6 +20,8 @@ public class CampCommittee extends Student implements DatabaseWritable {
      */
     private HashMap<Integer, Suggestion> submittedSuggestions;
 
+
+
     /**
      * Represents the point that this person currently have
      * For this camp management system, the point will increase when the user make a reply to an enquiry from camp attendee.
@@ -189,6 +191,9 @@ public class CampCommittee extends Student implements DatabaseWritable {
         output += suggestionString + "\n";
         output += point + "\n";
         return output;
+    }
+    public Integer getPoint() {
+        return point;
     }
 
     public void generateReport() {

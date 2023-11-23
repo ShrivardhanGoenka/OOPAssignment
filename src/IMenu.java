@@ -14,14 +14,4 @@ public abstract class IMenu<T extends User>{
 	 * This includes displaying the menu specific instruction message, handling user input, and execute the menu logic.
 	 */
 	public abstract void runMenu(T userObject) throws CampException;
-
-	/**
-	 * Checks if the user has a permission to run the menu. 
-	 * This checks whether the user is logged in to excute the menu.
-	 *
-	 * @return 			A boolean flag indicating whether the user calling the menu is logged in.
-	 */
-	public final boolean isUserLogin(T userObject){
-		return userObject.isLoggedIn();
-	}
 }

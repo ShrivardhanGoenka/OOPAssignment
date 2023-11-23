@@ -10,7 +10,7 @@ public class Driver {
         if(allMenus == null) return;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int choice = 0;
-        while(allMenus.get(0).isUserLogin(user)) {
+        while(user.isLoggedIn()) {
             System.out.println("------------------------------------");
             System.out.println("Welcome " + user.getUserID());
             for (int i=0;i<allMenus.size();i++) {
