@@ -1,4 +1,12 @@
+
+/**
+ * This class provides a method to print enquiry details (enquiry message, submission detail, reply detail, date of last updated) to the user.
+ */
 public class CustomPrinterEnquiry extends ICustomPrinter<Enquiry> {
+
+    /**
+     * Prints details of an enquiry to the console.
+     */
     public void print(Enquiry enquiry){
         System.out.printf("Enquiry: %s\n", enquiry.getStringValue());
         System.out.printf("Submitted by: %s\n", enquiry.getSubmittedBy());

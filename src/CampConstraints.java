@@ -152,6 +152,12 @@ public class CampConstraints {
         return true;
     }
 
+    /**
+     * Returns to formatted string containing list of withdrawn attendees' userID
+     * Each userID is separated by comma.
+     *
+     * @return {@code String}
+     */
     String returnWithdrawnString(){
         String output = "";
         for(String userID : withdrawn){

@@ -16,9 +16,10 @@ public class  RegisterCampMenu extends IMenu<Student> {
 
 	/**
 	 * Executes the menu logics for registering to a camp.
-	 * The logics is as follows:
+	 * The logics are as follows:
 	 * 1. The program shows camp avaiable to the student based on camp constraint and visibility.
 	 * 2. The program will prompt the student to choose the camp to register to.
+	 * @param studentObject 			The student object that runs the menu.
 	 */
 	public void runMenu(Student studentObject) {
                 ArrayList<Camp> availablaCamps = Filters.filterStudentCamps(studentObject.getFaculty());

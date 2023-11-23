@@ -1,5 +1,3 @@
-//javadoc
-
 /**
  * The abstract class {@code IMenu} provides a template for common functionality for all menu pages in this camp management applciation.
  * The required class to be implemented includes getMenuDescription and runMenu.

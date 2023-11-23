@@ -3,9 +3,22 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The {@code DeleteSuggestionMenu} class provides the execution logics of the menu for deleting user's submitted suggestion.
+ */
 public class DeleteSuggestionMenu extends IMenu<CampCommittee> {
+	/** 
+	 * A buffer reader to handle the user input.
+	 */
         private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+	/**
+	 * Executes the menu logics for deleing suggestions.
+	 * The logics are as follows:
+	 * 1. The program prompt the user to choose the suggestion to delete.
+	 * 2. The program shows the message to indicate whether the deletion is successful.
+	 * 3. If the user enter the invalid choice, the user will have to enter the input again.
+	 */
 	public void runMenu(CampCommittee committeeObject) {
 	    System.out.println("Choose the suggestion you want to delete: ");
 	    ArrayList<Suggestion> suggestion = committeeObject.getUnprocessedSuggestions();
@@ -30,6 +43,9 @@ public class DeleteSuggestionMenu extends IMenu<CampCommittee> {
 	    }
 	}
 
+	/** 
+	 * @return the menu description
+	 */
 	public String getMenuDescription() {
 		return "Delete Suggestion";
 	}

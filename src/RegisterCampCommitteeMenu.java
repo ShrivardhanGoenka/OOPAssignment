@@ -3,10 +3,21 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
+/**
+ * The {@link RegisterCampCommitteeMenu} class provides the execution logics of the menu for registering to a camp as a camp committee.
+ */
 public class RegisterCampCommitteeMenu extends IMenu<Student> {
 
+
+	/** 
+	 * A buffer reader to handle the user input.
+	 */
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+	/**
+	 * Executes the menu logics for registering to a camp as a camp committee.
+	 * @param studentObject 			The student object that runs the menu.
+	 */
     public void runMenu(Student studentObject) {
         ArrayList<Camp> availablaCamps = Filters.filterStudentCamps(studentObject.getFaculty());
         System.out.println("Choose the camp you want to register for: ");

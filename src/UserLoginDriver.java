@@ -3,13 +3,24 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.io.IOException;
 
+/**
+ * The {@code UserLoginDriver} class provides the method for authenticating users and control the user input and UI during user login.
+ */
 public class UserLoginDriver {
 
+    /**
+     * Prints the login menu options to the console.
+     */
     static void printLoginMenu(){
         System.out.println("1. Login");
         System.out.println("2. Exit");
     }
 
+    /**
+     * Authenticates user by validating their input credentials.
+     *
+     * @return The username of the authenticated user, or null if the user chose the exit menu.
+     */
     public static String authenticateUser() {
         ConsoleReaderString cr1 = new ConsoleReaderString();
 		ConsoleReaderInteger cr2 = new ConsoleReaderInteger();

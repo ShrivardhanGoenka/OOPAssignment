@@ -1,4 +1,3 @@
-// javadoc
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.io.InputStreamReader;
 public class ReplyToEnquiriesMenu extends IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for replying to enquiries.
-	 * The logics is as follows:
+	 * The logics are as follows:
 	 * 1. The unreplied enquiries submitted by attendee's will be shown to the camp committee.
 	 * 2. The program will prompt the camp committee to choose the enquiry to reply to.
 	 * 3. The program will prompt the camp committee to enter the reply message.

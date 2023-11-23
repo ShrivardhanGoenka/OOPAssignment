@@ -1,4 +1,10 @@
+/**
+ * This class provides a method to print suggestion details (suggestion message, submission information, reply information, status, date last updated) to the user.
+ */
 public class CustomPrinterSuggestion extends ICustomPrinter<Suggestion>{
+    /**
+     * Prints details of a suggestion to the console.
+     */
     public void print(Suggestion suggestion) {
         System.out.printf("Suggestion: %s\n", suggestion.getStringValue());
         System.out.printf("Submitted by: %s\n", suggestion.getSubmittedBy());

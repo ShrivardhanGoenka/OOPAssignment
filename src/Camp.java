@@ -297,6 +297,12 @@ public class Camp extends CampInformation implements DatabaseWritable {
     public String getFileName(){
         return "camp" + getCampID() + ".txt";
     }
+
+    /**
+     * Retrieves the string of userID withdrawn from the camp.
+     * Each userID is separated by ","
+     * @return {@code String} of formatted withdrawn userIDs
+     */
     public String getWithdrawnString(){
         return campConstraints.returnWithdrawnString();
     }

@@ -1,8 +1,18 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 //Complete
+//
+/**
+ * The {@code SortableCamp} class extends the abstract class {@code Sortable} and provides sorting attributes for objects of type {@link Camp}.
+ * It defines how camps can be sorted based on various attributes (e.g., name, deadline, location, total number of slots).
+ */
 public class SortableCamp extends Sortable<Camp>{
 
+    /**
+     * Returns the list of sortable attributes specific to camps.
+     *
+     * @return {@code ArrayList} of {@code ComparableAttribute} instances representing different sorting attributes.
+     */
     @Override
     public ArrayList<ComparableAttribute<Camp>> getSortableAttributes() {
         ArrayList<ComparableAttribute<Camp>> sortableAttributes = new ArrayList<ComparableAttribute<Camp>>();

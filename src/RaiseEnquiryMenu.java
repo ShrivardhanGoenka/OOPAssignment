@@ -16,7 +16,7 @@ public class RaiseEnquiryMenu extends IMenu<Student> {
 
 	/**
 	 * Executes the menu logics for making an enquiry to the camp committee.
-	 * The logics is as follows:
+	 * The logics are as follows:
 	 * 1. The program shows camp this student has registered.
 	 * 2. The program will prompt the student to choose the camp to raise an enquiry to the camp committee.
 	 * 3. The program will prompt the student to enter enquiry message.

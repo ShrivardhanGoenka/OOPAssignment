@@ -154,14 +154,26 @@ public class User implements UserActions{
         System.out.println("Faculty: " + faculty);
     }
 
+    /**
+     * Checks if the user account is locked.
+     *
+     * @return A boolean indicating whether the user account is locked.
+     */
     public boolean isLocked() {
         return isLocked;
     }
 
+    /**
+     * Retrieves the use password.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Formats the information of the user to a String (for writing to database).
+     * @return {@code String} 			The String containing password, email, faculty, and isLocked attributes of the user.
+     */
     public String DBWriter(){
         String output = "";
         output += password + "\n";

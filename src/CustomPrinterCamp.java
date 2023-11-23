@@ -2,7 +2,14 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * This class provides a method to print all camp details (name, camp ID, description, location, etc.) to the user.
+ */
 public class CustomPrinterCamp extends ICustomPrinter<Camp>{
+
+    /**
+     * Prints details of a camp to the console.
+     */
     public void print(Camp camp){
         System.out.println("Camp Name: " + camp.getCampName());
         System.out.println("Camp ID: " + camp.getCampID());
@@ -19,6 +26,10 @@ public class CustomPrinterCamp extends ICustomPrinter<Camp>{
         System.out.println("Camp Visibility: " + camp.isVisible());
         System.out.println("-----------------------------------------------");
     }
+
+    /**
+     * Prints a multiple camps with an input type of ArrayList of Camp to the console.
+     */
     public void print(ArrayList<Camp> list){
         for(Camp camp:list) print(camp);
     }

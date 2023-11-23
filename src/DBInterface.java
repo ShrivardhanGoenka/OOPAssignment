@@ -4,12 +4,28 @@ import java.nio.Buffer;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * The {@code DBInterface} class provides a method to write the information of students, enquiries, camp committees, staffs and suggestions to the database.
+ */
 public class DBInterface {
+
+    /**
+     * Converts the Date object to formatted date string ("dd/MM/yyyy") and Returns the formatted string
+     * @param date 			date object of type {@code Date}
+     * @return {@code String} of formatted date
+     */
     static String returnDateVal(Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
     }
 
+    /**
+     * Writes a Map object to the database
+     *
+     * @param folder 			The folder of the Map object to write to.
+     * @param objectMap 		The map object to write to database.
+     * @throws Exception 		If the writing is unsuccessful.
+     */
     private <T extends DatabaseWritable, K> void writeObjects(String folder, Map<K, T> objectMap) {
         removeAllFiles(folder);
         for(Map.Entry<K, T> entry: objectMap.entrySet()){
@@ -20,6 +36,13 @@ public class DBInterface {
             }
         }
     }
+
+
+    /**
+     * Writes the current number of camp, enquiry, and suggestion to the database.
+     * These numbers is used to aviod the ID conflict when creating an ID for a new camp/enquiry/suggestion.
+     * @throws Exception 		If the writing is unsuccessful.
+     */
     void writeNextValues(){
         try(PrintWriter writer = new PrintWriter("LOGS/nextValues.txt")){
             writer.write(Registry.nextCampID + "\n");
@@ -29,6 +52,11 @@ public class DBInterface {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Triggers all writers for every database field.
+     * This includes camp, enquiry, suggestion, student, camp committee, and staff.
+     */
     void writeToDB(){
         writeObjects("CAMPS", Registry.campMap);
         writeObjects("ENQUIRIES", Registry.enquiryMap);
@@ -39,6 +67,10 @@ public class DBInterface {
         writeNextValues();
     }
 
+    /**
+     * Removes the file from the database folder.
+     * @param folder 		The folder name (STUDENT/COMMITTEE/CAMPS/ENQUIRIES/STAFF/SUGGESTIONS) 
+     */
     void removeAllFiles(String folder){
         folder = "LOGS/" + folder + "/";
         File directory = new File(folder);
@@ -53,6 +85,11 @@ public class DBInterface {
         }
     }
 
+    /** 
+     * Reads the suggestion from the database
+     * @param suggestionID 		The ID of suggestion to read.
+     * @throws Exception 		If there is an error during reading and parsing suggestion file or during creating new Suggestion object.
+     */
     Suggestion readSuggestion(int suggestionID){
         //Suggestion suggestion = null;
         try{
@@ -78,6 +115,12 @@ public class DBInterface {
         }
         return null;
     }
+
+    /**
+     * Parses the string of numbers separated by comma to an ArrayList of Integer.
+     * @param l 			The list of number in string
+     * @return {@code ArrayList<Integer>}
+     */
     ArrayList<Integer> parseIntegerList(String l){
         if(l == null || l.equals("")){
             return new ArrayList<Integer>();
@@ -90,6 +133,13 @@ public class DBInterface {
         }
         return list;
     }
+
+    /**
+     * Finds all file in the specified directories.
+     * @param dirname 			The directories path to find the files from.
+     * @return {@code ArrayList<String>} of the file path found.
+     * @throws IOException 		If the directory is not found.
+     */
     ArrayList<String> readDirectoryList(String dirname) throws IOException{
         String directoryPath = "LOGS/" + dirname + "/";
         ArrayList<String> dir = new ArrayList<String>();
@@ -108,6 +158,12 @@ public class DBInterface {
         return dir;
     }
 
+    /**
+     * Creates a new Student object, Reads the input information for the student details, and Adds the neccessary information to the application {@code Registry}
+     *
+     * @param userID 		The ID of user to be created.
+     * @throws Exception 	If there is error when reading the student object or adding student to the Registry
+     */
     Student addStudent(String userID){
         try {
             BufferedReader reader = new BufferedReader(new FileReader("LOGS/STUDENT/" + userID + ".txt"));
@@ -136,6 +192,11 @@ public class DBInterface {
         }
     }
 
+    /**
+     * Reads the student information from all files in the directory "STUDENT" in database, 
+     * and Adds the information of each student to the application {@code Registry}
+     * @throws IOException 	If there is error when reading the student object or adding student to the Registry
+     */
     void populateStudents(){
         ArrayList<String> students = new ArrayList<String>();
         try{
@@ -150,6 +211,12 @@ public class DBInterface {
         }
     }
 
+    /**
+     * Creates a new CampCommittee object, Reads the input information for the committee details, and Adds the neccessary information to the application {@code Registry}
+     *
+     * @param userID 		The ID of user to be created.
+     * @throws Exception 	If there is error when reading the committee object or adding committee to the Registry
+     */
     CampCommittee addCommittee(String userID){
         try {
             BufferedReader reader = new BufferedReader(new FileReader("LOGS/COMMITTEE/" + userID + ".txt"));
@@ -186,6 +253,11 @@ public class DBInterface {
         }
     }
 
+    /**
+     * Reads the committee information from all files in the directory "COMMITTEE" in the database, 
+     * and Adds the information of each committee to the application {@code Registry}
+     * @throws IOException 		If the file in COMMITTEE directories is not in the correct format to read from.
+     */
     void populateCampCommittees(){
 	ArrayList<String> campCommittees = new ArrayList<String>();
 	try{
@@ -200,6 +272,13 @@ public class DBInterface {
 	}
     }
 
+    /**
+     * Creates a new Camp object, Reads the input information for the camp details, 
+     * and Adds the neccessary information to the application {@code Registry}
+     *
+     * @param campID 		The ID of the camp to be created.
+     * @throws Exception 	If there is error when reading the camp object or adding camp to the Registry
+     */
     Camp readCampDetails(int campID){
         Camp camp = null;
         try {
@@ -250,6 +329,12 @@ public class DBInterface {
         return camp;
     }
 
+    /**
+     * Reads the enquiry information from all files in the directory "ENQUIRIES" in the database, 
+     * and Adds the information of each enquiry to the application {@code Registry}
+     * @param enquiryID 		The ID of enquiry to read.
+     * @throws Exception 		If the enquiry is not in the correct format to read from or there is an error during adding to the system Registry.
+     */
     Enquiry readEnquiry(int enquiryID){
         Enquiry enquiry = null;
         try{
@@ -280,6 +365,14 @@ public class DBInterface {
     }
 
     // Helper method to parse dates in the format: dd/MM/yyyy,dd/MM/yyyy
+    /**
+     * Reads the string of dates list separated by ","
+     * and Converts the dates list into {@code ArrayList<Date>}.
+     *
+     * @param dates 			The dates list string to parse (must be in format "dd/MM/yyyy" and separated by ",")
+     * @return {@code ArrayList<Date>}
+     * @throws Exception 		If the dates list is not in the correct format to parse.
+     */
     private static ArrayList<Date> parseDates(String dates) {
         if(dates == null || dates.equals("")) return new ArrayList<Date>();
         ArrayList<Date> dateList = new ArrayList<>();
@@ -299,6 +392,14 @@ public class DBInterface {
     }
 
     // Helper method to parse a date in the format: dd/MM/yyyy
+    /**
+     * Reads the string of date
+     * and Converts the date into {@code Date} object.
+     * 
+     * @param dateStr			The date string to parse (must be in format "dd/MM/yyyy")
+     * @return {@code Date} 
+     * @throws Exception 		If the date is not in the correct format to parse.
+     */
     private static Date parseDate(String dateStr) {
         Date date = null;
         try {
@@ -311,6 +412,11 @@ public class DBInterface {
         return date;
     }
 
+    /**
+     * Reads the camp information from all files in the directory "CAMPS" in the database, 
+     * and Adds the information of each camp to the application {@code Registry}
+     * @throws IOException 		If there is error reading and parsing the file in CAMPS directory.
+     */
     void populateCamps(){
         ArrayList<String> camps = new ArrayList<String>();
         try{
@@ -326,6 +432,11 @@ public class DBInterface {
         }
     }
 
+    /**
+     * Reads the suggestion information from all files in the directory "SUGGESTIONS" in the database, 
+     * and Adds the information of each suggestion to the application {@code Registry}
+     * @throws IOException 		If there is error reading and parsing the file in SUGGESIONS directory.
+     */
     void populateSuggestions(){
         ArrayList<String> suggestions = new ArrayList<String>();
         try{
@@ -341,6 +452,11 @@ public class DBInterface {
         }
     }
 
+    /**
+     * Reads the enquiry information from all files in the directory "ENQUIRIES" in the database, 
+     * and Adds the information of each enquiry to the application {@code Registry}
+     * @throws IOException 		If there is error reading and parsing the file in ENQUIRIES directory.
+     */
     void populateEnquiries(){
         ArrayList<String> enquiries = new ArrayList<String>();
         try{
@@ -356,6 +472,11 @@ public class DBInterface {
         }
     }
 
+    /**
+     * Reads the number of existing camp, enquiry, and suggestion from the file nextValues.txt in the database
+     *
+     * @throws Exception 		If there is error parsing the Integer in the nextValues.txt file or the file does not exist
+     */
     void loadNextValues() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
@@ -369,6 +490,12 @@ public class DBInterface {
             System.exit(1);
         }
     }
+
+    /** 
+     * Reads the staff information from the database
+     * @param userID 			The ID of staff to read.
+     * @throws Exception 		If there is error reading and parsing the file in STAFF directory.
+     */
     Staff readStaff(String userID){
         try{
             BufferedReader reader = new BufferedReader(new FileReader("LOGS/STAFF/" + userID + ".txt"));
@@ -390,6 +517,12 @@ public class DBInterface {
         }
         return null;
     }
+
+    /**
+     * Reads the staff information from all files in the directory "STAFF" in the database, 
+     * and Adds the information of each staff to the application {@code Registry}
+     * @throws IOException 		If there is error reading and parsing the file in STAFF directory.
+     */
     void populateStaff(){
         ArrayList<String> staff = new ArrayList<String>();
         try{

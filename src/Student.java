@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 /**
  * The {@code Student} represents the attendees of the camp.
+ * The Student class will hold the information of userID, name, faculty, their own enquiries submitted, camp they registered, their availabilities.
+ * The Student can register for a camp, raise an enquiry, and see user's specific information.
  */
 public class Student extends User implements DatabaseWritable {
     /**

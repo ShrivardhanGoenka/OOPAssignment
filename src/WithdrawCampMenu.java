@@ -3,16 +3,14 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-//Done
-//Only responsible for withdrawing Student from a camp.
+
 /**
  * The WithdrawCampMenu class provides the execution logics of the menu for withdrawing from a camp.
  */
 public class WithdrawCampMenu extends IMenu<Student> {
 	/**
 	 * Executes the menu logics for withdrawing from a camp.
-	 * The logic is as follows:
-	 * 1. The program will prompt the student to choose the camp to withdraw from.
+	 * The program will prompt the student to choose the camp to withdraw from.
 	 */
 	public void runMenu(Student studentObject) {
 		System.out.println("Choose the camp you want to withdraw from: ");

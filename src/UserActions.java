@@ -1,6 +1,6 @@
 /**
  * UserActions provides an abstract for all required action for the User class
- * This includes changing password, logging in, logging out, and getting userID, email, and faculty.
+ * This includes changing password, logging in, logging out, and getting each attribute.
  */
 public interface UserActions{
     /**
@@ -56,5 +56,8 @@ public interface UserActions{
     boolean isLocked();
 
 
+    /***
+     * Retrieves the password of the user.
+     */
     String getPassword();
 }

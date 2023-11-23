@@ -1,12 +1,24 @@
 import java.util.Map;
 import java.util.ArrayList;
 //Complete
+/**
+ * The {@code ViewSuggestionMenu} class provides the execution logics of the menu for viewing all suggestions submitted.
+ */
 public class ViewSuggestionMenu extends IMenu<Staff> {
+
+	/**
+	 * @return String of the menu description.
+	 */
     @Override
     public String getMenuDescription() {
         return "View all Suggestions";
     }
 
+	/**
+	 * Executes the menu logics for viewing all suggestions submitted by camp committee.
+	 * The user will be able to sort the list of suggestion based on user input attribute of suggestion chosen.
+	 * @param userObject 		The staff that runs the menu.
+	 */
     @Override
     public void runMenu(Staff userObject) throws CampException {
 

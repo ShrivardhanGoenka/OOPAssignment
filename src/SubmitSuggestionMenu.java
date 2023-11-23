@@ -4,6 +4,7 @@
 public class SubmitSuggestionMenu extends IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for camp committee to submit a suggestion to the staff.
+	 * @param committeeObject 		The camp committee that runs the menu.
 	 */
 	public void runMenu(CampCommittee committeeObject) {
 		try {

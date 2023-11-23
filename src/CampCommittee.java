@@ -3,12 +3,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CampCommittee extends Student implements DatabaseWritable {
 
-    /**
-     * The {@CampCommittee} represents a student who is a committee member of the camp.
-     * It extends the {@link Student} class and includes extra functionality specific to camp committee.
-     */
+/**
+ * The {@code CampCommittee} represents a student who is a committee member of the camp.
+ * It extends the {@link Student} class and includes extra functionality specific to camp committee.
+ */
+public class CampCommittee extends Student implements DatabaseWritable {
 
     /**
      * Represents Camp that this committee is associated.
@@ -20,6 +20,10 @@ public class CampCommittee extends Student implements DatabaseWritable {
      */
     private HashMap<Integer, Suggestion> submittedSuggestions;
 
+    /**
+     * Represents the point that this person currently have
+     * For this camp management system, the point will increase when the user make a reply to an enquiry from camp attendee.
+     */
     Integer point;
 
     /**
@@ -52,9 +56,10 @@ public class CampCommittee extends Student implements DatabaseWritable {
      * @param blockedDates 		A list of dates the committee member is not available.
      * @param camp 			The camp associated with the committee member.
      * @param submittedSuggestions 	A map of submitted suggestions from the committee member.
+     * @param point 			The committee point of the committee member.
      */
-    public CampCommittee(String userId, String password, String email, String faculty, boolean isLocked, HashMap<Integer, Enquiry> enquiryMap, HashMap<Integer, Camp> registeredCamps, ArrayList<Date> blockedDates, Camp camp, HashMap<Integer, Suggestion> submittedSuggestions, Integer point) {
-        super(userId, password, email, faculty, isLocked, enquiryMap, registeredCamps, blockedDates);
+    public CampCommittee(String userID, String password, String email, String faculty, boolean isLocked, HashMap<Integer, Enquiry> enquiryMap, HashMap<Integer, Camp> registeredCamps, ArrayList<Date> blockedDates, Camp camp, HashMap<Integer, Suggestion> submittedSuggestions, Integer point) {
+        super(userID, password, email, faculty, isLocked, enquiryMap, registeredCamps, blockedDates);
         this.camp = camp;
 	this.point = point;
         this.submittedSuggestions = submittedSuggestions;
@@ -72,20 +77,35 @@ public class CampCommittee extends Student implements DatabaseWritable {
     /**
      * Returns ArrayList of suggestions submitted.
      *
-     * @returns An ArrayList of suggestions.
+     * @returns {@code ArrayList<Suggestion>}
      */
     public ArrayList<Suggestion> viewSuggestions(){
         return new ArrayList<>(submittedSuggestions.values());
     }
 
+    /**
+     * Returns camp that the committee oversees.
+     *
+     * @returns {@code Camp}
+     */
     public Camp getCamp() {
 	return camp;
     }
 
+    /**
+     * Returns enquiries about the camp from attendees.
+     *
+     * @return {@code HashMap<Integer, Enquiry>} of enquiryID and Enquiry
+     */
     public HashMap<Integer, Enquiry> getAttendeeEnquiryMap() {
 	    return camp.getCampEnquiries();
     }
 
+    /**
+     * Returns enquiries about the camp from attendees that has not yet been replied.
+     *
+     * @return {@code ArrayList<Enquiry>}
+     */
     public ArrayList<Enquiry> getUnprocessedAttendeeEnquiry() {
 	ArrayList<Enquiry> enquiryList = new ArrayList<>(camp.getCampEnquiries().values());
 	int i = 0;
@@ -98,10 +118,24 @@ public class CampCommittee extends Student implements DatabaseWritable {
 	return enquiryList;
     }
 
-    public void replyToAttendeeEnquiry(Enquiry enquiry, String Message, String userID) {
-	    enquiry.reply(Message, userID, new Date());
+    /**
+     * Makes a reply to the input enquiry
+     *
+     * @param enquiry 			The enquiry to reply to.
+     * @param message 			The enquiry message to sent.
+     * @param userID 			The userID of this committee member that make a reply.
+     *
+     */
+    public void replyToAttendeeEnquiry(Enquiry enquiry, String message, String userID) {
+	    enquiry.reply(message, userID, new Date());
     }
 
+    /**
+     * Submits a new suggestion about the camp to the staff.
+     *
+     * @param suggestion 		The suggestion message to sent.
+     * @param campID 			The ID of the camp to display this suggestion.
+     */
     public void submitSuggestion(String suggestion, Integer campID) {
         Suggestion newSuggestion = new Suggestion(Registry.nextSuggestionID, suggestion, this.getUserID(), new Date(), new Date(), campID);
         submittedSuggestions.put(newSuggestion.getID(), newSuggestion);
@@ -111,6 +145,11 @@ public class CampCommittee extends Student implements DatabaseWritable {
     }
 
     // can have some interface to link Enquiry and suggestion
+    /**
+     * Retrieves the suggestion that has not yet been processed by the staff.
+     *
+     * @return {@code ArrayList<Suggestion>}
+     */
     public ArrayList<Suggestion> getUnprocessedSuggestions(){
         ArrayList<Suggestion> suggestions = new ArrayList<>();
         for(Map.Entry<Integer, Suggestion> i: submittedSuggestions.entrySet() ) {
@@ -120,6 +159,11 @@ public class CampCommittee extends Student implements DatabaseWritable {
         return suggestions;
     }
 
+    /**
+     * Deletes the unprocessed suggestion
+     *
+     * @param suggestionID 		The ID of suggestion to delete.
+     */
     public void deleteSuggestion(int suggestionID) {
         int campID = submittedSuggestions.get(suggestionID).getCampID();
         Registry.campMap.get(campID).deleteCampSuggestion(suggestionID);
@@ -128,6 +172,10 @@ public class CampCommittee extends Student implements DatabaseWritable {
         Registry.suggestionMap.remove(suggestionID);
     }
 
+    /**
+     * Formats the text message to write to the database
+     * @return {@code String}
+     */
     @Override
     public String DBWriter(){
         String output = super.DBWriter();
@@ -146,5 +194,4 @@ public class CampCommittee extends Student implements DatabaseWritable {
     public void generateReport() {
 	System.out.println("To Generate report (not yet implemented)");
     }
-
 }

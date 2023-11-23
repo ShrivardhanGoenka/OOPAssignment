@@ -1,7 +1,7 @@
 public class Admin extends User{
 
     /**
-     * The Constructors for a new user.
+     * The Constructors for a new Admin user.
      *
      * @param userID   The unique userID.
      * @param password The password of this account.
@@ -12,6 +12,4 @@ public class Admin extends User{
     public Admin(String userID, String password, String email, String faculty, boolean isLocked) {
         super(userID, password, email, faculty, isLocked);
     }
-
-
 }

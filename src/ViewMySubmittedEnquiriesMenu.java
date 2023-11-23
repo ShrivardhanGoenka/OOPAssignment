@@ -3,7 +3,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 //Complete
+/**
+ * The {@code ViewMySubmittedEnquiriesMenu} class provides the execution logics of the menu for viewing the submitted enquiries.
+ */
 public class ViewMySubmittedEnquiriesMenu extends IMenu<Student> {
+	/**
+	 * Executes the menu logics for viewing the submitted enquiries.
+	 * @param studentObject 		The student that runs the menu.
+	 */
 	public void runMenu(Student studentObject) {
 	    ArrayList<Enquiry> enquiries = new ArrayList<>(studentObject.submittedEnquiries());
 		if(enquiries.isEmpty()){
@@ -17,6 +24,9 @@ public class ViewMySubmittedEnquiriesMenu extends IMenu<Student> {
 		printer.print(enquiries);
 	}
 
+	/**
+	 * @return String of the menu description.
+	 */
 	public String getMenuDescription() {
 		return "Viewed my submitted enquiries";
 	}

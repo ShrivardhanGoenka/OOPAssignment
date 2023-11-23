@@ -1,13 +1,23 @@
 import java.util.ArrayList;
 import java.util.Date;
 //Complete
+/**
+ * The {@code ViewCreatedCampsStaffMenu} class provides the execution logics of the menu for viewing all camps created by a specific staff account.
+ */
 public class ViewCreatedCampsStaffMenu extends IMenu<Staff>{
 
+	/**
+	 * @return String of the menu description.
+	 */
     @Override
     public String getMenuDescription() {
         return "View Created Camps";
     }
 
+	/**
+	 * Executes the menu logics for viewing the list of camps created by a specific staff account.
+	 * @param userObject 			The staff that runs the menu.
+	 */
     @Override
     public void runMenu(Staff userObject) throws CampException {
         ArrayList<Camp> camps = userObject.createdCamps();

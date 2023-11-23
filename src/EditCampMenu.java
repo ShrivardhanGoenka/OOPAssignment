@@ -4,13 +4,30 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Date;
 import java.text.ParseException;
+/**
+ * The {@code EditCampMenu} class provides the execution logics of the menu for editing the camp details.
+ */
 public class EditCampMenu extends IMenu<Staff> {
 
+	/** 
+	 * @return the menu description
+	 */
     @Override
     public String getMenuDescription() {
         return "Edit Camp";
     }
 
+	/**
+	 * Executes the menu logics for changing the camp details.
+	 * The logics are as follows:
+	 * 1. The program prompt the user to choose the suggestion to delete.
+	 * 2. If the user enter an invalid choice, the menu will be terminated.
+	 * 3. If the user enter a valid choice, the field to be modified will be shown.
+	 * 4. The user choose the field to modify.
+	 * 5. The user enter the new value for the chosen field.
+	 *
+	 * @throws CampException 		If the modification to the camp cannot be made.
+	 */
     @Override
     public void runMenu(Staff userObject) throws CampException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

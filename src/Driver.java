@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**
+ * The {@code Driver} class provides the method to control the account menu, and the UI of each menu.
+ */
 public class Driver {
     public static <T extends User> void accountMenu(T user, ArrayList<IMenu> allMenus) throws Exception{
         if(allMenus == null) return;

@@ -4,13 +4,28 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.text.ParseException;
+
+/**
+ * The {@link CreateCampMenuclass} provides the execution logics of the menu for the staff to create a new camp.
+ */
 public class CreateCampMenu extends IMenu<Staff> {
 
+    /** 
+    * @return the menu description
+    */
     @Override
     public String getMenuDescription() {
         return "Create Camp";
     }
 
+
+    /**
+    * Executes the menu logics for making an enquiry to the camp committee.
+    * The logics are as follows:
+	* 1. The program prompt the staff to enter camp details (camp name, description, dates, number of slots, visibility, faculty that the camp opens to and registration deadline).
+	 * 2. The program will show the error message when there is an error parsing the input of each field.
+	 * 3. If the camp is created successfully, the successful message will be shown to the staff.
+	*/
     @Override
     public void runMenu(Staff userObject) throws CampException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
