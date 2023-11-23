@@ -139,4 +139,25 @@ public class Staff extends User implements DatabaseWritable{
         }
         else suggestion.reject();
     }
+    public ArrayList<Enquiry> getEnquiries(){
+        ArrayList<Enquiry> enquiries = new ArrayList<>();
+        for(Map.Entry<Integer,Camp> camp : createdCamps.entrySet()){
+            enquiries.addAll(camp.getValue().getCampEnquiries().values());
+        }
+        return enquiries;
+    }
+    public ArrayList<Enquiry> getUnprocessedEnquiries(){
+        ArrayList<Enquiry> enquiries = getEnquiries();
+        ArrayList<Enquiry> unprocessedEnquiries = new ArrayList<>();
+        for(Enquiry enquiry: enquiries){
+            if(!enquiry.isProcessed()){
+                unprocessedEnquiries.add(enquiry);
+            }
+        }
+        return unprocessedEnquiries;
+    }
+    public void processEnquiry(int enquiryID, String reply){
+        Enquiry enquiry = Registry.enquiryMap.get(enquiryID);
+        enquiry.reply(reply, this.getUserID(), new Date());
+    }
 }

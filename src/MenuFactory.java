@@ -35,13 +35,13 @@ public class MenuFactory {
 				new DeleteEnquiryMenu(),
 				new WithdrawCampMenu(),
 				new ViewBlockedDatesMenu(),
-				new SubmitSuggestionMenu(), // checked
-				new EditSuggestionMenu(), // checked
-				new DeleteSuggestionMenu(), //checked
-				new ViewMySubmittedSuggestionsMenu(), // checked
-				new ViewAllEnquiriesMenu(), //checked
-				new ReplyToEnquiriesMenu(), //checked
-				new GenerateCampReportMenu() // not yet
+				new SubmitSuggestionMenu(),
+				new EditSuggestionMenu(),
+				new DeleteSuggestionMenu(),
+				new ViewMySubmittedSuggestionsMenu(),
+				new ViewAllEnquiriesMenu(),
+				new ReplyToEnquiriesMenu(),
+				new GenerateCampReportMenu()
 			)
 		);
 		userMenus.addAll(committeeSpecificMenus);
@@ -55,6 +55,8 @@ public class MenuFactory {
 				new CreateCampMenu(),
 				new ViewCreatedCampsStaffMenu(),
 				new EditCampMenu(),
+				new ViewAllEnquiriesStaffMenu(),
+				new ReplyToEnquiryStaffMenu(),
 				new ViewSuggestionMenu(),
 				new ProcessSuggestionMenu()
 			)
