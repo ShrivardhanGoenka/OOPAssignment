@@ -23,8 +23,7 @@ public class ViewCampStaffMenu extends IMenu<Staff>{
         ArrayList<Camp> camps = Registry.getAllCamps();
         SortableCamp sortableCamp = new SortableCamp();
         sortableCamp.runMenu(camps);
-        System.out.println("-------------<List of Camps>-------------");
         CustomPrinterCamp printer = new CustomPrinterCamp();
-        printer.print(camps);
+        printer.print(camps,"List of Camps");
     }
 }

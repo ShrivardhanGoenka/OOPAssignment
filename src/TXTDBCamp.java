@@ -1,7 +1,10 @@
-import java.util.Date;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.text.ParseException;
+import java.util.*;
 
-public abstract class TXTDBCamp implements TXTDB<Camp>{
+public class TXTDBCamp extends TXTDB<Camp,String>{
     Camp camp;
     public TXTDBCamp(Camp camp) {
         this.camp = camp;
@@ -12,55 +15,99 @@ public abstract class TXTDBCamp implements TXTDB<Camp>{
     }
 
     @Override
-    public String writeData() {
-        String output = "";
-        output += camp.getCampName() + "\n";
-        String campdates = "";
-        for (Date campdate : camp.getCampDates()) {
-            campdates += DBInterface.returnDateVal(campdate) + ",";
+    public String getWriteData() throws DBException {
+        try {
+            String output = "";
+            output += camp.getCampName() + "\n";
+            output += Parsers.datesToString(camp.getCampDates()) + "\n";
+            output += DBInterface.returnDateVal(camp.getRegistrationDeadline()) + "\n";
+            output += camp.getFacultyOpenTo() + "\n";
+            output += camp.getLocation() + "\n";
+            output += camp.getTotalSlots() + "\n";
+            output += camp.getCampCommitteeSlots() + "\n";
+            output += camp.getDescription() + "\n";
+            output += camp.getStaffID() + "\n";
+            output += camp.isVisible() ? "visible\n" : "notvisible\n";
+            output += Parsers.stringListToString(camp.getAttendees()) + "\n";
+            output += Parsers.stringListToString(camp.getCommitteeMembers()) + "\n";
+            output += Parsers.integerListToString(new ArrayList<>(camp.getCampEnquiries().keySet())) + "\n";
+            output += Parsers.integerListToString(new ArrayList<>(camp.getCampSuggestions().keySet())) + "\n";
+            output += camp.getWithdrawnString() + "\n";
+            return output;
+        }catch (Exception e){
+            throw new DBException("Error in writing camp data");
         }
-        if(!campdates.isEmpty())
-            campdates = campdates.substring(0, campdates.length()-1);
-        output += campdates + "\n";
-        output += DBInterface.returnDateVal(camp.getRegistrationDeadline()) + "\n";
-        output += camp.getFacultyOpenTo() + "\n";
-        output += camp.getLocation() + "\n";
-        output += camp.getTotalSlots() + "\n";
-        output += camp.getCampCommitteeSlots() + "\n";
-        output += camp.getDescription() + "\n";
-        output += camp.getStaffID() + "\n";
-        output += camp.isVisible()? "visible\n" : "notvisible\n";
-        String attendeesString = "";
-        for(String attendee: camp.getAttendees()){
-            attendeesString += attendee + ",";
-        }
-        if(!attendeesString.isEmpty())
-            attendeesString = attendeesString.substring(0, attendeesString.length()-1);
-        output += attendeesString + "\n";
-        String committeeMembersString = "";
-        for(String committeeMember: camp.getCommitteeMembers()){
-            committeeMembersString += committeeMember + ",";
-        }
-        if(!committeeMembersString.isEmpty())
-            committeeMembersString = committeeMembersString.substring(0, committeeMembersString.length()-1);
-        output += committeeMembersString + "\n";
-        String campEnquiriesString = "";
-        for (Map.Entry<Integer, Enquiry> i: camp.getCampEnquiries().entrySet() ) {
-            campEnquiriesString += i.getKey() + ",";
-        }
-        if(!campEnquiriesString.isEmpty())
-            campEnquiriesString = campEnquiriesString.substring(0, campEnquiriesString.length()-1);
-        output += campEnquiriesString + "\n";
-        String campSuggestionsString = "";
-        for (Map.Entry<Integer, Suggestion> i: camp.getCampSuggestions().entrySet() ) {
-            campSuggestionsString += i.getKey() + ",";
-        }
-        if(!campSuggestionsString.isEmpty())
-            campSuggestionsString = campSuggestionsString.substring(0, campSuggestionsString.length()-1);
-        output += campSuggestionsString + "\n";
-        output += camp.getWithdrawnString() + "\n";
-        return output;
     }
 
+    @Override
+    public Camp getObjectFromData(String id,String data) throws DBException{
+        Camp camp = null;
+        BufferedReader reader = new BufferedReader(new StringReader(data));
+        int campID;
+        try {
+            campID = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new DBException("Invalid camp ID in file");
+        }
+
+        try {
+            String campName = reader.readLine();
+            String dates = reader.readLine();
+            String registrationClosingDate = reader.readLine();
+            String userGroup = reader.readLine();
+            String location = reader.readLine();
+            int totalSlots = Integer.parseInt(reader.readLine());
+            int campCommitteeSlots = Integer.parseInt(reader.readLine());
+            String description = reader.readLine();
+            String staffInCharge = reader.readLine();
+            boolean visibility = (reader.readLine().equals("visible"));
+
+            // Parse the dates and registration deadline
+            ArrayList<Date> campDates;
+            Date regDeadline;
+            campDates = Parsers.parseDates(dates);
+            regDeadline = Parsers.parseDate(registrationClosingDate);
+
+            // Parse the attendees and committee members
+            String list = reader.readLine();
+            ArrayList<String> attendees = Parsers.parseStringList(list);
+
+            list = reader.readLine();
+            ArrayList<String> committee = Parsers.parseStringList(list);
+
+            ArrayList<Integer> enquiries = Parsers.parseIntegerList(reader.readLine());
+            HashMap<Integer, Enquiry> campEnquiries = new HashMap<>();
+            for (int i : enquiries) {
+                if (Registry.enquiryMap.get(i) != null) {
+                    campEnquiries.put(i, Registry.enquiryMap.get(i));
+                }
+            }
+
+            ArrayList<Integer> suggestions = Parsers.parseIntegerList(reader.readLine());
+            HashMap<Integer, Suggestion> campSuggestions = new HashMap<>();
+            for (int i : suggestions) {
+                if (Registry.suggestionMap.get(i) != null) {
+                    campSuggestions.put(i, Registry.suggestionMap.get(i));
+                }
+            }
+
+            ArrayList<String> withdrawn = new ArrayList<>(List.of(reader.readLine().split(",")));
+
+            // Create the CampInformation object
+            camp = new Camp(campID, campName, campDates, regDeadline, userGroup, location, totalSlots, campCommitteeSlots, description, staffInCharge, withdrawn, attendees, committee, visibility, campEnquiries, campSuggestions);
+
+            reader.close();
+        } catch(ParseException e){
+            throw new DBException("Invalid date format in file");
+        }
+        catch (NumberFormatException e) {
+            throw new DBException("Invalid numbers in file");
+        }
+        catch (IOException e) {
+            throw new DBException("Error in reading camp data");
+        }
+
+        return camp;
+    }
 
 }
