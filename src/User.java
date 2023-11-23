@@ -66,7 +66,6 @@ public class User implements UserActions{
      */
     @Override
     public void changePassword(String newPassword) throws UserException{
-        if(isLoggedIn == false) throw new UserException("User not logged in");
         this.password = newPassword;
     }
     /**
@@ -152,6 +151,22 @@ public class User implements UserActions{
         System.out.println("UserID: " + userID);
         System.out.println("Email Address: " + email);
         System.out.println("Faculty: " + faculty);
+    }
+
+    /**
+     * Locks the account.
+     * Admin can change {@code isLocked} state of every account.
+     */
+    public void unlockAccount() {
+	isLocked = false;
+    }
+
+    /**
+     * Unlocks the account.
+     * Admin can change {@code isLocked} state of every account.
+     */
+    public void lockAccount() {
+	isLocked = true;
     }
 
     /**

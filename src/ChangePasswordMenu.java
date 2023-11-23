@@ -15,8 +15,6 @@ public class ChangePasswordMenu extends IMenu<User> {
 	/**
 	 * Executes the menu logics for changing password.
 	 * The logics are as follows:
-	 * 1. The program prompt the user to enter new password.
-	 * 2. The program shows the message to indicate whether the change is successful.
 	 */
 	public void runMenu(User userObject) {
                     System.out.print("Enter your new password: ");

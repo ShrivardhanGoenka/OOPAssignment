@@ -185,6 +185,8 @@ public class DBInterface {
                 submittedEnquiriesMap.put(i, Registry.enquiryMap.get(i));
             }
             reader.close();
+	    System.out.println("++++");
+	    System.out.println(registeredCamps);
             return new Student(userID, password, email, faculty, isLocked, submittedEnquiriesMap, registeredCampsMap, blockedDatesList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -535,5 +537,36 @@ public class DBInterface {
         for(String s : staff){
             Registry.staffMap.put(s, readStaff(s));
         }
+    }
+
+    Admin readAdmin(String userID){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("LOGS/ADMIN/" + userID + ".txt"));
+            String password = reader.readLine();
+            String email = reader.readLine();
+            String faculty = reader.readLine();
+	    String temp = reader.readLine();
+            boolean isLocked = temp.equals("locked");
+            reader.close();
+            return new Admin(userID, password, email, faculty, isLocked);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+	    return null;
+        }
+    }
+
+    void populateAdmin(){
+	ArrayList<String> admin = new ArrayList<String>();
+	try{
+	    admin = readDirectoryList("ADMIN");
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
+	for (String userID : admin) {
+	    Registry.adminMap.put(userID, readAdmin(userID));
+	}
     }
 }

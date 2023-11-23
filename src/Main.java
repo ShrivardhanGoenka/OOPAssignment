@@ -10,6 +10,7 @@ public class Main {
         dbInterface.populateStudents();
 		dbInterface.populateCampCommittees();
 		dbInterface.populateStaff();
+		dbInterface.populateAdmin();
 
 		while (true)
 			try {
@@ -21,6 +22,8 @@ public class Main {
 				}
 				else if(Registry.staffMap.containsKey(userID)){
 					Driver.accountMenu(Registry.staffMap.get(userID), MenuFactory.getStaffMenu());
+				} else if (Registry.adminMap.containsKey(userID)){
+					Driver.accountMenu(Registry.adminMap.get(userID), MenuFactory.getAdminMenu());
 				}
 			}catch (Exception e){
 				System.out.println(e.getMessage());

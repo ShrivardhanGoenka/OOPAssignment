@@ -1,0 +1,4 @@
+adminpassword
+admin@e.ntu.edu.sg
+SCSE
+unlocked

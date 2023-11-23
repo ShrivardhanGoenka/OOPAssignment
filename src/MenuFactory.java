@@ -47,15 +47,29 @@ public class MenuFactory {
 		ArrayList<IMenu> userMenus = getUserMenu();
 		ArrayList<IMenu> staffSpecificMenus = new ArrayList<IMenu>(
 			Arrays.asList(
-					new ViewCampStaffMenu(),
-					new CreateCampMenu(),
-					new ViewCreatedCampsStaffMenu(),
-					new EditCampMenu(),
-					new ViewSuggestionMenu(),
-					new ProcessSuggestionMenu()
+				new ViewCampStaffMenu(),
+				new CreateCampMenu(),
+				new ViewCreatedCampsStaffMenu(),
+				new EditCampMenu(),
+				new ViewSuggestionMenu(),
+				new ProcessSuggestionMenu()
 			)
 		);
 		userMenus.addAll(staffSpecificMenus);
+		return userMenus;
+	}
+
+	public static ArrayList<IMenu> getAdminMenu(){
+		ArrayList<IMenu> userMenus = getUserMenu();
+		ArrayList<IMenu> adminSpecificMenu = new ArrayList<IMenu>(
+			Arrays.asList(
+				new ChangePasswordAdminMenu(),
+				new UnlockUserMenu(),
+				new LockUserMenu(),
+				new CreateUserMenu()
+			)
+		);
+		userMenus.addAll(adminSpecificMenu);
 		return userMenus;
 	}
 
