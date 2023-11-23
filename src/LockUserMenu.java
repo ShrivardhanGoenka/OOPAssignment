@@ -17,15 +17,15 @@ public class LockUserMenu extends IMenu<Admin> {
 	 * Executes the menu logics for locking user's account.
 	 */
 	public void runMenu(Admin adminObject) {
-                    System.out.println("Choose the user to lock the account");
+			System.out.println("Choose the user to lock the account");
 		    ArrayList<User> userList = new ArrayList<User>(Registry.studentMap.values());
 		    userList.addAll(userList.size(), Registry.committeeMap.values());
 		    userList.addAll(userList.size(), Registry.staffMap.values());
 		    for (int i=0; i<userList.size();i++) {
-			System.out.printf("%d: %s\n", i+1, userList.get(i).getUserID());
+				System.out.printf("%d: %s\n", i+1, userList.get(i).getUserID());
 		    }
 		    int choice;
-                    System.out.printf("Enter your choice: ");
+			System.out.printf("Enter your choice: ");
 		    try {
 		    	choice = Integer.parseInt(br.readLine());
 			if (choice >= userList.size() || choice < 0) {
@@ -37,8 +37,8 @@ public class LockUserMenu extends IMenu<Admin> {
 		    	return;
 		    }
                     try {
-			User userObject = userList.get(choice-1);
-                        userObject.lockAccount();
+						User userObject = userList.get(choice-1);
+						adminObject.lockUser(userObject);
                         System.out.println("Account locked successfully!\n");
                     }
                     catch (Exception e){

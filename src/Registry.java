@@ -43,4 +43,47 @@ public class Registry {
 	    }
 	    return true;
     }
+    private static Enquiry getEnquiry(int id){
+        return enquiryMap.get(id);
+    }
+    private static Suggestion getSuggestion(int id){
+        return suggestionMap.get(id);
+    }
+    public static void addEnquiry(Enquiry enquiry){
+        enquiryMap.put(enquiry.getID(),enquiry);
+    }
+    public static void addSuggestion(Suggestion suggestion){
+        suggestionMap.put(suggestion.getID(),suggestion);
+    }
+    public static void addCamp(Camp camp){
+        campMap.put(camp.getCampID(),camp);
+    }
+    public static void addStudent(Student student){
+        studentMap.put(student.getUserID(),student);
+    }
+    public static void addStaff(Staff staff){
+        staffMap.put(staff.getUserID(),staff);
+    }
+    public static void addCommittee(CampCommittee committee){
+        committeeMap.put(committee.getUserID(),committee);
+    }
+    public static void removeCamp(Camp camp){
+        campMap.remove(camp.getCampID());
+    }
+    public static void removeStudent(Student student){
+        studentMap.remove(student.getUserID());
+    }
+    public static void removeStaff(Staff staff){
+        staffMap.remove(staff.getUserID());
+    }
+    public static void removeCommittee(CampCommittee committee){
+        committeeMap.remove(committee.getUserID());
+    }
+    public static void removeEnquiry(Enquiry enquiry){
+        enquiryMap.remove(enquiry.getID());
+    }
+    public static void removeSuggestion(Suggestion suggestion){
+        suggestionMap.remove(suggestion.getID());
+    }
+
 }

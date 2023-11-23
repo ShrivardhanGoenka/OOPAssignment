@@ -92,7 +92,7 @@ public class Staff extends User implements DatabaseWritable{
      */
     public void createCamp(String campName, String description, boolean openToAll, boolean isVisible, ArrayList<Date> campDates, String location, Date registrationDeadline, int totalSlots, int campCommitteeSlots){
         Camp newCamp = new Camp(Registry.nextCampID,campName, campDates, registrationDeadline, (openToAll?"*":getFaculty()), location,totalSlots, campCommitteeSlots, description, getUserID(), isVisible);
-        Registry.campMap.put(newCamp.getCampID(), newCamp);
+        Registry.addCamp(newCamp);
         createdCamps.put(newCamp.getCampID(), newCamp);
     }
 
@@ -131,9 +131,11 @@ public class Staff extends User implements DatabaseWritable{
      */
     public void processSuggestion(int suggestionID, boolean approvalStatus, String reply){
         Suggestion suggestion = Registry.suggestionMap.get(suggestionID);
-        suggestion.approve();
         suggestion.reply(reply, this.getUserID(), new Date());
-        if(approvalStatus) suggestion.approve();
+        if(approvalStatus) {
+            suggestion.approve();
+            Registry.committeeMap.get(suggestion.getSubmittedBy()).suggestionAccepted();
+        }
         else suggestion.reject();
     }
 }

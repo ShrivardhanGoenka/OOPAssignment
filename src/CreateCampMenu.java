@@ -29,113 +29,35 @@ public class CreateCampMenu extends IMenu<Staff> {
     @Override
     public void runMenu(Staff userObject) throws CampException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("<------------------Enter the details of the camp------------------>");
-        System.out.print("Camp Name: ");
-        String campName = "";
-        try {
-            campName = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
+        ConsoleReaderDateList dateListReader = new ConsoleReaderDateList();
+        ConsoleReaderString stringReader = new ConsoleReaderString();
+        ConsoleReaderInteger intReader = new ConsoleReaderInteger();
+        ConsoleReaderDate dateReader = new ConsoleReaderDate();
+        try{
+            System.out.println("<------------------Enter the details of the camp------------------>");
+            System.out.print("Camp Name: ");
+            String campName = stringReader.readFromConsole();
+            System.out.print("Camp Description: ");
+            String description = stringReader.readFromConsole();
+            System.out.print("Camp Dates (Enter comma separated in dd/mm/yyyy format): ");
+            ArrayList<Date> campDates = dateListReader.readFromConsole();
+            System.out.print("Camp Location: ");
+            String location = stringReader.readFromConsole();
+            System.out.print("Camp Registration Deadline (dd/mm/yyyy): ");
+            Date registrationDate = dateReader.readFromConsole();
+            System.out.print("Camp Total Slots: ");
+            int totalSlots = intReader.readFromConsole(0, Integer.MAX_VALUE);
+            System.out.print("Camp Committee Slots: ");
+            int committeeSlots = intReader.readFromConsole(0, 10);
+            System.out.print("Camp Visibility (1 for visible, 0 for invisible): ");
+            int visible = intReader.readFromConsole(0, 1);
+            System.out.print("Camp Open to (1 for all, 2 for only your faculty): ");
+            String faculty = intReader.readFromConsole(1,2) == 1 ? "*" : userObject.getFaculty();
+            userObject.createCamp(campName, description, faculty.equals("*"), visible == 1, campDates, location, registrationDate, totalSlots, committeeSlots);
+            System.out.println("Camp created successfully");
+        } catch (InputException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.print("Camp Description: ");
-        String description = "";
-        try {
-            description = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        System.out.print("Camp Dates (dd/mm/yyyy): ");
-        String dates = "";
-        ArrayList<Date> campDates;
-        try {
-            dates = br.readLine();
-            campDates = DateInputFormatter.formatDateInput(dates);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        } catch (ParseException e) {
-            System.out.println("Invalid date format");
-            return;
-        }
-        System.out.print("Camp Location: ");
-        String location = "";
-        try {
-            location = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        System.out.print("Camp Registration Deadline (dd/mm/yyyy): ");
-        String registrationDeadline = "";
-        Date registrationDate;
-        try {
-            registrationDeadline = br.readLine();
-            registrationDate = DateInputFormatter.formatDateInput(registrationDeadline).get(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        } catch (ParseException e) {
-            System.out.println("Invalid date format");
-            return;
-        }
-        System.out.print("Camp Total Slots: ");
-        int totalSlots = 0;
-        try {
-            totalSlots = Integer.parseInt(br.readLine());
-        } catch (Exception e) {
-            System.out.println("Invalid choice");
-            return;
-        }
-        if (totalSlots < 0) {
-            System.out.println("Invalid number of slots");
-            return;
-        }
-        System.out.print("Camp Committee Slots: ");
-        int committeeSlots = 0;
-        try {
-            committeeSlots = Integer.parseInt(br.readLine());
-        } catch (Exception e) {
-            System.out.println("Invalid choice");
-            return;
-        }
-        if (committeeSlots < 0) {
-            System.out.println("Invalid number of slots");
-            return;
-        }
-        System.out.print("Camp Visibility (1 for visible, 0 for invisible): ");
-        int visible = 0;
-        try {
-            visible = Integer.parseInt(br.readLine());
-        } catch (Exception e) {
-            System.out.println("Invalid choice");
-            return;
-        }
-        if (visible != 0 && visible != 1) {
-            System.out.println("Invalid choice");
-            return;
-        }
-        System.out.print("Camp Open to (1 for all, 2 for only your faculty): ");
-        String faculty = "";
-        try {
-            faculty = br.readLine();
-            if (!faculty.equals("1") && !faculty.equals("2")) {
-                System.out.println("Invalid choice");
-                return;
-            }
-            if(faculty.equals("2")){
-                faculty = userObject.getFaculty();
-            }
-            else{
-                faculty = "*";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-        userObject.createCamp(campName, description, faculty.equals("*"), visible == 1, campDates, location, registrationDate, totalSlots, committeeSlots);
-        System.out.println("Camp created successfully");
 
     }
 }

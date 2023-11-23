@@ -27,6 +27,7 @@ public class MenuFactory {
 				new ViewCampStudentMenu(),
 				new RegisterCampCommitteeMenu(),
 				new ViewMyRegisteredCampMenu(),
+				new ViewMyRegisteredCampMenu(),
 				new ViewMySubmittedEnquiriesMenu(),
 				new RaiseEnquiryMenu(),
 				new DeleteEnquiryMenu(),

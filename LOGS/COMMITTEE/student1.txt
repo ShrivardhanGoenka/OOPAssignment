@@ -1,4 +1,4 @@
-testpasssword
+testpassword
 student1@e.ntu.edu.sg
 SCSE
 unlock
@@ -6,5 +6,5 @@ unlock
 3
 1,2,3,4
 2
-3,4
-0
+0,3,4
+4

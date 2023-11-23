@@ -25,6 +25,6 @@ public class ViewMyRegisteredCampMenu extends IMenu<Student> {
 	 * @return String of the menu description.
 	 */
 	public String getMenuDescription() {
-		return "View my registered camps";
+		return "View my registered camps as attendee";
 	}
 }

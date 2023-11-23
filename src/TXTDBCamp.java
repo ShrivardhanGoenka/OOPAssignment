@@ -4,7 +4,7 @@ import java.io.StringReader;
 import java.text.ParseException;
 import java.util.*;
 
-public class TXTDBCamp extends TXTDB<Camp,String>{
+public class TXTDBCamp extends TXTDB<Camp,Integer>{
     public TXTDBCamp(Camp obj) {
         super(obj);
     }
@@ -39,15 +39,9 @@ public class TXTDBCamp extends TXTDB<Camp,String>{
     }
 
     @Override
-    public Camp getObjectFromData(String id,String data) throws DBException{
+    public Camp getObjectFromData(Integer id,String data) throws DBException{
         Camp obj = null;
         BufferedReader reader = new BufferedReader(new StringReader(data));
-        int objID;
-        try {
-            objID = Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new DBException("Invalid obj ID in file");
-        }
 
         try {
             String objName = reader.readLine();
@@ -93,7 +87,7 @@ public class TXTDBCamp extends TXTDB<Camp,String>{
             ArrayList<String> withdrawn = new ArrayList<>(List.of(reader.readLine().split(",")));
 
             // Create the CampInformation object
-            obj = new Camp(objID, objName, objDates, regDeadline, userGroup, location, totalSlots, objCommitteeSlots, description, staffInCharge, withdrawn, attendees, committee, visibility, objEnquiries, objSuggestions);
+            obj = new Camp(id, objName, objDates, regDeadline, userGroup, location, totalSlots, objCommitteeSlots, description, staffInCharge, withdrawn, attendees, committee, visibility, objEnquiries, objSuggestions);
 
             reader.close();
         } catch(ParseException e){

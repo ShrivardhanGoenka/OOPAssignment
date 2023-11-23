@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -130,6 +131,7 @@ public class CampCommittee extends Student implements DatabaseWritable {
      */
     public void replyToAttendeeEnquiry(Enquiry enquiry, String message, String userID) {
 	    enquiry.reply(message, userID, new Date());
+        point++;
     }
 
     /**
@@ -144,6 +146,7 @@ public class CampCommittee extends Student implements DatabaseWritable {
         Registry.nextSuggestionID++;
         Registry.suggestionMap.put(newSuggestion.getID(), newSuggestion);
         camp.addCampSuggestion(newSuggestion);
+        point++;
     }
 
     // can have some interface to link Enquiry and suggestion
@@ -172,6 +175,10 @@ public class CampCommittee extends Student implements DatabaseWritable {
         //Enquiry e = enquiryMap.get(enquiryId);
         submittedSuggestions.remove(suggestionID);
         Registry.suggestionMap.remove(suggestionID);
+        point--;
+    }
+    public void suggestionAccepted(){
+        point++;
     }
 
     /**
