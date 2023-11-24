@@ -3,6 +3,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Collections;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +21,9 @@ public class TXTFileReportDBWriter {
 			formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
 
 			// change this path
-		    try(PrintWriter writer = new PrintWriter("REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt")){
+		String filename = "REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt";
+		System.out.printf("Report printed to %s\n", filename);
+		    try(PrintWriter writer = new PrintWriter(filename)) {
 			writer.write(formattedText);
 		    } catch(Exception e) {
 			e.printStackTrace();
@@ -48,6 +51,9 @@ public class TXTFileReportDBWriter {
 		if (studentList.size() == 0) {
 			text += "\nNo student has registered";
 		}
+
+		Collections.sort(studentList);
+		
 		for (String student : studentList) {
 			text += "\n" + student;
 		}
@@ -60,6 +66,7 @@ public class TXTFileReportDBWriter {
 		if (committeeList.size() == 0) {
 			text += "\nNo camp committee has registered";
 		}
+		Collections.sort(committeeList);
 		for (String campCommittee : committeeList) {
 			CampCommittee committeeObject = Registry.committeeMap.get(campCommittee);
 			text += "\n" + committeeObject.getUserID();
@@ -74,6 +81,9 @@ public class TXTFileReportDBWriter {
 		if (enquiryList.size() == 0) {
 			text += "\nNo enquiry found";
 		}
+		SortableEnquiryCommittee sortable = new SortableEnquiryCommittee();
+		System.out.println("Select sortable attribute for Enquiry:");
+		sortable.runMenu(enquiryList);
 		for (Enquiry enquiry: enquiryList) {
 			text += "Enquiry: " + enquiry.getStringValue();
 			text += "\n" + "Submitted by: " + enquiry.getSubmittedBy();
@@ -94,6 +104,9 @@ public class TXTFileReportDBWriter {
 		if (suggestionList.size() == 0) {
 			text += "\nNo suggestion found";
 		}
+		SortableSuggestionStaff sortable = new SortableSuggestionStaff();
+		System.out.println("Select sortable attribute for Suggestion:");
+		sortable.runMenu(suggestionList);
 		for (Suggestion suggestion: suggestionList) {
 			text += "Suggestion: " + suggestion.getStringValue() + "\n";
 			text += "Submitted by: " + suggestion.getSubmittedBy() + "\n";
