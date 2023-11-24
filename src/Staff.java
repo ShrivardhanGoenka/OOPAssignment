@@ -163,5 +163,6 @@ public class Staff extends User implements DatabaseWritable{
     public void deleteCamp(Camp camp) throws CampException{
         if(!createdCamps.containsKey(camp.getCampID())) throw new CampException("Camp does not exist");
         camp.deleteCamp();
+        createdCamps.remove(camp.getCampID());
     }
 }

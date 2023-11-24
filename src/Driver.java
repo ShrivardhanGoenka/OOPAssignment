@@ -17,10 +17,6 @@ public class Driver {
             System.out.print("\nEnter your choice: ");
             ConsoleReaderInteger consoleReaderInteger = new ConsoleReaderInteger();
             choice = consoleReaderInteger.readFromConsole(1, allMenus.size());
-            if (choice > allMenus.size()|| choice < 1) {
-                System.out.printf("Invalid choice\n");
-                continue;
-            }
             allMenus.get(choice - 1).runMenu(user);
             }
             catch(InputException e){
