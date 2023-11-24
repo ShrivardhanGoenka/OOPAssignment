@@ -92,7 +92,7 @@ public class Staff extends User implements DatabaseWritable{
      * @param campCommitteeSlots 	The maximum number of slotes reserved for camp committees.
      */
     public void createCamp(String campName, String description, boolean openToAll, boolean isVisible, ArrayList<Date> campDates, String location, Date registrationDeadline, int totalSlots, int campCommitteeSlots){
-        Camp newCamp = new Camp(Registry.nextCampID,campName, campDates, registrationDeadline, (openToAll?"*":getFaculty()), location,totalSlots, campCommitteeSlots, description, getUserID(), isVisible);
+        Camp newCamp = new Camp(Registry.nextCampID++,campName, campDates, registrationDeadline, (openToAll?"*":getFaculty()), location,totalSlots, campCommitteeSlots, description, getUserID(), isVisible);
         Registry.addCamp(newCamp);
         createdCamps.put(newCamp.getCampID(), newCamp);
     }
