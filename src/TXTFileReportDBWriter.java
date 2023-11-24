@@ -18,7 +18,9 @@ public class TXTFileReportDBWriter {
 			formattedText += filter.get("Committee") ? getFormattedTextCommittee(camp.getCommitteeMembers()) : "";
 			formattedText += filter.get("Enquiry") ? getFormattedTextEnquiries(enquiryList) : "";
 			formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
-		    try(PrintWriter writer = new PrintWriter("LOGS/REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt")){
+
+			// change this path
+		    try(PrintWriter writer = new PrintWriter("REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt")){
 			writer.write(formattedText);
 		    } catch(Exception e) {
 			e.printStackTrace();
@@ -88,7 +90,7 @@ public class TXTFileReportDBWriter {
 	}
 
 	public String getFormattedTextSuggestions(ArrayList<Suggestion> suggestionList) {
-		String text = "";
+		String text = "\nSuggestion List: \n";
 		if (suggestionList.size() == 0) {
 			text += "\nNo suggestion found";
 		}
