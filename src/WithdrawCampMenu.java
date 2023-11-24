@@ -25,6 +25,7 @@ public class WithdrawCampMenu extends IMenu<Student> {
 		try{
 			int choice = cr.readFromConsole(1, camps.size());
 			studentObject.withdrawFromCamp(camps.get(choice-1));
+			System.out.println("Withdrawn successfully!");
 		} catch (InputException e){
 			System.out.println(e.getMessage());
 		}

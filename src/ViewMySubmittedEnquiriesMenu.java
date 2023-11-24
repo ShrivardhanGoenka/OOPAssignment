@@ -16,7 +16,7 @@ public class ViewMySubmittedEnquiriesMenu extends IMenu<Student> {
 	    }
 		SortableEnquiryStudent sortableEnquiry = new SortableEnquiryStudent();
 		sortableEnquiry.runMenu(enquiries);
-		System.out.println("-------------<List of Enquiries Submitted>-------------");
+		System.out.println(">-------------List of Enquiries Submitted-------------<");
 		CustomPrinterEnquiry printer = new CustomPrinterEnquiry();
 		printer.print(enquiries);
 	}

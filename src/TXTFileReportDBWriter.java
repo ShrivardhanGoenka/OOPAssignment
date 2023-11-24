@@ -12,13 +12,13 @@ public class TXTFileReportDBWriter {
 		String formattedText = getFormattedTextCampDetails(camp);
 		ArrayList<Enquiry> enquiryList = new ArrayList<Enquiry> (camp.getCampEnquiries().values());
 		ArrayList<Suggestion> suggestionList = new ArrayList<Suggestion> (camp.getCampSuggestions().values());
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_G_HH:mm:ss_z");
 		String timeStamp = dateFormat.format(new Date());
 			formattedText += filter.get("Attendee") ? getFormattedTextAttendee(camp.getAttendees()) : "";
 			formattedText += filter.get("Committee") ? getFormattedTextCommittee(camp.getCommitteeMembers()) : "";
 			formattedText += filter.get("Enquiry") ? getFormattedTextEnquiries(enquiryList) : "";
 			formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
-		    try(PrintWriter writer = new PrintWriter("LOGS/REPORT/" + userID + timeStamp + camp.getCampID() + ".txt")){
+		    try(PrintWriter writer = new PrintWriter("LOGS/REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt")){
 			writer.write(formattedText);
 		    } catch(Exception e) {
 			e.printStackTrace();
