@@ -74,6 +74,7 @@ public class CampCommittee extends Student implements DatabaseWritable {
         super.printProfile();
         System.out.println("Domain: Student");
         System.out.println("Camp committee member of camp: " + camp.getCampName());
+        System.out.println("Points: " + point);
     }
 
     /**
