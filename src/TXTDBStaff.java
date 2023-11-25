@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TXTDBStaff extends TXTDB<Staff,String> {
-
+    public TXTDBStaff() {
+        super();
+    }
     public TXTDBStaff(Staff obj) {
         super(obj);
     }
@@ -37,7 +39,7 @@ public class TXTDBStaff extends TXTDB<Staff,String> {
             ArrayList<Integer> createdCamps = Parsers.parseIntegerList(reader.readLine());
             HashMap<Integer,Camp> createdCampsMap = new HashMap();
             for(int i: createdCamps){
-                createdCampsMap.put(i, Registry.campMap.get(i));
+                createdCampsMap.put(i, RegistryFactory.campRegistry.getEntry(i));
             }
             reader.close();
             return new Staff(userID, password, email, faculty, isLocked, createdCampsMap);
@@ -48,5 +50,9 @@ public class TXTDBStaff extends TXTDB<Staff,String> {
         catch (Exception e){
             throw new DBException("Error in reading enquiry data for enquiry " + userID);
         }
+    }
+    @Override
+    public String getID(String id){
+        return id;
     }
 }

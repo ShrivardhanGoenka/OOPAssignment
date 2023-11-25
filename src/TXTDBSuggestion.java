@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class TXTDBSuggestion extends TXTDB<Suggestion,Integer> {
+    public TXTDBSuggestion() {
+        super();
+    }
     public TXTDBSuggestion(Suggestion suggestion) {
         super(suggestion);
     }
@@ -55,5 +58,8 @@ public class TXTDBSuggestion extends TXTDB<Suggestion,Integer> {
             throw new DBException("Error in reading suggestion data for suggestion " + id);
         }
     }
-
+    @Override
+    public Integer getID(String id){
+        return Integer.parseInt(id.substring(10));
+    }
 }

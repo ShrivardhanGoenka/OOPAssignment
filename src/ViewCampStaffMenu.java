@@ -19,7 +19,7 @@ public class ViewCampStaffMenu extends IMenu<Staff>{
 	 */
     @Override
     public void runMenu(Staff userObject) {
-        ArrayList<Camp> camps = Registry.getAllCamps();
+        ArrayList<Camp> camps = RegistryFactory.campRegistry.getAllEntries();
         SortableCamp sortableCamp = new SortableCamp();
         sortableCamp.runMenu(camps);
         CustomPrinterCamp printer = new CustomPrinterCamp();

@@ -58,7 +58,7 @@ public class TXTFileReportDBWriter {
 			text += "\nNo camp committee has registered";
 		}
 		for (String campCommittee : committeeList) {
-			CampCommittee committeeObject = Registry.committeeMap.get(campCommittee);
+			CampCommittee committeeObject = RegistryFactory.committeeRegistry.getEntry(campCommittee);
 			text += "\n" + committeeObject.getUserID();
 			text += ", Points = " + committeeObject.getPoint();
 		}

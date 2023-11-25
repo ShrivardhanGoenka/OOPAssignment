@@ -38,20 +38,35 @@ public class Admin extends User{
     }
 
     public void createStudent(String userID, String password, String email, String faculty){
-	if (Registry.checkValidUserID(userID)) {
+	if (checkValidUserID(userID)) {
 		Student student = new Student(userID, password, email, faculty, false);
-		Registry.addStudent(student);
+		RegistryFactory.studentRegistry.addEntry(student, userID);
 	} else {
 		System.out.println("Unable to create new user as userID has already been used");
 	}
     }
 
     public void createStaff(String userID, String password, String email, String faculty){
-	if (Registry.checkValidUserID(userID)) {
+	if (checkValidUserID(userID)) {
 		Staff staff = new Staff(userID, password, email, faculty, false);
-		Registry.addStaff(staff);
+		RegistryFactory.staffRegistry.addEntry(staff, userID);
 	} else {
 		System.out.println("Unable to create new user as userID has already been used");
 	}
     }
+	private boolean checkValidUserID(String userID){
+		if(RegistryFactory.studentRegistry.getEntry(userID) != null){
+			return false;
+		}
+		if(RegistryFactory.staffRegistry.getEntry(userID) != null){
+			return false;
+		}
+		if(RegistryFactory.committeeRegistry.getEntry(userID) != null){
+			return false;
+		}
+		if(RegistryFactory.adminRegistry.getEntry(userID) != null){
+			return false;
+		}
+		return true;
+	}
 }

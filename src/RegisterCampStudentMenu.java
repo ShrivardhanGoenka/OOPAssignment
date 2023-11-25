@@ -30,9 +30,9 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 			else{
 				try {
 					chosen.registerCommitteeMember(studentObject.getUserID(), studentObject.getBlockedDates(), studentObject.getFaculty());
-					Registry.studentMap.remove(studentObject.getUserID());
+					RegistryFactory.studentRegistry.removeEntry(studentObject.getUserID());
 					CampCommittee cc = new CampCommittee(studentObject.getUserID(), studentObject.getPassword(), studentObject.getEmail(), studentObject.getFaculty(), studentObject.isLocked(), chosen);
-					Registry.committeeMap.put(studentObject.getUserID(), cc);
+					RegistryFactory.committeeRegistry.addEntry(cc,studentObject.getUserID());
 					throwexception = 1;
 				}
 				catch(CampException e){

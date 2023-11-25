@@ -8,7 +8,7 @@ import java.util.Map;
  * The Staff class will hold the information of userID, name, faculty, all enquiries/suggestions/camp information.
  * The Staff can create a new camp, view all camps/enquiries/suggestions information, and process the suggestion.
  */
-public class Staff extends User implements DatabaseWritable{
+public class Staff extends User {
     /**
      * {@code HashMap<Integer, Camp> of the campID and Camp that this staff created.
      */
@@ -76,7 +76,7 @@ public class Staff extends User implements DatabaseWritable{
      * @return {@code ArrayList<Camp>}
      */
     public ArrayList<Camp> createdCamps(){
-        return new ArrayList<>(Registry.campMap.values());
+        return new ArrayList<>(createdCamps.values());
     }
 
     /**
@@ -92,8 +92,8 @@ public class Staff extends User implements DatabaseWritable{
      * @param campCommitteeSlots 	The maximum number of slotes reserved for camp committees.
      */
     public void createCamp(String campName, String description, boolean openToAll, boolean isVisible, ArrayList<Date> campDates, String location, Date registrationDeadline, int totalSlots, int campCommitteeSlots){
-        Camp newCamp = new Camp(Registry.nextCampID++,campName, campDates, registrationDeadline, (openToAll?"*":getFaculty()), location,totalSlots, campCommitteeSlots, description, getUserID(), isVisible);
-        Registry.addCamp(newCamp);
+        Camp newCamp = new Camp(PrimaryKeyCounter.nextCampID++,campName, campDates, registrationDeadline, (openToAll?"*":getFaculty()), location,totalSlots, campCommitteeSlots, description, getUserID(), isVisible);
+        RegistryFactory.campRegistry.addEntry(newCamp, newCamp.getCampID());
         createdCamps.put(newCamp.getCampID(), newCamp);
     }
 
@@ -131,11 +131,11 @@ public class Staff extends User implements DatabaseWritable{
      * @param reply 				The reply message to show to camp committee that raise the suggestion.
      */
     public void processSuggestion(int suggestionID, boolean approvalStatus, String reply){
-        Suggestion suggestion = Registry.suggestionMap.get(suggestionID);
+        Suggestion suggestion = RegistryFactory.suggestionRegistry.getEntry(suggestionID);
         suggestion.reply(reply, this.getUserID(), new Date());
         if(approvalStatus) {
             suggestion.approve();
-            Registry.committeeMap.get(suggestion.getSubmittedBy()).suggestionAccepted();
+            RegistryFactory.committeeRegistry.getEntry(suggestion.getSubmittedBy()).suggestionAccepted();
         }
         else suggestion.reject();
     }
@@ -157,7 +157,7 @@ public class Staff extends User implements DatabaseWritable{
         return unprocessedEnquiries;
     }
     public void processEnquiry(int enquiryID, String reply){
-        Enquiry enquiry = Registry.enquiryMap.get(enquiryID);
+        Enquiry enquiry = RegistryFactory.enquiryRegistry.getEntry(enquiryID);
         enquiry.reply(reply, this.getUserID(), new Date());
     }
     public void deleteCamp(Camp camp) throws CampException{

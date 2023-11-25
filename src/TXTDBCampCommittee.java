@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
-
+    public TXTDBCampCommittee() {
+        super();
+    }
     public TXTDBCampCommittee(CampCommittee obj) {
         super(obj);
     }
@@ -22,6 +24,7 @@ public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
         TXTDBStudent studentDB = new TXTDBStudent(obj);
         String output = studentDB.getWriteData();
         ArrayList<Integer> suggestionIDs = new ArrayList<>();
+        output += obj.getCamp().getCampID() + "\n";
         for(Suggestion suggestion: obj.viewSuggestions()){
             suggestionIDs.add(suggestion.getID());
         }
@@ -45,18 +48,18 @@ public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
             ArrayList<Integer> submittedEnquiries = Parsers.parseIntegerList(reader.readLine());
             HashMap<Integer,Camp> registeredCampsMap = new HashMap<Integer,Camp>();
             for(int i: registeredCamps){
-                registeredCampsMap.put(i, Registry.campMap.get(i));
+                registeredCampsMap.put(i, RegistryFactory.campRegistry.getEntry(i));
             }
             HashMap<Integer,Enquiry> submittedEnquiriesMap = new HashMap<Integer,Enquiry>();
             for(int i: submittedEnquiries){
-                submittedEnquiriesMap.put(i, Registry.enquiryMap.get(i));
+                submittedEnquiriesMap.put(i, RegistryFactory.enquiryRegistry.getEntry(i));
             }
             Integer campIDCommittee = Integer.parseInt(reader.readLine());
-            Camp camp = Registry.campMap.get(campIDCommittee);
+            Camp camp = RegistryFactory.campRegistry.getEntry(campIDCommittee);
             HashMap<Integer,Suggestion> submittedSuggestionsMap = new HashMap<Integer,Suggestion>();
             ArrayList<Integer> submittedSuggestions = Parsers.parseIntegerList(reader.readLine());
             for(int i: submittedSuggestions) {
-                submittedSuggestionsMap.put(i, Registry.suggestionMap.get(i));
+                submittedSuggestionsMap.put(i, RegistryFactory.suggestionRegistry.getEntry(i));
             }
             Integer point = Integer.parseInt(reader.readLine());
             reader.close();
@@ -70,5 +73,10 @@ public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
         catch (IOException e) {
             throw new DBException("Error in reading obj data for camp committee " + userID);
         }
+    }
+
+    @Override
+    public String getID(String id){
+        return id;
     }
 }

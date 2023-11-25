@@ -1,30 +1,25 @@
 public class Main {
 
     public static void main(String[] args){
-
-        DBInterface dbInterface = new DBInterface();
-
-        dbInterface.loadNextValues();
-        dbInterface.populateSuggestions();
-        dbInterface.populateEnquiries();
-        dbInterface.populateCamps();
-        dbInterface.populateStudents();
-		dbInterface.populateCampCommittees();
-		dbInterface.populateStaff();
-		dbInterface.populateAdmin();
+		try{
+			DBReader.Initialise("");
+		} catch (Exception e){
+			System.out.println("Fatal Error in reading Database. Please contact the administrator.");
+			System.out.println(e.getMessage());
+		}
 
         while (true)
 			try {
 				String userID = UserLoginDriver.authenticateUser();
-				if (Registry.committeeMap.containsKey(userID)) {
-					Driver.accountMenu(Registry.committeeMap.get(userID), MenuFactory.getCommitteeMenu());
-				} else if (Registry.studentMap.containsKey(userID)){
-					Driver.accountMenu(Registry.studentMap.get(userID), MenuFactory.getStudentMenu());
+				if (RegistryFactory.committeeRegistry.getEntry(userID) != null) {
+					Driver.accountMenu(RegistryFactory.committeeRegistry.getEntry(userID), MenuFactory.getCommitteeMenu());
+				} else if (RegistryFactory.studentRegistry.getEntry(userID) != null){
+					Driver.accountMenu(RegistryFactory.studentRegistry.getEntry(userID), MenuFactory.getStudentMenu());
 				}
-				else if(Registry.staffMap.containsKey(userID)){
-					Driver.accountMenu(Registry.staffMap.get(userID), MenuFactory.getStaffMenu());
-				} else if (Registry.adminMap.containsKey(userID)){
-					Driver.accountMenu(Registry.adminMap.get(userID), MenuFactory.getAdminMenu());
+				else if(RegistryFactory.staffRegistry.getEntry(userID) != null){
+					Driver.accountMenu(RegistryFactory.staffRegistry.getEntry(userID), MenuFactory.getStaffMenu());
+				} else if (RegistryFactory.adminRegistry.getEntry(userID) != null){
+					Driver.accountMenu(RegistryFactory.adminRegistry.getEntry(userID), MenuFactory.getAdminMenu());
 				}
 			}catch (Exception e){
 				System.out.println(e.getMessage());

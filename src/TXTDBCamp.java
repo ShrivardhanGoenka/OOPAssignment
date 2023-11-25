@@ -8,12 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TXTDBCamp extends TXTDB<Camp,Integer>{
+    public TXTDBCamp() {
+        super();
+    }
     public TXTDBCamp(Camp obj) {
         super(obj);
     }
     @Override
     public String getFileName() {
-        return "obj" + obj.getCampID() + ".txt";
+        return "camp" + obj.getCampID() + ".txt";
     }
 
     @Override
@@ -22,7 +25,7 @@ public class TXTDBCamp extends TXTDB<Camp,Integer>{
             String output = "";
             output += obj.getCampName() + "\n";
             output += Parsers.datesToString(obj.getCampDates()) + "\n";
-            output += DBInterface.returnDateVal(obj.getRegistrationDeadline()) + "\n";
+            output += Parsers.dateToString(obj.getRegistrationDeadline()) + "\n";
             output += obj.getFacultyOpenTo() + "\n";
             output += obj.getLocation() + "\n";
             output += obj.getTotalSlots() + "\n";
@@ -74,16 +77,16 @@ public class TXTDBCamp extends TXTDB<Camp,Integer>{
             ArrayList<Integer> enquiries = Parsers.parseIntegerList(reader.readLine());
             HashMap<Integer, Enquiry> objEnquiries = new HashMap<>();
             for (int i : enquiries) {
-                if (Registry.enquiryMap.get(i) != null) {
-                    objEnquiries.put(i, Registry.enquiryMap.get(i));
+                if (RegistryFactory.enquiryRegistry.getEntry(i) != null) {
+                    objEnquiries.put(i, RegistryFactory.enquiryRegistry.getEntry(i));
                 }
             }
 
             ArrayList<Integer> suggestions = Parsers.parseIntegerList(reader.readLine());
             HashMap<Integer, Suggestion> objSuggestions = new HashMap<>();
             for (int i : suggestions) {
-                if (Registry.suggestionMap.get(i) != null) {
-                    objSuggestions.put(i, Registry.suggestionMap.get(i));
+                if (RegistryFactory.suggestionRegistry.getEntry(i) != null) {
+                    objSuggestions.put(i, RegistryFactory.suggestionRegistry.getEntry(i));
                 }
             }
 
@@ -105,5 +108,8 @@ public class TXTDBCamp extends TXTDB<Camp,Integer>{
 
         return obj;
     }
-
+    @Override
+    public Integer getID(String id){
+        return Integer.parseInt(id.substring(4));
+    }
 }

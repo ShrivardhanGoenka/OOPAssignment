@@ -9,7 +9,7 @@ import java.util.Map;
  * The Student class will hold the information of userID, name, faculty, their own enquiries submitted, camp they registered, their availabilities.
  * The Student can register for a camp, raise an enquiry, and see user's specific information.
  */
-public class Student extends User implements DatabaseWritable {
+public class Student extends User  {
     /**
      * {@code HashMap<Integer, Enquiry> of the enquiryID and Enquiry.
      */
@@ -100,11 +100,10 @@ public class Student extends User implements DatabaseWritable {
      * @param campID 		The ID of the camp to sent enquiry to.
      */
     public void raiseEnquiry(String enquiry, int campID){
-        Enquiry newEnquiry = new Enquiry(Registry.nextEnquiryID, enquiry, this.getUserID(), new Date(), new Date(), campID);
+        Enquiry newEnquiry = new Enquiry(PrimaryKeyCounter.nextEnquiryID++, enquiry, this.getUserID(), new Date(), new Date(), campID);
         enquiryMap.put(newEnquiry.getID(), newEnquiry);
-        Registry.nextEnquiryID++;
-        Registry.enquiryMap.put(newEnquiry.getID(), newEnquiry);
-        Registry.campMap.get(campID).addCampEnquiry(newEnquiry);
+        RegistryFactory.enquiryRegistry.addEntry(newEnquiry,newEnquiry.getID());
+        RegistryFactory.campRegistry.getEntry(campID).addCampEnquiry(newEnquiry);
     }
 
     /**
@@ -138,10 +137,10 @@ public class Student extends User implements DatabaseWritable {
      */
     public void deleteEnquiry(int enquiryID){
         int camp = enquiryMap.get(enquiryID).getCampID();
-        Registry.campMap.get(camp).deleteCampEnquiry(enquiryID);
+        RegistryFactory.campRegistry.getEntry(camp).deleteCampEnquiry(enquiryID);
         //Enquiry e = enquiryMap.get(enquiryId);
         enquiryMap.remove(enquiryID);
-        Registry.enquiryMap.remove(enquiryID);
+        RegistryFactory.enquiryRegistry.removeEntry(enquiryID);
     }
 
     /**
@@ -168,42 +167,5 @@ public class Student extends User implements DatabaseWritable {
      */
     public ArrayList<Date> getBlockedDates() {
         return blockedDates;
-    }
-
-    /**
-     * Saves the current information of this student back to the database (txt file).
-     */
-    @Override
-    public String DBWriter(){
-        String output = super.DBWriter();
-        String datesblocked = "";
-        for (Date blockedDate : blockedDates) {
-            datesblocked += DBInterface.returnDateVal(blockedDate) + ",";
-        }
-        if(!datesblocked.isEmpty())
-            datesblocked = datesblocked.substring(0, datesblocked.length()-1);
-        output += datesblocked + "\n";
-        String campsregistered = "";
-        for (Map.Entry<Integer, Camp> i: registeredCamps.entrySet() ) {
-            campsregistered += i.getKey() + ",";
-        }
-        if(!campsregistered.isEmpty())
-            campsregistered = campsregistered.substring(0, campsregistered.length()-1);
-        output += campsregistered + "\n";
-        String enquiries = "";
-        for (Map.Entry<Integer, Enquiry> i: enquiryMap.entrySet() ) {
-            enquiries += i.getKey() + ",";
-        }
-        if(!enquiries.isEmpty())
-            enquiries = enquiries.substring(0, enquiries.length()-1);
-        output += enquiries + "\n";
-        return output;
-    }
-
-    /**
-     * Gets the filename in the database to save this student's information to.
-     */
-    public String getFileName(){
-        return this.getUserID() + ".txt";
     }
 }

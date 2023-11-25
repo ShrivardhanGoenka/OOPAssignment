@@ -9,9 +9,9 @@ public class ChangePasswordAdminMenu extends IMenu<Admin> {
 	 */
 	public void runMenu(Admin adminObject) {
 			System.out.println("Choose the user to change password");
-		    ArrayList<User> userList = new ArrayList<User>(Registry.studentMap.values());
-		    userList.addAll(Registry.committeeMap.values());
-		    userList.addAll(Registry.staffMap.values());
+		    ArrayList<User> userList = new ArrayList<User>(RegistryFactory.studentRegistry.getAllEntries());
+		    userList.addAll(RegistryFactory.committeeRegistry.getAllEntries());
+		    userList.addAll(RegistryFactory.staffRegistry.getAllEntries());
 		    for (int i=0; i<userList.size();i++) {
 				System.out.printf("%d: %s\n", i+1, userList.get(i).getUserID());
 		    }

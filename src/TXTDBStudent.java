@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class TXTDBStudent extends TXTDB<Student,String>{
-
+    public TXTDBStudent() {
+        super();
+    }
     public TXTDBStudent(Student obj) {
         super(obj);
     }
@@ -50,11 +52,11 @@ public class TXTDBStudent extends TXTDB<Student,String>{
             ArrayList<Integer> submittedEnquiries = Parsers.parseIntegerList(reader.readLine());
             HashMap<Integer,Camp> registeredCampsMap = new HashMap<>();
             for(int i: registeredCamps){
-                registeredCampsMap.put(i, Registry.campMap.get(i));
+                registeredCampsMap.put(i, RegistryFactory.campRegistry.getEntry(i));
             }
             HashMap<Integer,Enquiry> submittedEnquiriesMap = new HashMap<Integer,Enquiry>();
             for(int i: submittedEnquiries){
-                submittedEnquiriesMap.put(i, Registry.enquiryMap.get(i));
+                submittedEnquiriesMap.put(i, RegistryFactory.enquiryRegistry.getEntry(i));
             }
             reader.close();
             return new Student(userID, password, email, faculty, isLocked, submittedEnquiriesMap, registeredCampsMap, blockedDatesList);
@@ -67,5 +69,9 @@ public class TXTDBStudent extends TXTDB<Student,String>{
         catch (Exception e){
             throw new DBException("Error in reading enquiry data for enquiry " + userID);
         }
+    }
+    @Override
+    public String getID(String id){
+        return id;
     }
 }

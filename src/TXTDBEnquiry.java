@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class TXTDBEnquiry extends TXTDB<Enquiry,Integer>{
+    public TXTDBEnquiry() {
+        super();
+    }
     public TXTDBEnquiry(Enquiry enquiry) {
         super(enquiry);
     }
@@ -62,5 +65,9 @@ public class TXTDBEnquiry extends TXTDB<Enquiry,Integer>{
         catch (Exception e){
             throw new DBException("Error in reading enquiry data for enquiry " + id);
         }
+    }
+    @Override
+    public Integer getID(String id){
+        return Integer.parseInt(id.substring(7));
     }
 }

@@ -30,8 +30,12 @@ public class UserLoginDriver {
 				continue;
 			}
 			if(choice == 2){
-				DBInterface db = new DBInterface();
-				db.writeToDB();
+				try{
+					DBWriter.saveState();
+				} catch (Exception e){
+					System.out.println("Fatal Error in writing Database. Please contact the administrator.");
+					System.out.println(e.getMessage());
+				}
 				System.exit(0);
 				return null;
 			}
@@ -41,7 +45,7 @@ public class UserLoginDriver {
 				username = cr1.readFromConsole();
 				System.out.print("Password: ");
 				password = cr1.readFromConsole();
-				if(Registry.authenticateUser(username, password)){
+				if(authenticateUser(username, password)){
 					return username;
 				}
 				else{
@@ -52,4 +56,20 @@ public class UserLoginDriver {
 			}
         }
     }
+
+	private static boolean authenticateUser(String username, String password) throws UserException{
+		if (RegistryFactory.studentRegistry.getEntry(username) != null){
+			return RegistryFactory.studentRegistry.getEntry(username).login(password);
+		}
+		else if (RegistryFactory.committeeRegistry.getEntry(username) != null){
+			return RegistryFactory.committeeRegistry.getEntry(username).login(password);
+		}
+		else if (RegistryFactory.staffRegistry.getEntry(username) != null){
+			return RegistryFactory.staffRegistry.getEntry(username).login(password);
+		}
+		else if (RegistryFactory.adminRegistry.getEntry(username) != null) {
+			return RegistryFactory.adminRegistry.getEntry(username).login(password);
+		}
+		return false;
+	}
 }

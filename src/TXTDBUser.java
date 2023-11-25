@@ -37,4 +37,8 @@ public class TXTDBUser extends TXTDB<User, String>{
             throw new DBException("Error in reading user data for user " + string);
         }
     }
+    @Override
+    public String getID(String id){
+        return id;
+    }
 }

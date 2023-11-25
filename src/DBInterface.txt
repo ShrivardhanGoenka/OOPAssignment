@@ -8,16 +8,6 @@ import java.util.*;
 public class DBInterface {
 
     /**
-     * Converts the Date object to formatted date string ("dd/MM/yyyy") and Returns the formatted string
-     * @param date 			date object of type {@code Date}
-     * @return {@code String} of formatted date
-     */
-    static String returnDateVal(Date date){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(date);
-    }
-
-    /**
      * Writes a Map object to the database
      *
      * @param folder 			The folder of the Map object to write to.
@@ -426,7 +416,6 @@ public class DBInterface {
 
         for(String camp : camps){
             Registry.campMap.put(Integer.parseInt(camp.substring(4)), readCampDetails(Integer.parseInt(camp.substring(4))));
-            //Registry.campList.add(readCampDetails(Integer.parseInt(camp.substring(4))));
         }
     }
 

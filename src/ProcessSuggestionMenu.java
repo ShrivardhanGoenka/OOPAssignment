@@ -18,8 +18,8 @@ public class ProcessSuggestionMenu extends IMenu<Staff>{
         for(Suggestion suggestion: suggestions){
             System.out.println("Suggestion number: " + counter++ );
             System.out.println("Suggestion: " + suggestion.getStringValue());
-            System.out.println("Camp: " + Registry.campMap.get(suggestion.getCampID()).getCampName());
-            System.out.println("Submitted on: " + DBInterface.returnDateVal(suggestion.getSubmittedOn()));
+            System.out.println("Camp: " + RegistryFactory.campRegistry.getEntry(suggestion.getCampID()).getCampName());
+            System.out.println("Submitted on: " + Parsers.dateToString(suggestion.getSubmittedOn()));
             System.out.println("---------------------------------------------------");
         }
         System.out.print("Enter the suggestion ID to process or 0 to exit: ");

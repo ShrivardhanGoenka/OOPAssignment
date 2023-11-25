@@ -239,30 +239,4 @@ public abstract class CampInformation implements Visibility {
         this.description = description;
     }
 
-    /** 
-     * Returns the formatted string of the aggregated camp details
-     * This method is visible to camp committee that oversees the camp and staff.
-     *
-     * @return {@code String} of formatted camp details
-     */
-    public String DBWriter(){
-        String output = "";
-        output += campName + "\n";
-        String campdates = "";
-        for (Date campdate : campDates) {
-            campdates += DBInterface.returnDateVal(campdate) + ",";
-        }
-        if(!campdates.isEmpty())
-        campdates = campdates.substring(0, campdates.length()-1);
-        output += campdates + "\n";
-        output += DBInterface.returnDateVal(registrationDeadline) + "\n";
-        output += facultyOpenTo + "\n";
-        output += location + "\n";
-        output += totalSlots + "\n";
-        output += campCommitteeSlots + "\n";
-        output += description + "\n";
-        output += staffID + "\n";
-        output += visibility? "visible\n" : "notvisible\n";
-        return output;
-    }
 }

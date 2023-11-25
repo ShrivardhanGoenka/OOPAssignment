@@ -9,9 +9,9 @@ public class LockUserMenu extends IMenu<Admin> {
 	 */
 	public void runMenu(Admin adminObject) {
 			System.out.println("Choose the user to lock the account");
-		    ArrayList<User> userList = new ArrayList<User>(Registry.studentMap.values());
-		    userList.addAll(userList.size(), Registry.committeeMap.values());
-		    userList.addAll(userList.size(), Registry.staffMap.values());
+		    ArrayList<User> userList = new ArrayList<User>(RegistryFactory.studentRegistry.getAllEntries());
+		    userList.addAll(userList.size(), RegistryFactory.committeeRegistry.getAllEntries());
+		    userList.addAll(userList.size(), RegistryFactory.staffRegistry.getAllEntries());
 		    for (int i=0; i<userList.size();i++) {
 				System.out.printf("%d: %s\n", i+1, userList.get(i).getUserID());
 		    }

@@ -8,7 +8,7 @@ import java.util.Map;
  * The {@code CampCommittee} represents a student who is a committee member of the camp.
  * It extends the {@link Student} class and includes extra functionality specific to camp committee.
  */
-public class CampCommittee extends Student implements DatabaseWritable {
+public class CampCommittee extends Student  {
 
     /**
      * Represents Camp that this committee is associated.
@@ -141,10 +141,9 @@ public class CampCommittee extends Student implements DatabaseWritable {
      * @param campID 			The ID of the camp to display this suggestion.
      */
     public void submitSuggestion(String suggestion, Integer campID) {
-        Suggestion newSuggestion = new Suggestion(Registry.nextSuggestionID, suggestion, this.getUserID(), new Date(), new Date(), campID);
+        Suggestion newSuggestion = new Suggestion(PrimaryKeyCounter.nextSuggestionID++, suggestion, this.getUserID(), new Date(), new Date(), campID);
         submittedSuggestions.put(newSuggestion.getID(), newSuggestion);
-        Registry.nextSuggestionID++;
-        Registry.suggestionMap.put(newSuggestion.getID(), newSuggestion);
+        RegistryFactory.suggestionRegistry.addEntry(newSuggestion,newSuggestion.getID());
         camp.addCampSuggestion(newSuggestion);
         point++;
     }
@@ -171,10 +170,10 @@ public class CampCommittee extends Student implements DatabaseWritable {
      */
     public void deleteSuggestion(int suggestionID) {
         int campID = submittedSuggestions.get(suggestionID).getCampID();
-        Registry.campMap.get(campID).deleteCampSuggestion(suggestionID);
+        RegistryFactory.campRegistry.getEntry(campID).deleteCampSuggestion(suggestionID);
         //Enquiry e = enquiryMap.get(enquiryId);
         submittedSuggestions.remove(suggestionID);
-        Registry.suggestionMap.remove(suggestionID);
+        RegistryFactory.suggestionRegistry.removeEntry(suggestionID);
         point--;
     }
     public void suggestionAccepted(){

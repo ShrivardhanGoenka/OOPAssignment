@@ -1,5 +1,5 @@
 import java.util.Date;
-public class Suggestion extends Enquiry implements DatabaseWritable {
+public class Suggestion extends Enquiry  {
     int approvalStatus;
     public Suggestion(int ID,String stringValue, String submittedBy, Date submittedOn, Date updatedOn, int campID){
         super(ID, stringValue, submittedBy, submittedOn, updatedOn, campID);
@@ -20,22 +20,5 @@ public class Suggestion extends Enquiry implements DatabaseWritable {
 
     public void reject(){
         approvalStatus = 2;
-    }
-
-    public void replyToSuggestions(String reply, String repliedBy, Date repliedOn){
-        super.reply(reply, repliedBy, repliedOn);
-    }
-
-    @Override
-    public String DBWriter(){
-        String output = super.DBWriter();
-        if(isProcessed()){
-            output += approvalStatus + "\n";
-        }
-        return output;
-    }
-
-    public String getFileName(){
-        return "suggestion" + getID() + ".txt";
     }
 }

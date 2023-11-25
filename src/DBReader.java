@@ -1,22 +1,65 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class DBReader {
+    private static final String rootDirectory = "LOGS/";
     public static void Initialise() throws IOException,DBException{
+        populatePrimaryKeys();
         for(Enquiry enquiry:readEnquiry())
-            Registry.addEnquiry(enquiry);
+            RegistryFactory.enquiryRegistry.addEntry(enquiry,enquiry.getID());
         for(Suggestion suggestion:readSuggestion())
-            Registry.addSuggestion(suggestion);
+            RegistryFactory.suggestionRegistry.addEntry(suggestion,suggestion.getID());
         for(Camp camp:readCamp())
-            Registry.addCamp(camp);
+            RegistryFactory.campRegistry.addEntry(camp,camp.getCampID());
         for(Student student:readStudent())
-            Registry.addStudent(student);
+            RegistryFactory.studentRegistry.addEntry(student,student.getUserID());
         for(Staff staff:readStaff())
-            Registry.addStaff(staff);
+            RegistryFactory.staffRegistry.addEntry(staff,staff.getUserID());
         for(CampCommittee committee:readCommittee())
-            Registry.addCommittee(committee);
+            RegistryFactory.committeeRegistry.addEntry(committee,committee.getUserID());
+        for(Admin admin:readAdmin())
+            RegistryFactory.adminRegistry.addEntry(admin,admin.getUserID());
+        System.out.println("Database loaded successfully!");
+    }
+    private static void populatePrimaryKeys() throws IOException,DBException{
+        BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
+        PrimaryKeyCounter.nextCampID = Integer.parseInt(reader.readLine());
+        PrimaryKeyCounter.nextEnquiryID = Integer.parseInt(reader.readLine());
+        PrimaryKeyCounter.nextSuggestionID = Integer.parseInt(reader.readLine());
+        reader.close();
+    }
+    public static void Initialise(String test) throws IOException, DBException {
+        populatePrimaryKeys();
+        for(Object enquiry : readObjects("ENQUIRIES",new TXTDBEnquiry()))
+            RegistryFactory.enquiryRegistry.addEntry((Enquiry) enquiry,((Enquiry) enquiry).getID());
+        for(Object suggestion : readObjects("SUGGESTIONS",new TXTDBSuggestion()))
+            RegistryFactory.suggestionRegistry.addEntry((Suggestion) suggestion,((Suggestion) suggestion).getID());
+        for(Object camp : readObjects("CAMPS",new TXTDBCamp()))
+            RegistryFactory.campRegistry.addEntry((Camp) camp,((Camp) camp).getCampID());
+        for(Object student : readObjects("STUDENT",new TXTDBStudent()))
+            RegistryFactory.studentRegistry.addEntry((Student) student,((Student) student).getUserID());
+        for(Object staff : readObjects("STAFF",new TXTDBStaff()))
+            RegistryFactory.staffRegistry.addEntry((Staff) staff,((Staff) staff).getUserID());
+        for(Object committee : readObjects("COMMITTEE",new TXTDBCampCommittee()))
+            RegistryFactory.committeeRegistry.addEntry((CampCommittee) committee,((CampCommittee) committee).getUserID());
+        for(Object admin : readObjects("ADMIN",new TXTDBAdmin()))
+            RegistryFactory.adminRegistry.addEntry((Admin) admin,((Admin) admin).getUserID());
+    }
+
+    private static <T extends TXTDB, W> ArrayList<W> readObjects(String dir, T obj) throws IOException, DBException{
+        ArrayList<String> list = readDirectoryList(dir);
+        ArrayList<W> objects = new ArrayList<W>();
+        for(String item:list){
+            File f = new File("LOGS/"+dir+"/"+item+".txt");
+            FileInputStream fis = new FileInputStream(f);
+            byte[] data = new byte[(int) f.length()];
+            fis.read(data);
+            fis.close();
+            String str = new String(data, "UTF-8");
+            W object = (W) obj.getObjectFromData(obj.getID(item), str);
+            objects.add(object);
+        }
+        return objects;
     }
 
     private static ArrayList<Student> readStudent() throws IOException,DBException{
@@ -115,9 +158,25 @@ public class DBReader {
         }
         return committeeObjects;
     }
+    private static ArrayList<Admin> readAdmin() throws IOException, DBException{
+        ArrayList<String> adminList = readDirectoryList("ADMIN");
+        ArrayList<Admin> adminObjects = new ArrayList<Admin>();
+        for(String admin:adminList){
+            File f = new File("LOGS/ADMIN/"+admin+".txt");
+            FileInputStream fis = new FileInputStream(f);
+            byte[] data = new byte[(int) f.length()];
+            fis.read(data);
+            fis.close();
+            String str = new String(data, "UTF-8");
+            TXTDBAdmin adminObject = new TXTDBAdmin(null);
+            Admin adminObj = adminObject.getObjectFromData(admin, str);
+            adminObjects.add(adminObj);
+        }
+        return adminObjects;
+    }
 
     private static ArrayList<String> readDirectoryList(String dirname) throws IOException {
-        String directoryPath = "LOGS/" + dirname + "/";
+        String directoryPath = rootDirectory + dirname + "/";
         ArrayList<String> dir = new ArrayList<String>();
         File directory = new File(directoryPath);
         if (directory.exists() && directory.isDirectory()) {
