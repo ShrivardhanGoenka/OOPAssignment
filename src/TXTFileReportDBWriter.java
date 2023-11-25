@@ -15,9 +15,13 @@ public class TXTFileReportDBWriter {
 		ArrayList<Suggestion> suggestionList = new ArrayList<Suggestion> (camp.getCampSuggestions().values());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_G_HH:mm:ss_z");
 		String timeStamp = dateFormat.format(new Date());
+		if (filter.containsKey("Attendee"))
 			formattedText += filter.get("Attendee") ? getFormattedTextAttendee(camp.getAttendees()) : "";
+		if (filter.containsKey("Committee"))
 			formattedText += filter.get("Committee") ? getFormattedTextCommittee(camp.getCommitteeMembers()) : "";
+		if (filter.containsKey("Enquiry"))
 			formattedText += filter.get("Enquiry") ? getFormattedTextEnquiries(enquiryList) : "";
+		if (filter.containsKey("Suggestion"))
 			formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
 
 			// change this path
@@ -77,7 +81,7 @@ public class TXTFileReportDBWriter {
 	}
 
 	public String getFormattedTextEnquiries(ArrayList<Enquiry> enquiryList) {
-		String text = "\nEnquiry List: \n";
+		String text = "\nEnquiry List: \n\n";
 		if (enquiryList.size() == 0) {
 			text += "\nNo enquiry found";
 		}
@@ -100,7 +104,7 @@ public class TXTFileReportDBWriter {
 	}
 
 	public String getFormattedTextSuggestions(ArrayList<Suggestion> suggestionList) {
-		String text = "\nSuggestion List: \n";
+		String text = "\nSuggestion List: \n\n";
 		if (suggestionList.size() == 0) {
 			text += "\nNo suggestion found";
 		}

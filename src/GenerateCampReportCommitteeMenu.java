@@ -12,7 +12,7 @@ public class GenerateCampReportCommitteeMenu extends IMenu<CampCommittee> {
 		ConsoleReaderString crs = new ConsoleReaderString();
 		TXTFileReportDBWriter databaseWriter = new TXTFileReportDBWriter();
 		for (String field: filterField) {
-			System.out.printf("Do you want to include camp %s in the report? (y/n)\n", field);
+			System.out.printf("Do you want to include camp %s in the report? (y/n): ", field);
 			try {
 				String choice = crs.readFromConsole();
 				if (choice.equals("y")) {
