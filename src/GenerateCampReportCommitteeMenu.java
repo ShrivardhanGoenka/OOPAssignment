@@ -8,8 +8,6 @@ public class GenerateCampReportCommitteeMenu extends IMenu<CampCommittee> {
 		ArrayList<String> filterField = new ArrayList<String>();
 		filterField.add("Attendee");
 		filterField.add("Committee");
-		filterField.add("Enquiry");
-		filterField.add("Suggestion");
 		HashMap<String, Boolean> filter = new HashMap<>();
 		ConsoleReaderString crs = new ConsoleReaderString();
 		TXTFileReportDBWriter databaseWriter = new TXTFileReportDBWriter();

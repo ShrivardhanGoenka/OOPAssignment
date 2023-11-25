@@ -268,7 +268,10 @@ public class Camp extends CampInformation {
     }
     @Override
     public void setFacultyOpenTo(String facultyOpenTo) throws CampException{
-        if(facultyOpenTo.equals("*")) super.setFacultyOpenTo(facultyOpenTo);
+        if(facultyOpenTo.equals("*")) {
+		super.setFacultyOpenTo(facultyOpenTo);
+		return;
+	}
         for(String attendee: attendees){
             User user = RegistryFactory.studentRegistry.getEntry(attendee);
             if(!user.getFaculty().equals(facultyOpenTo)){

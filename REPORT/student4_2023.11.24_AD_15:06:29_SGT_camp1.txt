@@ -1,0 +1,69 @@
+Camp Name: Learn how to code
+Camp ID: 1
+Camp Description: Learn how to code in a fast paced world
+Camp Dates: 01/04/2024,02/04/2024
+Camp Location: Room 5, SCSE
+Camp Registration Deadline: 08/11/2024
+Camp Total Slots: 10
+Camp Committee Slots: 5
+Camp Staff ID: staff1
+Camp Visibility: true
+Camp Faculty Opens to: SCSE
+===================================================
+
+Student List:
+student5
+===================================================
+
+Camp Committee List:
+student4, Points = 14
+===================================================
+
+Enquiry List: 
+Enquiry: What programming language?
+Submitted by: student5
+Submitted on: 24/11/2023
+Reply: CUDA
+Replied by: student4 on: 24/11/2023
+Last Updated on: 24/11/2023
+---------------------
+
+===================================================
+
+Suggestion List: 
+Suggestion: Chagne the name
+Submitted by: student4
+Submitted on: Fri Nov 24 15:04:24 SGT 2023
+Status: Pending
+Last Updated on: 24/11/2023
+---------------------
+Suggestion: Change the location to LT2
+Submitted by: student4
+Submitted on: Fri Nov 24 15:04:28 SGT 2023
+Status: Pending
+Last Updated on: 24/11/2023
+---------------------
+Suggestion: We should increase the total slots of this camp 
+Submitted by: student1
+Submitted on: Mon Nov 20 00:00:00 SGT 2023
+Reply: We cannot accommodate more!
+Replied by: staff1 on: Mon Nov 20 00:00:00 SGT 2023
+Approval Status: Rejected
+Last Updated on: 20/11/2023
+---------------------
+Suggestion: We should market this camp more
+Submitted by: student1
+Submitted on: Mon Nov 20 00:00:00 SGT 2023
+Reply: Good idea. Get on this ASAP. 
+Replied by: staff1 on: Tue Nov 21 00:00:00 SGT 2023
+Approval Status: Approved
+Last Updated on: 20/11/2023
+---------------------
+Suggestion: change the desceription
+Submitted by: student4
+Submitted on: Fri Nov 24 15:04:33 SGT 2023
+Status: Pending
+Last Updated on: 24/11/2023
+---------------------
+
+===================================================
