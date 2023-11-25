@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * The {@code MenuFactory} class provides static methods to generate menus for different user based on roles such as students, committee members, staff, and admin.
+ */
 public class MenuFactory {
+    /**
+     * Returns list of menus specific to students.
+     *
+     * @return {@code ArrayList<IMenu>}
+     */
 	public static ArrayList<IMenu> getStudentMenu() {
 		ArrayList<IMenu> userMenus = getUserMenu();
 		ArrayList<IMenu> studentSpecificMenus = new ArrayList<IMenu>(
@@ -21,6 +28,11 @@ public class MenuFactory {
 		return userMenus;
 	};
 
+    /**
+     * Returns list of menus specific to camp committee.
+     *
+     * @return {@code ArrayList<IMenu>}
+     */
 	public static ArrayList<IMenu> getCommitteeMenu() {
 		ArrayList<IMenu> userMenus = getUserMenu();
 		ArrayList<IMenu> committeeSpecificMenus = new ArrayList<IMenu>(
@@ -47,6 +59,12 @@ public class MenuFactory {
 		userMenus.addAll(committeeSpecificMenus);
 		return userMenus;
 	};
+
+    /**
+     * Returns list of menus specific to staff.
+     *
+     * @return {@code ArrayList<IMenu>}
+     */
 	public static ArrayList<IMenu> getStaffMenu(){
 		ArrayList<IMenu> userMenus = getUserMenu();
 		ArrayList<IMenu> staffSpecificMenus = new ArrayList<IMenu>(
@@ -67,6 +85,11 @@ public class MenuFactory {
 		return userMenus;
 	}
 
+    /**
+     * Returns list of menus specific to admin.
+     *
+     * @return {@code ArrayList<IMenu>}
+     */
 	public static ArrayList<IMenu> getAdminMenu(){
 		ArrayList<IMenu> userMenus = getUserMenu();
 		ArrayList<IMenu> adminSpecificMenu = new ArrayList<IMenu>(
@@ -81,6 +104,11 @@ public class MenuFactory {
 		return userMenus;
 	}
 
+    /**
+     * Returns list of menus shared across all user.
+     *
+     * @return {@code ArrayList<IMenu>}
+     */
 	public static ArrayList<IMenu> getUserMenu() {
 		ArrayList<IMenu> userProfileMenus = new ArrayList<IMenu>(
 			Arrays.asList(

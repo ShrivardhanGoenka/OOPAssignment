@@ -18,7 +18,6 @@ public class ChangePasswordMenu extends IMenu<User> {
 			System.out.print(e.getMessage());
 		}
 	}
-
 	/** 
 	 * @return the menu description
 	 */

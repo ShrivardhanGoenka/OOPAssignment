@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The {@link CreateCampMenuclass} provides the execution logics of the menu for the staff to create a new camp.
+ * The {@code CreateCampMenu} class provides the execution logics of the menu for the staff to create a new camp.
  */
 public class CreateCampMenu extends IMenu<Staff> {
 
@@ -13,7 +13,6 @@ public class CreateCampMenu extends IMenu<Staff> {
     public String getMenuDescription() {
         return "Create Camp";
     }
-
 
     /**
     * Executes the menu logics for making an enquiry to the camp committee.

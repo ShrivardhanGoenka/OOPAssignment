@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-//Complete
 /**
- * The ViewMySubmittedSuggestionsMenu class provides the execution logics of the menu for viewing the submitted suggestion to the staff.
+ * The {@code ViewMySubmittedSuggestionsMenu} class provides the execution logics of the menu for viewing the submitted suggestion to the staff.
  */
 public class ViewMySubmittedSuggestionsMenu extends IMenu<CampCommittee> {
 

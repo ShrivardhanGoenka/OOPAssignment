@@ -12,6 +12,8 @@ public abstract class IMenu<T extends User>{
 	/**
 	 * Runs the menu.
 	 * This includes displaying the menu specific instruction message, handling user input, and execute the menu logic.
+	 * @param userObject 				The user that runs the menu
+	 * @throws CampException 			If the camp cannot be modified based on user's input
 	 */
 	public abstract void runMenu(T userObject) throws CampException;
 }

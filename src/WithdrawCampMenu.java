@@ -1,5 +1,3 @@
-//javadoc
-
 import java.util.ArrayList;
 
 /**

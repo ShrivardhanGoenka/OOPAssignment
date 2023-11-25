@@ -26,7 +26,6 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 			int choice = consoleReaderInteger.readFromConsole(1, 2);
 			if(choice == 1){
 				studentObject.registerCamp(chosen);
-				System.out.println("Registered successfully!");
 			}
 			else{
 				try {
@@ -50,6 +49,9 @@ public class RegisterCampStudentMenu extends IMenu<Student> {
 		}
 	}
 
+	/** 
+	 * @return the menu description
+	 */
 	public String getMenuDescription() {
 		return "Register for a Camp";
 	}

@@ -1,4 +1,3 @@
-//complete
 /**
  * The UserLogoutMenu class provides the execution logics of the logging out menu.
  */

@@ -1,4 +1,3 @@
-// javadoc
 /**
  * The {@code User} class represents a user in the system and implements the {@code UserActions} interface.
  * It provides methods to manage user actions such as changing passwords, logging in, controling user login, retreiving user information, and logging out.

@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 
 public class ViewAllEnquiriesStaffMenu extends IMenu<Staff> {
-    /** NEED TO REWRITE THE JAVADOC
-     * NEED TO REWRITE THE JAVADOC
-     * NEED TO REWRITE THE JAVADOC
-     * Executes the menu logics for viewing all enquiries submitted by attendees to the camp that the committee oversees.
+    /**
+     * Executes the menu logics for viewing all enquiries submitted by attendees to the staff's camp.
      * The user will be able to sort the list of enquiries based on user input attribute of enquiry chosen.
      * @param staffObject 		The camp committee that runs the menu.
      */

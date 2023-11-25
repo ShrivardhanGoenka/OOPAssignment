@@ -1,5 +1,6 @@
 /**
- * This class provides a method to print all camp details (name, camp ID, description, location, etc.) to the user.
+ * The {@code CustomPrinterCamp} class provides a method to print all camp details (name, camp ID, description, location, etc.) to the user.
+ * It extends the {@code CustomPrinter} class with generic type {@code Camp}
  */
 public class CustomPrinterCamp extends CustomPrinter<Camp> {
 

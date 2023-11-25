@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 
+/**
+ * The {@code ReplyToEnquiryStaffMenu} class provides the execution logics of the staff's menu for replying to student's enquiries.
+ */
 public class ReplyToEnquiryStaffMenu extends IMenu<Staff>{
+	/**
+	 * Executes the menu logics for replying to enquiries.
+	 * The logics are as follows:
+	 * 1. The unreplied enquiries submitted by attendee's will be shown.
+	 * 2. The program will prompt the staff to choose the enquiry to reply to.
+	 * 3. The program will prompt the staff to enter the reply message.
+     * @param staffObject                   The staff that runs the menu
+	 */
     public void runMenu(Staff staffObject) {
         System.out.print("----------<List of Unprocessed Enquiries>-----------\n");
         int indexIterator=0;
@@ -26,6 +37,9 @@ public class ReplyToEnquiryStaffMenu extends IMenu<Staff>{
             System.out.println(e.getMessage());
         }
     }
+	/** 
+	 * @return the menu description
+	 */
     public String getMenuDescription() {
         return "Make a reply to attendees' enquiries";
     }

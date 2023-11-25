@@ -4,6 +4,13 @@ import java.util.ArrayList;
  * The {@code Driver} class provides the method to control the account menu, and the UI of each menu.
  */
 public class Driver {
+    /**
+     * Controls the menu flows of the user's account, and Handles the user's input from console.
+     * @param <T> 		A generic type of object extended from User
+     * @param user 		The user object of type {@code T} that runs the menu
+     * @param allMenus 		The menus available to this user account based on user's role
+     * @throws Exception 	If the user's input is invalid
+     */
     public static <T extends User> void accountMenu(T user, ArrayList<IMenu> allMenus) throws Exception{
         if(allMenus == null) return;
         int choice = 0;

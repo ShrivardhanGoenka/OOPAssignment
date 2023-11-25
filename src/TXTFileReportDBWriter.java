@@ -7,8 +7,18 @@ import java.util.Collections;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * The {@code TXTFileReportDBWriter} class is for writing and formatting camp reports to text files.
+ * It includes methods for formatting camp details, attendee lists, committee lists, enquiry lists, and suggestion lists.
+ */
 public class TXTFileReportDBWriter {
+    	/**
+	* Writes a formatted camp report to a text file based on specified filters.
+	*
+	* @param camp              The camp to generate the report
+	* @param filter            {@code HashMap} containing filters indicating to include or not include each attributes in the report
+	* @param userID            The userID of camp commmittee or staff generating the report.
+	*/
 	public void writeToDatabase(Camp camp, HashMap<String, Boolean> filter, String userID) {
 		String formattedText = getFormattedTextCampDetails(camp);
 		ArrayList<Enquiry> enquiryList = new ArrayList<Enquiry> (camp.getCampEnquiries().values());
@@ -24,17 +34,21 @@ public class TXTFileReportDBWriter {
 		if (filter.containsKey("Suggestion"))
 			formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
 
-			// change this path
 		String filename = "REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt";
 		System.out.printf("Report printed to %s\n", filename);
-		    try(PrintWriter writer = new PrintWriter(filename)) {
+		try(PrintWriter writer = new PrintWriter(filename)) {
 			writer.write(formattedText);
-		    } catch(Exception e) {
-			e.printStackTrace();
-		    }
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-
-	public String getFormattedTextCampDetails(Camp camp) { // refactored later this is copied from CustomPrinterCamp
+    	/**
+     	* Gets the formatted text for camp details.
+     	*
+     	* @param camp                      The camp for which the details are formatted
+     	* @return a formatted string containing camp details
+     	*/
+	public String getFormattedTextCampDetails(Camp camp) {
 		String text = "Camp Name: " + camp.getCampName();
 		text += "\nCamp ID: " + camp.getCampID();
 		text += "\nCamp Description: " + camp.getDescription();
@@ -49,7 +63,12 @@ public class TXTFileReportDBWriter {
 		text += "\n===================================================\n";
 		return text;
 	}
-
+	/**
+	* Gets the formatted text for the attendee list.
+	*
+	* @param studentList                   The list of students attending the camp
+	* @return A formatted string containing the attendee list
+	*/
 	public String getFormattedTextAttendee(ArrayList<String> studentList) {
 		String text = "\nStudent List:";
 		if (studentList.size() == 0) {
@@ -65,6 +84,12 @@ public class TXTFileReportDBWriter {
 		return text;
 	}
 
+	/**
+	* Gets the formatted text for the camp committee list.
+	*
+	* @param committeeList                  The list of committee members associated with the camp
+	* @return  A formatted string containing the committee list
+	*/
 	public String getFormattedTextCommittee(ArrayList<String> committeeList) {
 		String text = "\nCamp Committee List:";
 		if (committeeList.size() == 0) {
@@ -80,6 +105,12 @@ public class TXTFileReportDBWriter {
 		return text;
 	}
 
+	/**
+	* Gets the formatted text for the enquiry list.
+	*
+	* @param enquiryList                   The list of enquiries associated with the camp
+	* @return a formatted string containing the enquiry list
+	*/
 	public String getFormattedTextEnquiries(ArrayList<Enquiry> enquiryList) {
 		String text = "\nEnquiry List: \n\n";
 		if (enquiryList.size() == 0) {
@@ -103,6 +134,12 @@ public class TXTFileReportDBWriter {
 		return text;
 	}
 
+	/**
+	* Gets the formatted text for the suggestion list.
+	*
+	* @param suggestionList                The list of suggestions associated with the camp
+	* @return A formatted string containing the suggestion list
+	*/
 	public String getFormattedTextSuggestions(ArrayList<Suggestion> suggestionList) {
 		String text = "\nSuggestion List: \n\n";
 		if (suggestionList.size() == 0) {

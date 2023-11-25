@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Date;
 /**
- * The {@code CampInformation stores the necessary attributes for the camp in this camp management system, such as ID, name, dates, registration deadline, locaiton, etc.
+ * The {@code CampInformation} stores the necessary attributes for the camp in this camp management system, such as ID, name, dates, registration deadline, locaiton, etc.
  * It realizes the visibility class to provide a method to hide or unhide the camp to the student.
  * The visibility is meant to be controlled by the staff.
  */
@@ -113,7 +113,7 @@ public abstract class CampInformation implements Visibility {
     /** 
      * Returns the total maximum slots of committees and attendees for this camp
      *
-     * @returns {@code int} of total slots.
+     * @return {@code int} of total slots.
      */
     public int getTotalSlots() {
         return totalSlots;
@@ -137,7 +137,7 @@ public abstract class CampInformation implements Visibility {
 
     /**
      * Returns the ID of staff that creates this camp.
-     * @returns {@code String} of staff ID.
+     * @return {@code String} of staff ID.
      */
     public String getStaffID() {
         return staffID;
@@ -145,6 +145,8 @@ public abstract class CampInformation implements Visibility {
 
     /**
      * Hides the camp from student.
+     *
+     * @throws CampException If the camp is already hidden
      */
     public void hide() throws CampException {
         if(!visibility) throw new CampException("Camp is already hidden");
@@ -152,6 +154,7 @@ public abstract class CampInformation implements Visibility {
     }
     /**
      * Unhides the camp to student.
+     * @throws CampException If the camp is already visible
      */
     public void show() throws CampException {
         if(visibility) throw new CampException("Camp is already visible");
@@ -161,7 +164,7 @@ public abstract class CampInformation implements Visibility {
     /**
      * Returns whether the camp is visible to student.
      *
-     * @return {@code boolean} indicating whether the camp is visible to student.
+     * @return A {@code boolean} indicating whether the camp is visible to student.
      */
     public boolean isVisible() {
         return visibility;
@@ -170,7 +173,7 @@ public abstract class CampInformation implements Visibility {
     /**
      * Returns whether the camp is visible to student from a specific faculty.
      * @param faculty 			The faculty to check. "*" indicates that the camp is visible to all faculties.
-     * @return {@code boolean} indicating whether the camp is visible to the student from the input faculty.
+     * @return A {@code boolean} indicating whether the camp is visible to the student from the input faculty.
      */
     public boolean isVisible(String faculty){
         if(facultyOpenTo.equals("*")) return true;
@@ -212,6 +215,7 @@ public abstract class CampInformation implements Visibility {
      * This method is to be performed by staff.
      *
      * @param facultyOpenTo 	The new allowed faculty from which student can register and attend the camp.
+     * @throws CampException 	If the faculty that the camp opens to cannot be modified.
      */
     public void setFacultyOpenTo(String facultyOpenTo) throws CampException{
         if(this.facultyOpenTo.equals(facultyOpenTo)) throw new CampException("Camp is already open to " + facultyOpenTo);
@@ -220,20 +224,29 @@ public abstract class CampInformation implements Visibility {
 
     /**
      * Changes the location details of the camp
-     * @param 			The new location
+     * @param location 		The new location
      */
     public void setLocation(String location){
         this.location = location;
     }
 
-    //the below 2 functions are abstract as I need to call the camp constraints object to check if changing the slot is allowed or not.
+    /**
+     * The abstract method to set the new attendees slot of the camp.
+     * @param newSlots 			    The number of total slot to change to
+     * @throws CampException                If the change is unsuccesful.
+     */
     public abstract void setTotalSlots(int newSlots) throws CampException;
 
+    /**
+     * The abstract method to set the new camp committee slot of the camp.
+     * @param newSlots 			    The number of slots reserved for camp committee to change to
+     * @throws CampException                If the change is unsuccesful.
+     */
     public abstract void setCampCommitteeSlots(int newSlots) throws CampException;
 
     /**
      * Changes the description of the camp.
-     * @param 			The description text to change to.
+     * @param description		    The description text to change to.
      */
     public void setDescription(String description){
         this.description = description;

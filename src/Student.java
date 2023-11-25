@@ -27,6 +27,7 @@ public class Student extends User  {
      * Constructs a Student with empty enquiries, camps registered, and unavailable dates.
      *
      * @param userID 		The id of the student.
+     * @param password 		The user's password.
      * @param email 		The email address of the student.
      * @param faculty 		The faculty the student is from.
      * @param isLocked 		true if the user is locked, otherwise false.
@@ -42,6 +43,7 @@ public class Student extends User  {
      * Constructs a Student with enquiries, registered, and unavailable dates from the exisiting database.
      *
      * @param userID 		The id of the student.
+     * @param password 		The user's password.
      * @param email 		The email address of the student.
      * @param faculty 		The faculty the student is from.
      * @param isLocked 		true if the user is locked, otherwise false.
@@ -120,7 +122,7 @@ public class Student extends User  {
 
     /**
      * Retrieves the list of unreplied enquiries this student created.
-     * @return 			{@code ArrayList<Enquiry> of enquiries from this student that has not been replied.
+     * @return 			{@code ArrayList<Enquiry>} of enquiries from this student that has not been replied.
      */
     public ArrayList<Enquiry> getUnprocessedEnquiries(){
         ArrayList<Enquiry> enquiries = new ArrayList<>();

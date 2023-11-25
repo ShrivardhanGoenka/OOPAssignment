@@ -30,7 +30,7 @@ public class CreateUserMenu extends IMenu<Admin> {
 					break;
 			}
 	    } catch (InputException e) {
-		System.out.println("Invalid choice");
+            System.out.println("Invalid choice");
 	    }
 	}
 

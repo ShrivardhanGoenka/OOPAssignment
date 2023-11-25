@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /** 
- * {@CampConstraints} provides the rules and constraints checking for camp registration.
+ * The {@code CampConstraints} provides the rules and constraints checking for camp registration.
  * The constraints include avaiable slot, registration deadline, and unavailable dates.
  */
 public class CampConstraints {
@@ -56,7 +56,6 @@ public class CampConstraints {
         this.campDates = campDates;
     }
     
-    // Methods
     /**
      * Checks the eligibility of a specified attendee to register for the camp.
      *
@@ -166,6 +165,4 @@ public class CampConstraints {
         if(!output.isEmpty()) output = output.substring(0, output.length()-1);
         return output;
     }
-
-
 }

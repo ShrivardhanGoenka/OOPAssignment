@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-//Complete
 /**
  * The {@code ViewSuggestionMenu} class provides the execution logics of the menu for viewing all suggestions submitted.
  */

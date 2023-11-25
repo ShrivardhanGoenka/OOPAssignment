@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 /**
  * The UnlockUserMenu class provides the execution logics of the admin menu for unlock the user's account.
  */

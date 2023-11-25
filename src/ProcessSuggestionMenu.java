@@ -1,11 +1,28 @@
 import java.util.ArrayList;
+
+/**
+ * The {@code ProcessSuggestionMenu} class provides the execution logics of the staff's menu for processing the suggestion.
+ */
 public class ProcessSuggestionMenu extends IMenu<Staff>{
 
+	/**
+	 * @return the menu description.
+	 */
     @Override
     public String getMenuDescription() {
         return "Process Suggestions";
     }
 
+	/**
+	 * Executes the menu logics for processing the committee's submitted suggestion
+	 * The logics are as follows:
+	 * 1. The program prompt the staff to choose the suggestion to process (if any).
+	 * 2. If the user enter an invalid choice, the menu will be terminated.
+	 * 3. If the staff can choose to accept or reject the suggestion.
+	 * 4. The staff enter the reply message.
+	 * 
+	 * @throws CampException 		If the suggestion processing cannot be made or the input choice is invalid
+	 */
     @Override
     public void runMenu(Staff userObject) throws CampException {
         ArrayList<Suggestion> suggestions = userObject.getUnprocessedSuggestions();

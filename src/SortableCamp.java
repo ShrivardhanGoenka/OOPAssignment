@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Comparator;
-//Complete
 //
 /**
  * The {@code SortableCamp} class extends the abstract class {@code Sortable} and provides sorting attributes for objects of type {@link Camp}.

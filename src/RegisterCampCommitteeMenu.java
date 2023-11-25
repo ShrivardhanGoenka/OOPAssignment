@@ -25,6 +25,10 @@ public class RegisterCampCommitteeMenu extends IMenu<Student> {
             System.out.println(e.getMessage());
         }
     }
+
+	/** 
+	 * @return the menu description
+	 */
     public String getMenuDescription() {
         return "Register for a Camp";
     }

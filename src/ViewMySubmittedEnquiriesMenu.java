@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-//Complete
 /**
  * The {@code ViewMySubmittedEnquiriesMenu} class provides the execution logics of the menu for viewing the submitted enquiries.
  */

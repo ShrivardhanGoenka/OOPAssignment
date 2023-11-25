@@ -1,7 +1,8 @@
 import java.util.ArrayList;
-//Complete
+/**
+ * The {@code ViewMyRegisteredCampMenu} class provides the execution logics of the menu for viewing all the camp the student has registered as an attendee
+ */
 public class ViewMyRegisteredCampMenu extends IMenu<Student> {
-
 	/**
 	 * Executes the menu logics for viewing camp that a specific student has registered to.
 	 * The user will be able to sort the list of camp based on user input attribute of camp chosen.

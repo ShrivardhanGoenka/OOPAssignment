@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 
 /**
- * The RaiseEnquiryMenu class provides the execution logics of the menu for submitting an enquiry to a camp committee.
+ * The {@code RaiseEnquiryMenu} class provides the execution logics of the menu for submitting an enquiry to a camp committee.
  */
 public class RaiseEnquiryMenu extends IMenu<Student> {
 	/**

@@ -1,8 +1,17 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * The {@code SortableSuggestionCommittee} class extends the {@code Sortable} class and provides sortable attributes
+ * specific to committee-related sorting attributes for {@code Suggestion} objects.
+ */
 public class SortableSuggestionCommittee extends Sortable<Suggestion> {
 
+    /**
+     * Provides committee-specific sortable attributes for {@code Suggestion} objects.
+     *
+     * @return {@code ArrayList} of {@code ComparableAttribute<Suggestion>} representing sortable attributes for committee-specific sorting
+     */
     @Override
     public ArrayList<ComparableAttribute<Suggestion>> getSortableAttributes() {
         ArrayList<ComparableAttribute<Suggestion>> sortableAttributes = new ArrayList<ComparableAttribute<Suggestion>>();

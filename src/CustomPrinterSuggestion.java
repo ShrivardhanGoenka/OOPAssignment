@@ -1,5 +1,6 @@
 /**
- * This class provides a method to print suggestion details (suggestion message, submission information, reply information, status, date last updated) to the user.
+ * The {@code CustomPrinterSuggestion} class provides a method to print suggestion details (suggestion message, submission information, reply information, status, date last updated) to the user.
+ * It extends the {@code CustomPrinter} class with generic type {@code Suggestion}
  */
 public class CustomPrinterSuggestion extends CustomPrinter<Suggestion> {
     /**

@@ -9,6 +9,7 @@ public class EditSuggestionMenu extends IMenu<CampCommittee> {
 	 * The logics are as follows:
 	 * 1. The program prompt the user to choose the suggestion to edit.
 	 * 2. The user enter the new suggestion message.
+     * @param committeeObject           The camp committee that runs the menu
 	 */
 	public void runMenu(CampCommittee committeeObject) {
 		System.out.println("Choose the suggestion you want to edit: ");

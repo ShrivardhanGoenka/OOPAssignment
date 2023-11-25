@@ -1,0 +1,39 @@
+Camp Name: Innovation Festival
+Camp ID: 3
+Camp Description: Students will learn important innovation skills
+Camp Dates: 01/02/2024,02/02/2024,03/02/2024
+Camp Location: Hardware Lab 2, SCSE
+Camp Registration Deadline: 31/12/2023
+Camp Total Slots: 10
+Camp Committee Slots: 2
+Camp Staff ID: staff1
+Camp Visibility: true
+Camp Faculty Opens to: All
+===================================================
+
+Student List:
+student1
+student5
+student6
+student7
+===================================================
+
+Camp Committee List:
+student3, Points = 0
+===================================================
+
+Enquiry List: 
+
+Enquiry: Can the dates be changed for this event? 
+Submitted by: student1
+Submitted on: 24/11/2023
+Last Updated on: 24/11/2023
+---------------------
+
+===================================================
+
+Suggestion List: 
+
+
+No suggestion found
+===================================================

@@ -17,6 +17,7 @@ public class Staff extends User {
      * Constructs a Staff with empty camp.
      *
      * @param userID 		The id of the student.
+     * @param password 		The user's password
      * @param email 		The email address of the student.
      * @param faculty 		The faculty the student is from.
      * @param isLocked 		true if the user is locked, otherwise false.
@@ -29,6 +30,7 @@ public class Staff extends User {
      * Constructs a Staff with exisiting created camp from the database.
      *
      * @param userID 		The id of the student.
+     * @param password 		The user's password
      * @param email 		The email address of the student.
      * @param faculty 		The faculty the student is from.
      * @param isLocked 		true if the user is locked, otherwise false.
@@ -62,13 +64,6 @@ public class Staff extends User {
             campList = campList.substring(0, campList.length()-1);
         output += campList;
         return output;
-    }
-
-    /**
-     * Gets the filename in the database to save this staff's information to.
-     */
-    public String getFileName(){
-        return getUserID() + ".txt";
     }
 
     /**
@@ -139,6 +134,11 @@ public class Staff extends User {
         }
         else suggestion.reject();
     }
+
+    /**
+     * Gets the aggregated ArrayList of Enquiry submitted to all camp this staff has created
+     * @return {@code ArrayList<Enquiry>}
+     */
     public ArrayList<Enquiry> getEnquiries(){
         ArrayList<Enquiry> enquiries = new ArrayList<>();
         for(Map.Entry<Integer,Camp> camp : createdCamps.entrySet()){
@@ -146,6 +146,10 @@ public class Staff extends User {
         }
         return enquiries;
     }
+    /**
+     * Gets the aggregated ArrayList of unprocessed Enquiry submitted to all camp this staff has created
+     * @return {@code ArrayList<Enquiry>}
+     */
     public ArrayList<Enquiry> getUnprocessedEnquiries(){
         ArrayList<Enquiry> enquiries = getEnquiries();
         ArrayList<Enquiry> unprocessedEnquiries = new ArrayList<>();
@@ -156,10 +160,23 @@ public class Staff extends User {
         }
         return unprocessedEnquiries;
     }
+    /**
+     * Make a reply to student's enquiry
+     * @param enquiryID             The ID of enquiry to reply to
+     * @param reply                 The reply message
+     */
     public void processEnquiry(int enquiryID, String reply){
         Enquiry enquiry = RegistryFactory.enquiryRegistry.getEntry(enquiryID);
         enquiry.reply(reply, this.getUserID(), new Date());
     }
+
+    /**
+     * Deletes the camp and Remove the camp from the registry
+     * The camp that has student registered cannot be deleted and the {@code CampException} will be shown.
+     *
+     * @param camp                  The camp object to be deleted
+     * @throws CampException If the camp cannot be deleted
+     */
     public void deleteCamp(Camp camp) throws CampException{
         if(!createdCamps.containsKey(camp.getCampID())) throw new CampException("Camp does not exist");
         camp.deleteCamp();

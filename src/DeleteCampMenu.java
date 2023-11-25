@@ -1,12 +1,24 @@
 import java.util.ArrayList;
 
+/**
+ * The {@code DeleteCampMenu} class provides the execution logics of the staff's menu for deleting the camp.
+ */
 public class DeleteCampMenu extends IMenu<Staff>{
 
+	/** 
+	 * @return the menu description
+	 */
     @Override
     public String getMenuDescription() {
         return "Delete Camp";
     }
 
+	/**
+	 * Executes the menu logics for deleing the camp.
+	 * The logics are as follows:
+	 * 1. The program prompt the user to choose the camp to delete.
+	 * 2. The program shows the message to indicate whether the deletion is successful.
+	 */
     @Override
     public void runMenu(Staff userObject) throws CampException {
         ArrayList<Camp> camps = userObject.createdCamps();

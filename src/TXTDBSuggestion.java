@@ -3,29 +3,60 @@ import java.io.StringReader;
 import java.text.ParseException;
 import java.util.Date;
 
+/**
+ * The {@code TXTDBSuggestion} class extends the {@code TXTDB} class and is specifically designed for handling text-based
+ * database operations for {@code Suggestion} objects.
+ */
 public class TXTDBSuggestion extends TXTDB<Suggestion,Integer> {
+    /**
+     * Constructs an empty {@code TXTDBSuggestion} object.
+     */
     public TXTDBSuggestion() {
         super();
     }
+    /**
+     * Constructs a {@code TXTDBSuggestion} object with an exsiting {@code Suggestion} object from the database.
+     *
+     * @param suggestion 			The initial {@code Suggestion} object
+     */
     public TXTDBSuggestion(Suggestion suggestion) {
         super(suggestion);
     }
 
+    /**
+     * Gets the file name associated with the the suggestionID
+     *
+     * @return {@code String} representing the file name
+     */
     @Override
     public String getFileName() {
         return "suggestion" + obj.getID() + ".txt";
     }
 
+    /**
+     * Gets the formatted suggestion data for writing to the database file.
+     *
+     * @return {@code String} representing the formatted data
+     * @throws DBException              If an error occurs during the data formatting process
+     */
     @Override
     public String getWriteData() throws DBException {
-        TXTDBEnquiry enquiryDB = new TXTDBEnquiry(obj);
-        String output = enquiryDB.getWriteData();
+        TXTDBSuggestion suggestionDB = new TXTDBSuggestion(obj);
+        String output = suggestionDB.getWriteData();
         if(obj.isProcessed()){
             output += obj.getApprovalStatus() + "\n";
         }
         return output;
     }
 
+    /**
+     * Converts data from a text representation to {@code Suggestion} object.
+     *
+     * @param id                        The suggestionID 
+     * @param data                      The string of the suggestion information 
+     * @return {@code Suggestion} object representing the converted data
+     * @throws DBException              If an error occurs during the data conversion process
+     */
     @Override
     public Suggestion getObjectFromData(Integer id, String data) throws DBException {
         try{
@@ -58,6 +89,11 @@ public class TXTDBSuggestion extends TXTDB<Suggestion,Integer> {
             throw new DBException("Error in reading suggestion data for suggestion " + id);
         }
     }
+    /**
+     * Retrieves the formatted unique identifier of the suggestion
+     * @param id                The unique identifier to format
+     * @return {@code String}
+     */
     @Override
     public Integer getID(String id){
         return Integer.parseInt(id.substring(10));

@@ -6,19 +6,42 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * The {@code TXTDBCampCommittee} class extends the {@code TXTDB} class and is specifically designed for handling text-based
+ * database operations for {@code CampCommittee} objects.
+ */
 public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
+    /**
+     * Constructs an empty {@code TXTDBCampCommittee} object.
+     */
     public TXTDBCampCommittee() {
         super();
     }
+    /**
+     * Constructs a {@code TXTDBCampCommittee} object with an exsiting {@code CampCommittee} object from the database.
+     *
+     * @param obj                   The initial {@code CampCommittee} object
+     */
     public TXTDBCampCommittee(CampCommittee obj) {
         super(obj);
     }
 
+    /**
+     * Gets the file name associated with the the camp committee's userID
+     *
+     * @return {@code String} representing the file name
+     */
     @Override
     public String getFileName() {
         return obj.getUserID() + ".txt";
     }
 
+    /**
+     * Gets the formatted data for writing to the database file by calling {@code TXTDBStudent}.
+     *
+     * @return {@code String} representing the formatted data
+     * @throws DBException              If an error occurs during the data formatting process
+     */
     @Override
     public String getWriteData() throws DBException {
         TXTDBStudent studentDB = new TXTDBStudent(obj);
@@ -33,6 +56,14 @@ public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
         return output;
     }
 
+    /**
+     * Converts data from a text representation to {@code CampCommittee} object.
+     *
+     * @param userID                    The ID of the user 
+     * @param data                      The text representation of the camp committee information 
+     * @return {@code CampCommittee} object representing the converted data
+     * @throws DBException              If an error occurs during the data conversion process
+     */
     @Override
     public CampCommittee getObjectFromData(String userID, String data) throws DBException {
         try{
@@ -75,6 +106,11 @@ public class TXTDBCampCommittee extends TXTDB<CampCommittee,String>{
         }
     }
 
+    /**
+     * Retrieves the unique identifier of the user
+     * @param id                The unique identifier to format
+     * @return {@code String}
+     */
     @Override
     public String getID(String id){
         return id;

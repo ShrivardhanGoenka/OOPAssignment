@@ -1,11 +1,11 @@
 import java.util.ArrayList;
-
 /**
- * The ChangePasswordAdminMenu class provides the execution logics of the admin menu for changing user's password.
+ * The {@code ChangePasswordAdminMenu} class provides the execution logics of the admin menu for changing user's password.
  */
 public class ChangePasswordAdminMenu extends IMenu<Admin> {
 	/**
 	 * Executes the menu logics for changing password of chosen user account.
+	 * @param adminObject 				The admin that runs the menu
 	 */
 	public void runMenu(Admin adminObject) {
 			System.out.println("Choose the user to change password");

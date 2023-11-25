@@ -16,12 +16,12 @@ public class EditCampMenu extends IMenu<Staff> {
 	/**
 	 * Executes the menu logics for changing the camp details.
 	 * The logics are as follows:
-	 * 1. The program prompt the user to choose the suggestion to delete.
+	 * 1. The program prompt the user to choose the camp to edit.
 	 * 2. If the user enter an invalid choice, the menu will be terminated.
 	 * 3. If the user enter a valid choice, the field to be modified will be shown.
 	 * 4. The user choose the field to modify.
 	 * 5. The user enter the new value for the chosen field.
-	 *
+	 * 
 	 * @throws CampException 		If the modification to the camp cannot be made.
 	 */
     @Override

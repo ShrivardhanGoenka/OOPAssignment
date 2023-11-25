@@ -1,5 +1,5 @@
 /**
- * UserActions provides an abstract for all required action for the User class
+ * The {@code UserActions} provides an abstract for all required action for the User class
  * This includes changing password, logging in, logging out, and getting each attribute.
  */
 public interface UserActions{
@@ -58,6 +58,8 @@ public interface UserActions{
 
     /***
      * Retrieves the password of the user.
+     *
+     * @return  				The password of the user
      */
     String getPassword();
 }

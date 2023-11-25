@@ -7,18 +7,42 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The {@code TXTDBCamp} class extends the {@code TXTDB} class and is specifically designed for handling text-based
+ * database operations for {@code Camp} objects.
+ */
 public class TXTDBCamp extends TXTDB<Camp,Integer>{
+    /**
+     * Constructs an empty {@code TXTDBCamp} object.
+     */
     public TXTDBCamp() {
         super();
     }
+    /**
+     * Constructs a {@code TXTDBCamp} object with an exsiting {@code Camp} object from the database.
+     *
+     * @param obj                   The initial {@code Camp} object
+     */
     public TXTDBCamp(Camp obj) {
         super(obj);
     }
+
+    /**
+     * Gets the file name associated with the the campID
+     *
+     * @return {@code String} representing the file name
+     */
     @Override
     public String getFileName() {
         return "camp" + obj.getCampID() + ".txt";
     }
 
+    /**
+     * Gets the formatted camp data for writing to the database file.
+     *
+     * @return {@code String} representing the formatted data
+     * @throws DBException              If an error occurs during the data formatting process
+     */
     @Override
     public String getWriteData() throws DBException {
         try {
@@ -44,6 +68,14 @@ public class TXTDBCamp extends TXTDB<Camp,Integer>{
         }
     }
 
+    /**
+     * Converts data from a text representation to {@code Camp} object.
+     *
+     * @param id                        The campID 
+     * @param data                      The string of the camp information 
+     * @return {@code Camp} object representing the converted data
+     * @throws DBException              If an error occurs during the data conversion process
+     */
     @Override
     public Camp getObjectFromData(Integer id,String data) throws DBException{
         Camp obj = null;
@@ -108,6 +140,11 @@ public class TXTDBCamp extends TXTDB<Camp,Integer>{
 
         return obj;
     }
+
+    /**
+     * Retrieves the unique identifier of the camp
+     * @return {@code String}
+     */
     @Override
     public Integer getID(String id){
         return Integer.parseInt(id.substring(4));

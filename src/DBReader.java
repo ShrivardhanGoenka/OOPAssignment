@@ -1,34 +1,19 @@
 import java.io.*;
 import java.util.ArrayList;
-
+/**
+ * The {@code DBReader} class provides the method to reads the information from the database (the text files in LOG folder) and adds the information from database to the Registry.
+ */
 public class DBReader {
+    /**
+     * The path of the database folder
+     */
     private static final String rootDirectory = "LOGS/";
-    public static void Initialise() throws IOException,DBException{
-        populatePrimaryKeys();
-        for(Enquiry enquiry:readEnquiry())
-            RegistryFactory.enquiryRegistry.addEntry(enquiry,enquiry.getID());
-        for(Suggestion suggestion:readSuggestion())
-            RegistryFactory.suggestionRegistry.addEntry(suggestion,suggestion.getID());
-        for(Camp camp:readCamp())
-            RegistryFactory.campRegistry.addEntry(camp,camp.getCampID());
-        for(Student student:readStudent())
-            RegistryFactory.studentRegistry.addEntry(student,student.getUserID());
-        for(Staff staff:readStaff())
-            RegistryFactory.staffRegistry.addEntry(staff,staff.getUserID());
-        for(CampCommittee committee:readCommittee())
-            RegistryFactory.committeeRegistry.addEntry(committee,committee.getUserID());
-        for(Admin admin:readAdmin())
-            RegistryFactory.adminRegistry.addEntry(admin,admin.getUserID());
-        System.out.println("Database loaded successfully!");
-    }
-    private static void populatePrimaryKeys() throws IOException,DBException{
-        BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
-        PrimaryKeyCounter.nextCampID = Integer.parseInt(reader.readLine());
-        PrimaryKeyCounter.nextEnquiryID = Integer.parseInt(reader.readLine());
-        PrimaryKeyCounter.nextSuggestionID = Integer.parseInt(reader.readLine());
-        reader.close();
-    }
-    public static void Initialise(String test) throws IOException, DBException {
+    /**
+     * Executes the database loading process
+     * @throws IOException If there is an error during reading the information from the database.
+     * @throws DBException If there is an error during adding information to the Registry.
+     */
+    public static void Initialise() throws IOException, DBException {
         populatePrimaryKeys();
         for(Object enquiry : readObjects("ENQUIRIES",new TXTDBEnquiry()))
             RegistryFactory.enquiryRegistry.addEntry((Enquiry) enquiry,((Enquiry) enquiry).getID());
@@ -45,7 +30,25 @@ public class DBReader {
         for(Object admin : readObjects("ADMIN",new TXTDBAdmin()))
             RegistryFactory.adminRegistry.addEntry((Admin) admin,((Admin) admin).getUserID());
     }
-
+    /**
+     * Reads the number of keys of Camp, Enquiry, and Suggestion from the database.
+     * And add the numbers to the {@code PrimaryKeyCounter}.
+     */
+    private static void populatePrimaryKeys() throws IOException,DBException{
+        BufferedReader reader = new BufferedReader(new FileReader("LOGS/nextValues.txt"));
+        PrimaryKeyCounter.nextCampID = Integer.parseInt(reader.readLine());
+        PrimaryKeyCounter.nextEnquiryID = Integer.parseInt(reader.readLine());
+        PrimaryKeyCounter.nextSuggestionID = Integer.parseInt(reader.readLine());
+        reader.close();
+    }
+    /**
+     * Reads the object of generic type {@code T} from the text database 
+     * @param dir           The directory that stores the object of type {@code T}
+     * @param obj           The object to read from database
+     * @throws IOException If there is an error during reading from database
+     * @throws DBException If there is an error during adding the information to the Registry
+     * @return {@code ArrayList} of object 
+     */
     private static <T extends TXTDB, W> ArrayList<W> readObjects(String dir, T obj) throws IOException, DBException{
         ArrayList<String> list = readDirectoryList(dir);
         ArrayList<W> objects = new ArrayList<W>();
@@ -62,6 +65,13 @@ public class DBReader {
         return objects;
     }
 
+    /**
+     * Reads the information of students from the database, Returns all student entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<Student>}
+     */
     private static ArrayList<Student> readStudent() throws IOException,DBException{
         ArrayList<String> studentList = readDirectoryList("STUDENT");
         ArrayList<Student> studentObjects = new ArrayList<Student>();
@@ -78,6 +88,13 @@ public class DBReader {
         }
         return studentObjects;
     }
+    /**
+     * Reads the information of staff from the database, Returns all staff entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<Staff>}
+     */
     private static ArrayList<Staff> readStaff() throws IOException,DBException{
         ArrayList<String> staffList = readDirectoryList("STAFF");
         ArrayList<Staff> staffObjects = new ArrayList<Staff>();
@@ -94,6 +111,13 @@ public class DBReader {
         }
         return staffObjects;
     }
+    /**
+     * Reads the information of camp from the database, Returns all camp entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<Camp>}
+     */
     private static ArrayList<Camp> readCamp() throws IOException,DBException{
         ArrayList<String> campList = readDirectoryList("CAMPS");
         ArrayList<Camp> campObjects = new ArrayList<Camp>();
@@ -110,6 +134,13 @@ public class DBReader {
         }
         return campObjects;
     }
+    /**
+     * Reads the information of enquiry from the database, Returns all enquiry entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<Enquiry>}
+     */
     private static ArrayList<Enquiry> readEnquiry() throws IOException,DBException{
         ArrayList<String> enquiryList = readDirectoryList("ENQUIRIES");
         ArrayList<Enquiry> enquiryObjects = new ArrayList<Enquiry>();
@@ -126,6 +157,13 @@ public class DBReader {
         }
         return enquiryObjects;
     }
+    /**
+     * Reads the information of suggesiton from the database, Returns all suggesiton entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<Suggestion>}
+     */
     private static ArrayList<Suggestion> readSuggestion() throws IOException,DBException{
         ArrayList<String> suggestionList = readDirectoryList("SUGGESTIONS");
         ArrayList<Suggestion> suggestionObjects = new ArrayList<Suggestion>();
@@ -142,6 +180,13 @@ public class DBReader {
         }
         return suggestionObjects;
     }
+    /**
+     * Reads the information of camp committee from the database, Returns all camp committee entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<CampCommittee>}
+     */
     private static ArrayList<CampCommittee> readCommittee() throws IOException,DBException{
         ArrayList<String> committeeList = readDirectoryList("COMMITTEE");
         ArrayList<CampCommittee> committeeObjects = new ArrayList<CampCommittee>();
@@ -158,6 +203,13 @@ public class DBReader {
         }
         return committeeObjects;
     }
+    /**
+     * Reads the information of admin from the database, Returns all admin entries in the database as an {@code ArrayList}
+     *
+     * @throws IOException If there is an error during reading the information from database.
+     * @throws DBException If there is an error during adding the information to the database.
+     * @return {@code ArrayList<Admin>}
+     */
     private static ArrayList<Admin> readAdmin() throws IOException, DBException{
         ArrayList<String> adminList = readDirectoryList("ADMIN");
         ArrayList<Admin> adminObjects = new ArrayList<Admin>();
@@ -175,6 +227,11 @@ public class DBReader {
         return adminObjects;
     }
 
+    /**
+     * Lists all file name in the directory and return the files name in {@code ArrayList}
+     * @throws IOException If there is an error during reading the directory or the directory does not exist.
+     * @return {@code ArrayList<String>} of file name 
+     */
     private static ArrayList<String> readDirectoryList(String dirname) throws IOException {
         String directoryPath = rootDirectory + dirname + "/";
         ArrayList<String> dir = new ArrayList<String>();

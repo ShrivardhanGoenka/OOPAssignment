@@ -1,7 +1,15 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * The {@code SortableEnquiryStudent} class provides student-specific sortable attributes for the object of type {@code Enquiry}
+ */
 public class SortableEnquiryStudent extends Sortable<Enquiry>{
+    /**
+     * Provides student-specific sortable attributes.
+     *
+     * @return {@code ArrayList} of {@code ComparableAttribute<Enquiry>} representing sortable attributes for Enquiry object
+     */
     public ArrayList<ComparableAttribute<Enquiry>> getSortableAttributes(){
         ArrayList<ComparableAttribute<Enquiry>> sortableAttributes = new ArrayList<ComparableAttribute<Enquiry>>();
         sortableAttributes.add(new ComparableAttribute<Enquiry>("Enquiry Content", Comparator.comparing(Enquiry::getStringValue)));

@@ -23,12 +23,13 @@ public class ConsoleReaderInteger implements IConsoleReader<Integer>{
             throw new InputException("Input must be an integer");
         }
     }
-
     /**
      * Reads a single input number from the console input with <b>a specified ranges (inclusive)</b> and converts the number to Integer type.
      *
+     * @param a 			The lower bound of number input to parse (inclusive)
+     * @param b 			The upper bound of number input to parse (inclusive)
      * @return The Integer of number read from the console.
-     * @throws InputException If there is an error parsing the Integer input or the number is not in specified range or the input is empty.
+     * @throws InputException 		If there is an error parsing the Integer input or the number is not in specified range or the input is empty.
      */
     public Integer readFromConsole(int a, int b) throws InputException {
         int input = readFromConsole();

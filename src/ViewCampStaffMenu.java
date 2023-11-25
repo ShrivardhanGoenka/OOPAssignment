@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-//Complete
 /**
  * The {@code ViewCampStaffMenu} class provides the execution logics of the menu for viewing all of the camp in the camp management system.
  */

@@ -1,6 +1,6 @@
-
 /**
- * This class provides a method to print enquiry details (enquiry message, submission detail, reply detail, date of last updated) to the user.
+ * The {@code CustomPrinterEnquiry} class provides a method to print enquiry details (enquiry message, submission detail, reply detail, date of last updated) to the user.
+ * It extends the {@code CustomPrinter} class with generic type {@code Enquiry}
  */
 public class CustomPrinterEnquiry extends CustomPrinter<Enquiry> {
 

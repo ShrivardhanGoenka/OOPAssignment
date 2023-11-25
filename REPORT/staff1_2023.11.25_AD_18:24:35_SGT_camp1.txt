@@ -1,0 +1,12 @@
+Camp Name: Learn how to code
+Camp ID: 1
+Camp Description: Learn how to code in a fast paced world
+Camp Dates: 01/04/2024,02/04/2024
+Camp Location: Room 5, SCSE
+Camp Registration Deadline: 08/11/2024
+Camp Total Slots: 10
+Camp Committee Slots: 5
+Camp Staff ID: staff1
+Camp Visibility: true
+Camp Faculty Opens to: SCSE
+===================================================

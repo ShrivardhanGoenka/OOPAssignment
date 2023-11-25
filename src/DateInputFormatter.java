@@ -2,7 +2,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 /**
  * The {@code DateInputFormatter} class provides a method to parse a comma-separated string
  * of dates list and converts into {@code ArrayList} of Date objects.
@@ -26,7 +25,6 @@ public class DateInputFormatter {
             Date date = dateFormat.parse(dateString.trim());
             dates.add(date);
         }
-
         return dates;
     }
 }

@@ -1,8 +1,15 @@
+/**
+ * The Main class to runs the camp management system
+ */
 public class Main {
 
+    /**
+     * Main function to drives the program
+     * @param args 	Input arguments
+     */
     public static void main(String[] args){
 		try{
-			DBReader.Initialise("");
+			DBReader.Initialise();
 		} catch (Exception e){
 			System.out.println("Fatal Error in reading Database. Please contact the administrator.");
 			System.out.println(e.getMessage());

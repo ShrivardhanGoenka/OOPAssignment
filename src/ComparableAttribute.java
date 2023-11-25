@@ -1,7 +1,6 @@
 import java.util.Comparator;
-
 /**
- * The {@code ComparableAttribute} class provides the comparator for specific type specified by the superclass, the name of the associated attribute to compare.
+ * The {@code ComparableAttribute} class provides the comparator for specific type specified by the subclass, the name of the associated attribute to compare.
  * This class provides the necessary method for sorting menu.
  *
  * @param <T> The type of attributes to compare.
@@ -16,7 +15,6 @@ public class ComparableAttribute<T>{
      * The comparator for attribute of type T.
      */
     Comparator<T> comparator;
-
 
     /**
      * Constructor from the specified attribute name and comparator.

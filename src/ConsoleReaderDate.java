@@ -7,7 +7,6 @@ import java.util.Date;
  * The {@code ConsoleReaderDate} realizes {@code IConsoleReader} interface with type Date
  */
 public class ConsoleReaderDate implements IConsoleReader<Date>{
-
     /**
      * Reads date String from the console input and converts the date to Date object.
      *

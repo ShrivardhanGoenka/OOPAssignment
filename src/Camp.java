@@ -4,11 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* The Camp class represents a camp with a specific constraints and information
+* The Camp class represents a camp with a specific information
+* The Camp compose of {@link CampConstraints} and references to attendee, camp committee, staff, enquiry, and suggestion.
+* The Camp class provide functionality for making changes to the camp, which includes submitting enquiries, suggestions, editing the camp details, and retrieving camp information.
 * It extends the {@link CampInformation} class.
-*
-* @see  	{@link CampInformation}
-* @see        	{@link CampConstrants}
 */
 public class Camp extends CampInformation {
 
@@ -16,7 +15,6 @@ public class Camp extends CampInformation {
     /** The constraints for this camp*/
     CampConstraints campConstraints;
 
-    // Constructor for new camp by staff
     /** List of registered attendees for this camp*/
     private ArrayList<String> attendees;
 
@@ -31,19 +29,20 @@ public class Camp extends CampInformation {
 
     // Constructors
     /** Constructs a new empty camp by staff
-     * @param campID 			The ID of the camp.
-     * @param campName 			The name of the camp.
-     * @param campDates  		The dates of the camp.
+     * @param campID 			    The ID of the camp.
+     * @param campName 			    The name of the camp.
+     * @param campDates  		    The dates of the camp.
      * @param registrationDeadline 	The deadline for registration.
-     * @param schoolOpenTo 		The schools in which students are allowed to attend the camp.
-     * @param location 			The location of the camp.
-     * @param totalSlots 		The total slots for the attendees of the camp.
+     * @param schoolOpenTo 		    The schools in which students are allowed to attend the camp.
+     * @param location 			    The location of the camp.
+     * @param totalSlots 		    The total slots for the attendees of the camp.
      * @param campCommitteeSlots 	The total slots for the camp committee.
-     * @param description 		The description of the camp.
-     * @param staffID 			The staff ID of the committee organizing the camp.
+     * @param description 		    The description of the camp.
+     * @param staffID 			    The staff ID of the committee organizing the camp.
+     * @param isCampVisible             A boolean indicating whether the student can see this camp or not.
      */
-    public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, boolean isVisible){
-        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isVisible);
+    public Camp(int campID, String campName, ArrayList<Date> campDates, Date registrationDeadline, String schoolOpenTo, String location, int totalSlots, int campCommitteeSlots, String description, String staffID, boolean isCampVisible){
+        super(campID, campName, campDates, registrationDeadline, schoolOpenTo, location, totalSlots, campCommitteeSlots, description, staffID, isCampVisible);
         campConstraints = new CampConstraints(totalSlots, campCommitteeSlots, registrationDeadline, schoolOpenTo, new ArrayList<>(), campDates);
         attendees = new ArrayList<>();
         committeeMembers = new ArrayList<>();
@@ -51,18 +50,18 @@ public class Camp extends CampInformation {
         campSuggestions = new HashMap<>();
     }
     /** Constructs a new camp with existing data from the database.
-     * @param campID 			The ID of the camp.
-     * @param campName 			The name of the camp.
-     * @param campDates 		The dates of the camp.
+     * @param campID 	    		The ID of the camp.
+     * @param campName 	    		The name of the camp.
+     * @param campDates     		The dates of the camp.
      * @param registrationDeadline 	The deadline for registrations.
-     * @param schoolOpenTo 		The allowed schools from which attendees are allowed to register for the camp.
-     * @param location 			The location of the camp.
-     * @param totalSlots 		The total slots for the attendees and committees of the camp.
+     * @param schoolOpenTo  		The allowed schools from which attendees are allowed to register for the camp.
+     * @param location 	    		The location of the camp.
+     * @param totalSlots    		The total slots for the attendees and committees of the camp.
      * @param campCommitteeSlots 	The reserved slots for the camp committee.
-     * @param description 		The description of the camp.
-     * @param staffID 			The staff ID of the committee organizing the camp.
-     * @param withdrawn 		List of withdrawn registrants.
-     * @param attendees 		List of attendees.
+     * @param description   		The description of the camp.
+     * @param staffID 	    		The staff ID of the committee organizing the camp.
+     * @param withdrawn 	    	List of withdrawn registrants.
+     * @param attendees 	    	List of attendees.
      * @param committeeMembers 		List of committee members.
      * @param isCampVisible 		{@code true} if the camp is visible to student, otherwise {@code false}.
      * @param campEnquiries 		The HashMap of enquiryID and {@code Enquiry}.
@@ -77,11 +76,10 @@ public class Camp extends CampInformation {
         this.campSuggestions = campSuggestions;
     }
 
-    // Methods
     /**
      * Checks if a user is already registered for the camp.
      *
-     * @param userID 			The ID of user to check.
+     * @param userID 			    The ID of user to check.
      * @throws CampException 		If the user is already registered.
      */
     public void checkUserAlreadyRegistered(String userID) throws CampException{
@@ -257,6 +255,11 @@ public class Camp extends CampInformation {
     public String getWithdrawnString(){
         return campConstraints.returnWithdrawnString();
     }
+
+    /**
+     * Hides the camp so that the student cannot see this camp in their all camp list.
+     * @throws CampException            If the camp cannot be hidden (Ex. There is student already registered for this camp)
+     */
     @Override
     public void hide() throws CampException{
         if(!attendees.isEmpty() || !committeeMembers.isEmpty()){
@@ -266,6 +269,12 @@ public class Camp extends CampInformation {
             super.show();
         }
     }
+
+    /**
+     * Change the faculty that this camp opens to.
+     * @param facultyOpenTo             The {@code String} of the new faculty to change to ("*" indicating the camp is open to all faculty)
+     * @throws CampException            If the faculty cannot be modified (Ex. There is student from other faculty already registered for this camp)
+     */
     @Override
     public void setFacultyOpenTo(String facultyOpenTo) throws CampException{
         if(facultyOpenTo.equals("*")) {
@@ -286,6 +295,11 @@ public class Camp extends CampInformation {
         }
         super.setFacultyOpenTo(facultyOpenTo);
     }
+
+    /**
+     * Deletes the camp, and Updates the deletion in the Registry.
+     * @throws CampException                    If the camp cannot be deleted. Ex. there is student already registered for the camp.
+     */
     void deleteCamp() throws CampException{
         if (!attendees.isEmpty() || !committeeMembers.isEmpty()){
             throw new CampException("There are students registered for this camp");
