@@ -1,0 +1,45 @@
+Camp Name: Learn how to code
+Camp ID: 1
+Camp Description: Learn how to code in a fast paced world
+Camp Dates: 01/04/2024,02/04/2024
+Camp Location: Room 5, SCSE
+Camp Registration Deadline: 08/11/2024
+Camp Total Slots: 10
+Camp Committee Slots: 5
+Camp Staff ID: staff1
+Camp Visibility: true
+Camp Faculty Opens to: SCSE
+===================================================
+
+Student List:
+No student has registered
+===================================================
+
+Camp Committee List:
+student4, Points = 10
+===================================================
+
+Enquiry List: 
+
+No enquiry found
+===================================================
+
+Suggestion List: 
+Suggestion: We should market this camp more
+Submitted by: student1
+Submitted on: Mon Nov 20 00:00:00 SGT 2023
+Reply: Good idea. Get on this ASAP. 
+Replied by: staff1 on: Tue Nov 21 00:00:00 SGT 2023
+Approval Status: Approved
+Last Updated on: 20/11/2023
+---------------------
+Suggestion: We should increase the total slots of this camp 
+Submitted by: student1
+Submitted on: Mon Nov 20 00:00:00 SGT 2023
+Reply: We cannot accommodate more!
+Replied by: staff1 on: Mon Nov 20 00:00:00 SGT 2023
+Approval Status: Rejected
+Last Updated on: 20/11/2023
+---------------------
+
+===================================================

@@ -15,10 +15,14 @@ public class TXTFileReportDBWriter {
 		ArrayList<Suggestion> suggestionList = new ArrayList<Suggestion> (camp.getCampSuggestions().values());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_G_HH:mm:ss_z");
 		String timeStamp = dateFormat.format(new Date());
-			formattedText += filter.get("Attendee") ? getFormattedTextAttendee(camp.getAttendees()) : "";
-			formattedText += filter.get("Committee") ? getFormattedTextCommittee(camp.getCommitteeMembers()) : "";
-			formattedText += filter.get("Enquiry") ? getFormattedTextEnquiries(enquiryList) : "";
-			formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
+			if (filter.containsKey("Attendee"))
+				formattedText += filter.get("Attendee") ? getFormattedTextAttendee(camp.getAttendees()) : "";
+			if (filter.containsKey("Committee"))
+				formattedText += filter.get("Committee") ? getFormattedTextCommittee(camp.getCommitteeMembers()) : "";
+			if (filter.containsKey("Enquiry"))
+				formattedText += filter.get("Enquiry") ? getFormattedTextEnquiries(enquiryList) : "";
+			if (filter.containsKey("Suggestion"))
+				formattedText += filter.get("Suggestion") ? getFormattedTextSuggestions(suggestionList) : "";
 
 			// change this path
 		String filename = "REPORT/" + userID + "_" + timeStamp + "_camp" + camp.getCampID() + ".txt";
