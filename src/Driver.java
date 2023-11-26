@@ -11,7 +11,7 @@ public class Driver {
      * @param allMenus 		The menus available to this user account based on user's role
      * @throws Exception 	If the user's input is invalid
      */
-    public static <T extends User> void accountMenu(T user, ArrayList<IMenu> allMenus) throws Exception{
+    public static <T extends User> void accountMenu(T user, ArrayList<IMenu> allMenus) {
         if(allMenus == null) return;
         int choice = 0;
         while(user.isLoggedIn()) {
@@ -26,7 +26,7 @@ public class Driver {
                 choice = consoleReaderInteger.readFromConsole(1, allMenus.size());
                 allMenus.get(choice - 1).runMenu(user);
             }
-            catch(InputException e){
+            catch(Exception e){
                 System.out.println(e.getMessage());
             }
         }
