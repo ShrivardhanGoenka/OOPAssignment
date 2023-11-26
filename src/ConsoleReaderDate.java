@@ -19,8 +19,9 @@ public class ConsoleReaderDate implements IConsoleReader<Date>{
             if(input==null || input.isEmpty()){
                 throw new InputException("Input cannot be empty");
             }
-            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(input);
-            return date;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            return sdf.parse(input);
         }catch(IOException e){
             throw new InputException("Error reading input");
         } catch(ParseException e){

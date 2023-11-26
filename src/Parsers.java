@@ -37,14 +37,15 @@ public class Parsers {
         try {
             String[] dateArr = dates.split(",");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
+            dateFormat.setLenient(false);
             for (String dateStr : dateArr) {
                 Date date = dateFormat.parse(dateStr.trim());
                 dateList.add(date);
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (ParseException e) {
+            throw new ParseException("Invalid date format",0);
         }
+
 
         return dateList;
     }
