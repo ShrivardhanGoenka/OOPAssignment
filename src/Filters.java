@@ -11,7 +11,7 @@ public class Filters {
      * @param faculty                   The faculty to filter the camp
      * @return {@code ArrayList} of {@code Camp} objects that are visible and open to the specified faculty
      */
-    static ArrayList<Camp> filterStudentCamps(String faculty){
+    public static ArrayList<Camp> filterStudentCamps(String faculty){
         ArrayList<Camp> list = new ArrayList<>();
         for (Camp i : RegistryFactory.campRegistry.getAllEntries()){
             if(i.isVisible() && i.isVisible(faculty) ){

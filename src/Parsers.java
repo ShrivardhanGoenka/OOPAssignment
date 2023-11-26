@@ -90,7 +90,7 @@ public class Parsers {
      * @param date 				The Date object to convert to string
      * @return {@code String}
      */
-    static String dateToString(Date date)  {
+    public static String dateToString(Date date)  {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(date);
     }
@@ -100,7 +100,7 @@ public class Parsers {
      * @param dates 				The ArrayList of Date object to format to string
      * @return {@code String}
      */
-    static String datesToString(ArrayList<Date> dates) {
+    public static String datesToString(ArrayList<Date> dates) {
         String dateStr = "";
         for(Date date : dates){
             dateStr += dateToString(date) + ",";
@@ -114,7 +114,7 @@ public class Parsers {
      * @param list 				The list of integer to convert to string
      * @return {@code String}
      */
-    static String integerListToString(ArrayList<Integer> list){
+    public static String integerListToString(ArrayList<Integer> list){
         String str = "";
         for(Integer i : list){
             str += i + ",";
@@ -128,7 +128,7 @@ public class Parsers {
      * @param list 				The list of text to convert to one single string
      * @return {@code String}
      */
-    static String stringListToString(ArrayList<String> list){
+    public static String stringListToString(ArrayList<String> list){
         String str = "";
         for(String s : list){
             str += s + ",";

@@ -16,7 +16,7 @@ public class CampCommittee extends Student  {
     /**
      * Represents Camp that this committee is associated.
      */
-    Camp camp;
+    private Camp camp;
 
     /**
      * Represents suggestions submitted and their entry IDs.
@@ -27,7 +27,7 @@ public class CampCommittee extends Student  {
      * Represents the point that this person currently have
      * For this camp management system, the point will increase when the user make a reply to an enquiry from camp attendee.
      */
-    Integer point;
+    private Integer point;
 
     /**
      * Constructs a new {@code CampCommittee} with an empty submittedSuggestions.

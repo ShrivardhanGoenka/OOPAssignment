@@ -9,12 +9,12 @@ public class ComparableAttribute<T>{
     /**
      * The name of the attribute associated with this comparator.
      */
-    String attributeName;
+    private String attributeName;
 
     /**
      * The comparator for attribute of type T.
      */
-    Comparator<T> comparator;
+    private Comparator<T> comparator;
 
     /**
      * Constructor from the specified attribute name and comparator.

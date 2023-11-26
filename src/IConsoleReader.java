@@ -12,5 +12,5 @@ public interface IConsoleReader<T> {
      * @return the user's input of type {@code T} from the console
      * @throws InputException If there is an error reading the input or if the input is invalid
      */
-    T readFromConsole() throws InputException;
+    public T readFromConsole() throws InputException;
 }

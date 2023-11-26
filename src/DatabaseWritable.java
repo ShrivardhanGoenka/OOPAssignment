@@ -7,11 +7,11 @@ public interface DatabaseWritable {
      * Returns a String in the same format that is stored in the database.
      * @return {@code String} representing the formatted text to write
      */
-    String DBWriter();
+    public String DBWriter();
 
     /**
      * Retrieves the file name of the database to write to.
      * @return {@code String} representing the filename to write to
      */
-    String getFileName();
+    public String getFileName();
 }

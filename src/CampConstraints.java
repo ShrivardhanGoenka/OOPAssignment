@@ -9,33 +9,33 @@ public class CampConstraints {
     /**
      * Number of total slots for camp attendees and committees.
      */
-    int availableSlots;
+    private int availableSlots;
 
     /**
      * Number of slots reserved for camp committees.
      */
-    int availableCommitteeSlots;
+    private int availableCommitteeSlots;
 
     /**
      * Deadline for camp registration.
      */
-    Date registrationDeadline;
+    private Date registrationDeadline;
 
     /**
      * The allowed school to attend the camp.
      * Use "*" for allowing all schools.
      */
-    String facultyOpenTo;
+    private String facultyOpenTo;
 
     /**
      * List of ID of user withdrawn from the camp.
      */
-    ArrayList<String> withdrawn;
+    private ArrayList<String> withdrawn;
 
     /**
      * List of dates the camp is scheduled.
      */
-    ArrayList<Date> campDates;
+    private ArrayList<Date> campDates;
 
     /**
      * Constructor for CampConstraints object with specified constraints:
@@ -64,7 +64,7 @@ public class CampConstraints {
      * @param faculty 				Faculty of the attendee.
      * @throws CampException 			if the registration condition fails.
      */
-    void checkAttendeeRegistration(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
+    public void checkAttendeeRegistration(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
         if(availableSlots <= 0){
             throw new CampException("Camp is full!");
         }
@@ -95,7 +95,7 @@ public class CampConstraints {
      * @param faculty 				Faculty of the committee member.
      * @throws CampException 			if the registration condition fails.
      */
-    void checkCommitteeRegistration(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
+    public void checkCommitteeRegistration(String userID, ArrayList<Date> blockedDates, String faculty) throws CampException{
         checkAttendeeRegistration(userID, blockedDates, faculty);
         if(availableCommitteeSlots <= 0){
             throw new CampException("Camp committee is full!");
@@ -105,14 +105,14 @@ public class CampConstraints {
     /**
      * Updates the slots when an attendee is added.
      */
-    void addRegistration(){
+    public void addRegistration(){
         availableSlots--;
     }
 
     /**
      * Updates the slots when a member is added.
      */
-    void addCommitteeMember(){
+    public void addCommitteeMember(){
         availableSlots--;
         availableCommitteeSlots--;
     }
@@ -122,7 +122,7 @@ public class CampConstraints {
      *
      * @param userID 				The ID of the user to withdraw.
      */
-    void withdrawAttendee(String userID){
+    public void withdrawAttendee(String userID){
         availableSlots++;
         withdrawn.add(userID);
     }
@@ -133,7 +133,7 @@ public class CampConstraints {
      * @param difference 		The difference in number of total slots requested to change.
      * @return true 			if the change is successful, otherwise false.
      */
-    boolean changeAttendeeSlots(int difference){
+    public boolean changeAttendeeSlots(int difference){
         if (difference > availableSlots) return false;
         availableSlots -= difference;
         return true;
@@ -145,7 +145,7 @@ public class CampConstraints {
      * @param difference 		The difference in number of committee slots requested to change.
      * @return true 			if the change is successful, otherwise false.
      */
-    boolean changeCampCommitteeSlots(int difference){
+    public boolean changeCampCommitteeSlots(int difference){
         if (difference > availableCommitteeSlots) return false;
         availableCommitteeSlots -= difference;
         return true;
@@ -157,7 +157,7 @@ public class CampConstraints {
      *
      * @return {@code String}
      */
-    String returnWithdrawnString(){
+    public String returnWithdrawnString(){
         String output = "";
         for(String userID : withdrawn){
             output += userID + ",";

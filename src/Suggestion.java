@@ -8,7 +8,7 @@ public class Suggestion extends Enquiry  {
     /**
      * A number indicating whether the status of suggestion (pending, reject, accept)
      */
-    int approvalStatus;
+    private int approvalStatus;
 
     /**
      * Constructor for the Suggestion object (new empty Suggestion)

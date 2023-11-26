@@ -13,7 +13,7 @@ public class Camp extends CampInformation {
 
     // Fields
     /** The constraints for this camp*/
-    CampConstraints campConstraints;
+    private CampConstraints campConstraints;
 
     /** List of registered attendees for this camp*/
     private ArrayList<String> attendees;
@@ -300,7 +300,7 @@ public class Camp extends CampInformation {
      * Deletes the camp, and Updates the deletion in the Registry.
      * @throws CampException                    If the camp cannot be deleted. Ex. there is student already registered for the camp.
      */
-    void deleteCamp() throws CampException{
+    public void deleteCamp() throws CampException{
         if (!attendees.isEmpty() || !committeeMembers.isEmpty()){
             throw new CampException("There are students registered for this camp");
         }

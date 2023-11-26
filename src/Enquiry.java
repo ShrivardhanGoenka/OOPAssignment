@@ -90,7 +90,7 @@ public class Enquiry  {
      * Returns A boolean indicating whether the Enquiry has been processed.
      * @return {@code boolean}
      */
-    boolean isProcessed(){
+    public boolean isProcessed(){
         return isProcessed;
     }
 
@@ -100,7 +100,7 @@ public class Enquiry  {
      * @param repliedBy             The userID of the camp committee that makes a reply
      * @param repliedOn             The Date when the reply is made
      */
-    void reply(String reply, String repliedBy, Date repliedOn){
+    public void reply(String reply, String repliedBy, Date repliedOn){
         isProcessed = true;
         this.reply = reply;
         this.repliedBy = repliedBy;

@@ -5,7 +5,7 @@ public class UserLoginDriver {
     /**
      * Prints the login menu options to the console.
      */
-    static void printLoginMenu(){
+    private static void printLoginMenu(){
 	System.out.println("Welcome to CAMS");
         System.out.println("1. Login");
         System.out.println("2. Exit");

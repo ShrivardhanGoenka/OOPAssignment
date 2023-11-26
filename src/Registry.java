@@ -54,7 +54,7 @@ public class Registry<T,ID> {
      *
      * @return {@code ArrayList<ID>}
      */
-    ArrayList<ID> getAllIDs(){
+    public ArrayList<ID> getAllIDs(){
         return new ArrayList<>(map.keySet());
     }
 
@@ -63,7 +63,7 @@ public class Registry<T,ID> {
      *
      * @return {@code ArrayList<T>}
      */
-    ArrayList<T> getAllEntries(){
+    public ArrayList<T> getAllEntries(){
         return new ArrayList<>(map.values());
     }
 }

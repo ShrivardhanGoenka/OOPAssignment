@@ -9,7 +9,7 @@ public interface UserActions{
      * @param newPassword 			The new password to set.
      * @throws UserException 			If an error occurs during the password change process.
      */
-    void changePassword(String newPassword) throws UserException;
+    public void changePassword(String newPassword) throws UserException;
 
     /**
      * Authenticates the user by verifying the provided password.
@@ -18,42 +18,42 @@ public interface UserActions{
      * @return 					{@code true} if the login is successful, {@code false} otherwise.
      * @throws UserException 			If an error occurs during the login process.
      */
-    boolean login(String password) throws UserException;
+    public boolean login(String password) throws UserException;
 
     /**
      * Logs the user out of the system.
      *
      * @throws UserException 			If an error occurs during the logout process.
      */
-    void logout() throws UserException;
+    public void logout() throws UserException;
 
     /**
      * Retrieves the email of the user.
      *
      * @return 					The user's email.
      */
-    String getEmail();
+    public String getEmail();
 
     /**
      * Retrieves the ID of the user.
      *
      * @return 					The user's ID.
      */
-    String getUserID();
+    public String getUserID();
 
     /**
      * Retrieves the faculty of the user.
      *
      * @return 					The user's faculty information.
      */
-    String getFaculty();
+    public String getFaculty();
 
     /**
      * Retrieves if the account is locked.
      *
      * @return 					{@code true} if the account is locked, {@code false} otherwise.
      */
-    boolean isLocked();
+    public boolean isLocked();
 
 
     /***
@@ -61,5 +61,5 @@ public interface UserActions{
      *
      * @return  				The password of the user
      */
-    String getPassword();
+    public String getPassword();
 }
