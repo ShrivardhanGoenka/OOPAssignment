@@ -41,7 +41,7 @@ public class TXTDBSuggestion extends TXTDB<Suggestion,Integer> {
      */
     @Override
     public String getWriteData() throws DBException {
-        TXTDBSuggestion suggestionDB = new TXTDBSuggestion(obj);
+        TXTDBEnquiry suggestionDB = new TXTDBEnquiry(obj);
         String output = suggestionDB.getWriteData();
         if(obj.isProcessed()){
             output += obj.getApprovalStatus() + "\n";
