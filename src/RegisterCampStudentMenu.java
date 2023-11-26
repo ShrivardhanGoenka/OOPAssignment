@@ -26,6 +26,7 @@ public class RegisterCampStudentMenu implements IMenu<Student> {
 			int choice = consoleReaderInteger.readFromConsole(1, 2);
 			if(choice == 1){
 				studentObject.registerCamp(chosen);
+				System.out.println("You have successfully registered for the camp!");
 			}
 			else{
 				try {

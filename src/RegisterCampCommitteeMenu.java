@@ -20,7 +20,7 @@ public class RegisterCampCommitteeMenu implements IMenu<Student> {
             int tempchoice = consoleReaderInteger.readFromConsole(1, availablaCamps.size());
             Camp chosen = availablaCamps.get(tempchoice-1);
             studentObject.registerCamp(chosen);
-
+            System.out.println("You have successfully registered for the camp!");
         } catch (InputException e) {
             System.out.println(e.getMessage());
         }
