@@ -70,16 +70,11 @@ public class Student extends User  {
      * Registers the student to a Camp
      * @param camp 		The camp to register to.
      */
-    public void registerCamp(Camp camp){
-        try {
-            camp.registerAttendee(this.getUserID(), blockedDates, this.getFaculty());
-            registeredCamps.put(camp.getCampID(), camp);
-            ArrayList<Date> datelist = camp.getCampDates();
-            blockedDates.addAll(datelist);
-        }
-        catch (CampException e){
-            System.out.println(e.getMessage());
-        }
+    public void registerCamp(Camp camp) throws CampException{
+        camp.registerAttendee(this.getUserID(), blockedDates, this.getFaculty());
+        registeredCamps.put(camp.getCampID(), camp);
+        ArrayList<Date> datelist = camp.getCampDates();
+        blockedDates.addAll(datelist);
     }
 
     /**

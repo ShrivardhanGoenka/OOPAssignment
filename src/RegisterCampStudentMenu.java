@@ -41,7 +41,7 @@ public class RegisterCampStudentMenu implements IMenu<Student> {
 					return;
 				}
 			}
-		} catch (InputException e) {
+		} catch (InputException | CampException e) {
 			System.out.println(e.getMessage());
 			return;
 		}
