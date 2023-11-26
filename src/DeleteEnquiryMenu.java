@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code DeleteEnquiryMenu} class provides the execution logics of the menu for deleting the user's submitted enquiries.
  */
-public class DeleteEnquiryMenu extends IMenu<Student> {
+public class DeleteEnquiryMenu implements IMenu<Student> {
 	/**
 	 * Executes the menu logics for deleing enquiries.
 	 * The logics are as follows:

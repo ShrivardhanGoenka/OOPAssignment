@@ -2,7 +2,7 @@ import java.util.ArrayList;
 /**
  * The {@code ViewCreatedCampsStaffMenu} class provides the execution logics of the menu for viewing all camps created by a specific staff account.
  */
-public class ViewCreatedCampsStaffMenu extends IMenu<Staff>{
+public class ViewCreatedCampsStaffMenu implements IMenu<Staff>{
 
 	/**
 	 * @return String of the menu description.

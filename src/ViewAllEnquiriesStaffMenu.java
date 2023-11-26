@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class ViewAllEnquiriesStaffMenu extends IMenu<Staff> {
+public class ViewAllEnquiriesStaffMenu implements IMenu<Staff> {
     /**
      * Executes the menu logics for viewing all enquiries submitted by attendees to the staff's camp.
      * The user will be able to sort the list of enquiries based on user input attribute of enquiry chosen.

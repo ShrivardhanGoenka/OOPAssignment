@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code EditSuggestionMenu} class provides the execution logics of the menu for editing user's submitted suggestion.
  */
-public class EditSuggestionMenu extends IMenu<CampCommittee> {
+public class EditSuggestionMenu implements IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for editing suggestions.
 	 * The logics are as follows:

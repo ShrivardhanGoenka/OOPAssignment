@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code EditEnquiryMenu} class provides the execution logics of the menu for editing user's submitted enquiry.
  */
-public class EditEnquiryMenu extends IMenu<Student> {
+public class EditEnquiryMenu implements IMenu<Student> {
 
 	/**
 	 * Executes the menu logics for editing enquiry.

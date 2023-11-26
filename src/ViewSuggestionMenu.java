@@ -2,7 +2,7 @@ import java.util.ArrayList;
 /**
  * The {@code ViewSuggestionMenu} class provides the execution logics of the menu for viewing all suggestions submitted.
  */
-public class ViewSuggestionMenu extends IMenu<Staff> {
+public class ViewSuggestionMenu implements IMenu<Staff> {
 
 	/**
 	 * @return String of the menu description.

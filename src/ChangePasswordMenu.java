@@ -1,7 +1,7 @@
 /**
  * The ChangePasswordMenu class provides the execution logics of the menu for changing user password.
  */
-public class ChangePasswordMenu extends IMenu<User> {
+public class ChangePasswordMenu implements IMenu<User> {
 	/**
 	 * Executes the menu logics for changing password.
 	 * The logics are as follows:

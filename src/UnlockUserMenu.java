@@ -2,13 +2,13 @@ import java.util.ArrayList;
 /**
  * The UnlockUserMenu class provides the execution logics of the admin menu for unlock the user's account.
  */
-public class UnlockUserMenu extends IMenu<Admin> {
+public class UnlockUserMenu implements IMenu<Admin> {
 	/**
 	 * Executes the menu logics for unlocking user's account.
 	 */
 	public void runMenu(Admin adminObject) {
 			System.out.println("Choose the user to unlock the account");
-		    ArrayList<User> userList = new ArrayList<User>(RegistryFactory.studentRegistry.getAllEntries());
+		    ArrayList<User> userList = new ArrayList<>(RegistryFactory.studentRegistry.getAllEntries());
 		    userList.addAll(userList.size(), RegistryFactory.committeeRegistry.getAllEntries());
 		    userList.addAll(userList.size(), RegistryFactory.staffRegistry.getAllEntries());
 		    for (int i=0; i<userList.size();i++) {
@@ -17,7 +17,7 @@ public class UnlockUserMenu extends IMenu<Admin> {
 		    int choice;
 			ConsoleReaderInteger consoleReaderInteger = new ConsoleReaderInteger();
 		    try {
-				System.out.printf("Enter your choice: ");
+				System.out.print("Enter your choice: ");
 		    	choice = consoleReaderInteger.readFromConsole(1, userList.size());
 		    } catch (InputException e) {
 		    	System.out.println(e.getMessage());

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The WithdrawCampMenu class provides the execution logics of the menu for withdrawing from a camp.
  */
-public class WithdrawCampMenu extends IMenu<Student> {
+public class WithdrawCampMenu implements IMenu<Student> {
 	/**
 	 * Executes the menu logics for withdrawing from a camp.
 	 * The program will prompt the student to choose the camp to withdraw from.

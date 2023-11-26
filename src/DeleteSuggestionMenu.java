@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code DeleteSuggestionMenu} class provides the execution logics of the menu for deleting user's submitted suggestion.
  */
-public class DeleteSuggestionMenu extends IMenu<CampCommittee> {
+public class DeleteSuggestionMenu implements IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for deleing suggestions.
 	 * The logics are as follows:

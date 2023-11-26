@@ -1,7 +1,7 @@
 /**
  * The ViewMySubmittedSuggestionsMenu class provides the execution logics of the menu for submitting a suggestion to the staff.
  */
-public class SubmitSuggestionMenu extends IMenu<CampCommittee> {
+public class SubmitSuggestionMenu implements IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for camp committee to submit a suggestion to the staff.
 	 * @param committeeObject 		The camp committee that runs the menu.

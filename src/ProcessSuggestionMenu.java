@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code ProcessSuggestionMenu} class provides the execution logics of the staff's menu for processing the suggestion.
  */
-public class ProcessSuggestionMenu extends IMenu<Staff>{
+public class ProcessSuggestionMenu implements IMenu<Staff>{
 
 	/**
 	 * @return the menu description.
@@ -42,7 +42,7 @@ public class ProcessSuggestionMenu extends IMenu<Staff>{
         System.out.print("Enter the suggestion ID to process or 0 to exit: ");
         ConsoleReaderInteger cri = new ConsoleReaderInteger();
         ConsoleReaderString crs = new ConsoleReaderString();
-        int choice = 0;
+        int choice;
         try{
             choice = cri.readFromConsole(0, suggestions.size());
             Suggestion chosen = suggestions.get(choice-1);
@@ -54,7 +54,6 @@ public class ProcessSuggestionMenu extends IMenu<Staff>{
             System.out.println("Suggestion processed");
         } catch(Exception e){
             System.out.println("Invalid choice");
-            return;
         }
     }
 }

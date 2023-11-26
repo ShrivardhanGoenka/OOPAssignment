@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code ReplyToEnquiryStaffMenu} class provides the execution logics of the staff's menu for replying to student's enquiries.
  */
-public class ReplyToEnquiryStaffMenu extends IMenu<Staff>{
+public class ReplyToEnquiryStaffMenu implements IMenu<Staff>{
 	/**
 	 * Executes the menu logics for replying to enquiries.
 	 * The logics are as follows:

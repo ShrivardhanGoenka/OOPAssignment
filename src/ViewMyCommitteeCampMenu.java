@@ -1,7 +1,7 @@
 /**
  * The {@code ViewMyCommitteeCampMenu} class provides the execution logics of the menu for viewing the camp the student has registered as a camp committee.
  */
-public class ViewMyCommitteeCampMenu extends IMenu<CampCommittee>{
+public class ViewMyCommitteeCampMenu implements IMenu<CampCommittee>{
 	/**
 	 * Executes the menu logics for viewing camp that a specific student is a camp committee member of.
 	 * @param committeeObject               The camp committee that runs the menu.

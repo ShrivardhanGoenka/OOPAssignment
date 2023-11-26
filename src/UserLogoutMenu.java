@@ -1,7 +1,7 @@
 /**
  * The UserLogoutMenu class provides the execution logics of the logging out menu.
  */
-public class UserLogoutMenu extends IMenu<User> {
+public class UserLogoutMenu implements IMenu<User> {
 
 	/**
 	 * Logout the user from the application.

@@ -1,7 +1,7 @@
 /**
  * The {@link CreateUserMenu} class provides the execution logics of the admin menu for creating new user account.
  */
-public class CreateUserMenu extends IMenu<Admin> {
+public class CreateUserMenu implements IMenu<Admin> {
 	/**
 	 * Executes the menu logics for locking user's account.
 	 */

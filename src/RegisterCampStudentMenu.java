@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The RegisterCampStudentMenu class provides the execution logics of the menu for registering to a camp as an attendee.
  */
-public class RegisterCampStudentMenu extends IMenu<Student> {
+public class RegisterCampStudentMenu implements IMenu<Student> {
 
 	/**
 	 * Executes the menu logics for registering to a camp as attendee.

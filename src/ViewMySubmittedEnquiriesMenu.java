@@ -2,7 +2,7 @@ import java.util.ArrayList;
 /**
  * The {@code ViewMySubmittedEnquiriesMenu} class provides the execution logics of the menu for viewing the submitted enquiries.
  */
-public class ViewMySubmittedEnquiriesMenu extends IMenu<Student> {
+public class ViewMySubmittedEnquiriesMenu implements IMenu<Student> {
 	/**
 	 * Executes the menu logics for viewing the submitted enquiries.
 	 * @param studentObject 		The student that runs the menu.

@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * The {@code CreateCampMenu} class provides the execution logics of the menu for the staff to create a new camp.
  */
-public class CreateCampMenu extends IMenu<Staff> {
+public class CreateCampMenu implements IMenu<Staff> {
 
     /** 
     * @return the menu description

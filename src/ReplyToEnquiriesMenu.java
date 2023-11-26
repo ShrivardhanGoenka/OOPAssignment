@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * The ReplyToEnquiriesMenu class provides the execution logics of the menu for replying to attendee's enquiries.
  * Only camp committee are allowed to execute this menu.
  */
-public class ReplyToEnquiriesMenu extends IMenu<CampCommittee> {
+public class ReplyToEnquiriesMenu implements IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for replying to enquiries.
 	 * The logics are as follows:

@@ -3,7 +3,7 @@ import java.util.Date;
 /**
  * The {@code EditCampMenu} class provides the execution logics of the menu for editing the camp details.
  */
-public class EditCampMenu extends IMenu<Staff> {
+public class EditCampMenu implements IMenu<Staff> {
 
 	/** 
 	 * @return the menu description

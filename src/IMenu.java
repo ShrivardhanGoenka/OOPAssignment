@@ -2,12 +2,12 @@
  * The abstract class {@code IMenu} provides a template for common functionality for all menu pages in this camp management applciation.
  * The required class to be implemented includes getMenuDescription and runMenu.
  */
-public abstract class IMenu<T extends User>{
+public interface IMenu<T extends User>{
 	/**
 	 * Provides a description message of the menu.
 	 * @return The String description of the menu.
 	 */
-	public abstract String getMenuDescription();
+	String getMenuDescription();
 
 	/**
 	 * Runs the menu.
@@ -15,5 +15,5 @@ public abstract class IMenu<T extends User>{
 	 * @param userObject 				The user that runs the menu
 	 * @throws CampException 			If the camp cannot be modified based on user's input
 	 */
-	public abstract void runMenu(T userObject) throws CampException;
+	void runMenu(T userObject) throws CampException;
 }

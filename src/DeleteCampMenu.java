@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The {@code DeleteCampMenu} class provides the execution logics of the staff's menu for deleting the camp.
  */
-public class DeleteCampMenu extends IMenu<Staff>{
+public class DeleteCampMenu implements IMenu<Staff>{
 
 	/** 
 	 * @return the menu description
@@ -38,7 +38,6 @@ public class DeleteCampMenu extends IMenu<Staff>{
             userObject.deleteCamp(chosen);
         }catch (InputException | CampException e) {
             System.out.println(e.getMessage());
-            return;
         }
     }
 }

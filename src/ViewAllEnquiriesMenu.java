@@ -2,7 +2,7 @@ import java.util.ArrayList;
 /**
  * The {@code ViewAllEnquiriesMenu} class provides the execution logics of the menu for viewing all enquiries submitted from camp attendees.
  */
-public class ViewAllEnquiriesMenu extends IMenu<CampCommittee> {
+public class ViewAllEnquiriesMenu implements IMenu<CampCommittee> {
 	/**
 	 * Executes the menu logics for viewing all enquiries submitted by attendees to the camp that the committee oversees.
 	 * The user will be able to sort the list of enquiries based on user input attribute of enquiry chosen.
